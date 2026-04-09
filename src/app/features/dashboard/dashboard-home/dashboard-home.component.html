@@ -1,0 +1,138 @@
+<div class="content">
+
+  @if (loading) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>{{ 'DASHBOARD.LOADING' | translate }}</p>
+    </div>
+  }
+
+  @if (error) {
+    <div class="error-state">{{ error | translate }}</div>
+  }
+
+  @if (!loading && !error) {
+
+    <!-- Stat cards -->
+    <div class="stat-grid">
+      <div class="stat-card">
+        <p class="stat-card__label">{{ 'DASHBOARD.STATS.WIN_RATE' | translate }}</p>
+        <p class="stat-card__value">{{ winRate | number:'1.1-1' }}%</p>
+        <p class="stat-card__sub">{{ closedTrades.length }} {{ 'DASHBOARD.STATS.WIN_RATE_SUB' | translate }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-card__label">{{ 'DASHBOARD.STATS.PROFIT_FACTOR' | translate }}</p>
+        <p class="stat-card__value"
+           [class.value--positive]="profitFactor >= 1"
+           [class.value--negative]="profitFactor < 1 && profitFactor > 0">
+          {{ profitFactor | number:'1.2-2' }}
+        </p>
+        <p class="stat-card__sub">{{ 'DASHBOARD.STATS.PROFIT_FACTOR_SUB' | translate }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-card__label">{{ 'DASHBOARD.STATS.TOTAL_PROFIT' | translate }}</p>
+        <p class="stat-card__value"
+           [class.value--positive]="totalProfit > 0"
+           [class.value--negative]="totalProfit < 0">
+          {{ formatPnl(totalProfit) }}
+        </p>
+        <p class="stat-card__sub">{{ 'DASHBOARD.STATS.TOTAL_PROFIT_SUB' | translate }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-card__label">{{ 'DASHBOARD.STATS.AVG_RR' | translate }}</p>
+        <p class="stat-card__value"
+           [class.value--positive]="avgRR >= 1"
+           [class.value--negative]="avgRR < 1 && avgRR > 0">
+          {{ avgRR | number:'1.2-2' }}
+        </p>
+        <p class="stat-card__sub">{{ 'DASHBOARD.STATS.AVG_RR_SUB' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- Trades table -->
+    <div class="trades-section">
+      <div class="trades-header">
+        <h2>{{ 'DASHBOARD.TRADES.TITLE' | translate }}</h2>
+        <span class="trades-count">{{ trades.length }} {{ 'DASHBOARD.TRADES.COUNT' | translate }}</span>
+      </div>
+
+      @if (trades.length === 0) {
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <p>{{ 'DASHBOARD.TRADES.EMPTY' | translate }}</p>
+        </div>
+      }
+
+      @if (trades.length > 0) {
+        <div class="table-wrapper">
+          <table class="trades-table">
+            <thead>
+              <tr>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.DATE_TIME' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.SYMBOL' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.TYPE' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.ENTRY' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.EXIT' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.SL' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.TP' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.SIZE' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.PROFIT_PIPS' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.PNL' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (trade of paginatedTrades; track trade.id) {
+                <tr class="trade-row"
+                    [class.trade-row--profit]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) > 0"
+                    [class.trade-row--loss]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) < 0"
+                    (click)="openTrade(trade)">
+                  <td class="cell-date">{{ formatDate(trade.entryTime) }}</td>
+                  <td class="cell-symbol">{{ trade.symbol }}</td>
+                  <td>
+                    <span class="badge"
+                          [class.badge--buy]="trade.direction.toLowerCase() === 'buy'"
+                          [class.badge--sell]="trade.direction.toLowerCase() === 'sell'">
+                      {{ trade.direction | titlecase }}
+                    </span>
+                  </td>
+                  <td>{{ trade.entryPrice ?? '—' }}</td>
+                  <td>{{ trade.exitPrice ?? '—' }}</td>
+                  <td>{{ trade.stopLoss ?? '—' }}</td>
+                  <td>{{ trade.takeProfit ?? '—' }}</td>
+                  <td>{{ trade.lotSize ?? '—' }}</td>
+                  <td [class.pnl--positive]="(trade.profitPips ?? 0) > 0"
+                      [class.pnl--negative]="(trade.profitPips ?? 0) < 0">
+                    {{ formatPips(trade.profitPips) }}
+                  </td>
+                  <td [class.pnl--positive]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) > 0"
+                      [class.pnl--negative]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) < 0">
+                    {{ trade.status === TradeStatus.Open ? '—' : formatPnl(trade.profit ?? 0) }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        @if (totalPages > 1) {
+          <div class="pagination">
+            <button class="pagination__btn" (click)="prevPage()" [disabled]="currentPage === 0">
+              {{ 'DASHBOARD.PAGINATION.PREV' | translate }}
+            </button>
+            <span class="pagination__info">{{ currentPage + 1 }} / {{ totalPages }}</span>
+            <button class="pagination__btn" (click)="nextPage()" [disabled]="currentPage === totalPages - 1">
+              {{ 'DASHBOARD.PAGINATION.NEXT' | translate }}
+            </button>
+          </div>
+        }
+      }
+    </div>
+
+  }
+
+</div>

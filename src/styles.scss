@@ -1,0 +1,33 @@
+@use 'styles/variables' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  background-color: $bg-primary;
+  color: $text-primary;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: $accent-primary;
+  text-decoration: none;
+
+  &:hover {
+    color: $accent-hover;
+  }
+}
+
+input,
+button {
+  font-family: inherit;
+}

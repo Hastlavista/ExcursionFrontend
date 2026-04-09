@@ -1,0 +1,33 @@
+@use '../../../styles/variables' as *;
+
+.lang-switcher {
+  display: flex;
+  gap: 2px;
+  background-color: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-full;
+  padding: 3px;
+}
+
+.lang-btn {
+  padding: 4px 12px;
+  border: none;
+  border-radius: $radius-full;
+  background: transparent;
+  color: $text-muted;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  font-family: $font-family;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover:not(.lang-btn--active) {
+    color: $text-secondary;
+  }
+
+  &--active {
+    background-color: $accent-primary;
+    color: #fff;
+  }
+}

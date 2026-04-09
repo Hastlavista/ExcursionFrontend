@@ -1,0 +1,352 @@
+@use '../../../../styles/variables' as *;
+
+// ─── Page layout ─────────────────────────────────────────────────────────────
+
+.login-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  background-color: $bg-primary;
+  position: relative;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lang-switcher-overlay {
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+  z-index: 10;
+}
+
+// ─── Marketing (left) ────────────────────────────────────────────────────────
+
+.marketing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-2xl;
+  background-color: $bg-secondary;
+
+  @media (max-width: 768px) {
+    padding: $spacing-xl $spacing-md;
+  }
+}
+
+.marketing__inner {
+  max-width: 420px;
+  width: 100%;
+}
+
+.brand-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: $spacing-xl;
+
+  .brand-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  .logo--brand {
+    color: #4f6ef7;
+  }
+
+  .logo--suffix {
+    color: $text-secondary;
+  }
+}
+
+.marketing__headline {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+
+  @media (max-width: 1024px) {
+    font-size: 1.75rem;
+  }
+
+  &--white {
+    color: $text-primary;
+    font-weight: 400;
+  }
+
+  &--blue {
+    color: $accent-primary;
+    font-weight: 700;
+  }
+}
+
+.marketing__sub {
+  font-size: $font-size-base;
+  color: $text-secondary;
+  line-height: 1.6;
+  margin-bottom: $spacing-xl;
+}
+
+.feature-cards {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-md;
+  padding: $spacing-md;
+  background-color: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+
+  &__icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($accent-primary, 0.12);
+    border-radius: $radius-md;
+    color: $accent-primary;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__desc {
+    font-size: $font-size-xs;
+    color: $text-secondary;
+    line-height: 1.5;
+  }
+}
+
+// ─── Form side (right) ───────────────────────────────────────────────────────
+
+.form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-2xl $spacing-xl;
+
+  @media (max-width: 768px) {
+    padding: $spacing-xl $spacing-md;
+  }
+}
+
+.form-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  padding: $spacing-2xl;
+  box-shadow: $shadow-lg;
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__sub {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin-bottom: $spacing-xl;
+  }
+}
+
+// ─── Form internals ──────────────────────────────────────────────────────────
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-secondary;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+
+  input {
+    padding-right: 2.75rem;
+  }
+}
+
+.form-group input,
+.input-wrapper input {
+  width: 100%;
+  background-color: $bg-input;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-md;
+  color: $text-primary;
+  font-size: $font-size-base;
+  font-family: $font-family;
+  transition: border-color $transition-fast;
+  outline: none;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:focus {
+    border-color: $accent-primary;
+    box-shadow: 0 0 0 3px rgba($accent-primary, 0.15);
+  }
+
+  &.is-invalid {
+    border-color: $danger;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($danger, 0.15);
+    }
+  }
+
+  // Override browser autofill white background
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px $bg-input inset;
+    -webkit-text-fill-color: $text-primary;
+    caret-color: $text-primary;
+  }
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: $spacing-sm;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: $text-muted;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $text-secondary;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// ─── Field errors ─────────────────────────────────────────────────────────────
+
+.field-error {
+  font-size: $font-size-xs;
+  color: $danger;
+}
+
+.server-error {
+  font-size: $font-size-sm;
+  color: $danger;
+  background-color: rgba($danger, 0.08);
+  border: 1px solid rgba($danger, 0.25);
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-md;
+}
+
+// ─── Submit button ───────────────────────────────────────────────────────────
+
+.btn-submit {
+  width: 100%;
+  background-color: $accent-primary;
+  color: #fff;
+  border: none;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-base;
+  font-weight: 600;
+  font-family: $font-family;
+  cursor: pointer;
+  transition: background-color $transition-fast, transform $transition-fast;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: $spacing-xs;
+
+  &:hover:not(:disabled) {
+    background-color: $accent-hover;
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background-color: $accent-active;
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: $radius-full;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ─── Register link ───────────────────────────────────────────────────────────
+
+.register-link {
+  margin-top: $spacing-lg;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+
+  a {
+    color: $accent-primary;
+    font-weight: 500;
+    margin-left: 4px;
+
+    &:hover {
+      color: $accent-hover;
+    }
+  }
+}

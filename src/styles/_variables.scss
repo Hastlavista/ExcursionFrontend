@@ -1,0 +1,52 @@
+// ─── Colors ───────────────────────────────────────────────
+$bg-primary:   #1a1a1a;
+$bg-secondary: #242424;
+$bg-card:      #2a2a2a;
+$bg-input:     #1e1e1e;
+
+$accent-primary: #4f6ef7;
+$accent-hover:   #6b85f8;
+$accent-active:  #3d5ce6;
+
+$text-primary:   #e8e8e8;
+$text-secondary: #9a9a9a;
+$text-muted:     #5a5a5a;
+
+$border-color:  #333333;
+$border-accent: #4f6ef7;
+
+$success: #26a69a;
+$danger:  #ef5350;
+$warning: #ffa726;
+
+// ─── Typography ───────────────────────────────────────────
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-size-xs:   0.75rem;
+$font-size-sm:   0.875rem;
+$font-size-base: 1rem;
+$font-size-lg:   1.125rem;
+$font-size-xl:   1.25rem;
+$font-size-2xl:  1.5rem;
+
+// ─── Spacing ──────────────────────────────────────────────
+$spacing-xs:  0.25rem;
+$spacing-sm:  0.5rem;
+$spacing-md:  1rem;
+$spacing-lg:  1.5rem;
+$spacing-xl:  2rem;
+$spacing-2xl: 3rem;
+
+// ─── Border radius ────────────────────────────────────────
+$radius-sm:   4px;
+$radius-md:   8px;
+$radius-lg:   12px;
+$radius-full: 9999px;
+
+// ─── Shadows ──────────────────────────────────────────────
+$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+
+// ─── Transitions ──────────────────────────────────────────
+$transition-fast: 150ms ease;
+$transition-base: 250ms ease;

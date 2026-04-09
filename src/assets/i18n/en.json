@@ -1,0 +1,181 @@
+{
+  "MAIN": {
+    "BRAND_TITLE": "TradeVantiq",
+    "BRAND_PART1": "Trade",
+    "BRAND_PART2": "Vantiq"
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Welcome Back",
+      "SUBTITLE": "Sign in to your trading journal.",
+      "EMAIL": "Email",
+      "EMAIL_PLACEHOLDER": "you@example.com",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "Your password",
+      "SUBMIT": "Sign In →",
+      "NO_ACCOUNT": "Don't have an account?",
+      "REGISTER_LINK": "Create one",
+      "ERROR": "Invalid email or password.",
+      "MARKETING": {
+        "HEADLINE_1": "Your Trades.",
+        "HEADLINE_2": "Your Edge.",
+        "SUBTITLE": "Pick up where you left off. All your trade data, analytics, and insights are waiting for you.",
+        "FEATURE_1_TITLE": "MAE & MFE Analytics",
+        "FEATURE_1_DESC": "Deep-dive into trade performance with automatic excursion metrics.",
+        "FEATURE_2_TITLE": "Auto MT4/MT5 Sync",
+        "FEATURE_2_DESC": "Your trades sync automatically. No manual entry, ever."
+      },
+      "ERRORS": {
+        "EMAIL_REQUIRED": "Email is required.",
+        "EMAIL_INVALID": "Enter a valid email address.",
+        "PASSWORD_REQUIRED": "Password is required.",
+        "UNAUTHORIZED": "Invalid email or password.",
+        "UNAVAILABLE": "Service unavailable. Please try again later.",
+        "GENERIC": "Something went wrong. Please try again."
+      },
+      "ARIA": {
+        "TOGGLE_PASSWORD": "Toggle password visibility"
+      }
+    },
+    "REGISTER": {
+      "TITLE": "Create Account",
+      "SUBTITLE": "Start your trading journal today.",
+      "EMAIL": "Email",
+      "EMAIL_PLACEHOLDER": "you@example.com",
+      "PASSWORD": "Password",
+      "PASSWORD_PLACEHOLDER": "Min. 8 characters",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "CONFIRM_PASSWORD_PLACEHOLDER": "Repeat your password",
+      "TERMS": "I agree to the <a class=\"terms-link\" href=\"#\">Terms of Service</a> and <a class=\"terms-link\" href=\"#\">Privacy Policy</a>.",
+      "SUBMIT": "Create Account →",
+      "HAS_ACCOUNT": "Already have an account?",
+      "LOGIN_LINK": "Login",
+      "ERROR": "Registration failed. Please try again.",
+      "MARKETING": {
+        "HEADLINE_1": "Professional Grade",
+        "HEADLINE_2": "Trading Intelligence.",
+        "SUBTITLE": "Document your trading journey with precision tools built for serious traders.",
+        "FEATURE_1_TITLE": "MAE & MFE Analytics",
+        "FEATURE_1_DESC": "Deep-dive into trade performance with automatic excursion metrics.",
+        "FEATURE_2_TITLE": "Auto MT4/MT5 Sync",
+        "FEATURE_2_DESC": "Your trades sync automatically. No manual entry, ever."
+      },
+      "STRENGTH": {
+        "WEAK": "Weak",
+        "MEDIUM": "Medium",
+        "STRONG": "Strong"
+      },
+      "ERRORS": {
+        "EMAIL_REQUIRED": "Email is required.",
+        "EMAIL_INVALID": "Enter a valid email address.",
+        "PASSWORD_REQUIRED": "Password is required.",
+        "PASSWORD_MIN_LENGTH": "Password must be at least 8 characters.",
+        "CONFIRM_REQUIRED": "Please confirm your password.",
+        "PASSWORD_MISMATCH": "Passwords do not match.",
+        "TERMS_REQUIRED": "You must accept the terms to continue.",
+        "INVALID_DATA": "Invalid data. Please check your inputs.",
+        "EMAIL_TAKEN": "An account with this email already exists.",
+        "UNAVAILABLE": "Service unavailable. Please try again later.",
+        "GENERIC": "Something went wrong. Please try again."
+      },
+      "ARIA": {
+        "TOGGLE_PASSWORD": "Toggle password visibility",
+        "TOGGLE_CONFIRM_PASSWORD": "Toggle confirm password visibility"
+      }
+    }
+  },
+  "COMMON": {
+    "LOADING": "Loading...",
+    "ERROR": "Something went wrong"
+  },
+  "DASHBOARD": {
+    "NAV": {
+      "DASHBOARD": "Dashboard",
+      "TRADE_LOG": "Trade Log",
+      "ANALYTICS": "Analytics",
+      "SETTINGS": "Settings",
+      "SOON": "Soon",
+      "LOGOUT": "Logout"
+    },
+    "TOPBAR": {
+      "WELCOME": "Welcome back,",
+      "OPEN_POSITIONS": "Open Positions",
+      "TODAY_PNL": "Today's P&L"
+    },
+    "LOADING": "Loading trades…",
+    "ERROR": "Failed to load trades. Please refresh or try again later.",
+    "STATS": {
+      "WIN_RATE": "WIN RATE",
+      "WIN_RATE_SUB": "closed trades",
+      "PROFIT_FACTOR": "PROFIT FACTOR",
+      "PROFIT_FACTOR_SUB": "wins / losses ratio",
+      "TOTAL_PROFIT": "TOTAL PROFIT",
+      "TOTAL_PROFIT_SUB": "all closed trades",
+      "AVG_RR": "AVG R:R",
+      "AVG_RR_SUB": "avg win / avg loss"
+    },
+    "TRADES": {
+      "TITLE": "Recent Trades",
+      "COUNT": "trades",
+      "EMPTY": "No trades found.",
+      "TABLE": {
+        "DATE_TIME": "DATE / TIME",
+        "SYMBOL": "SYMBOL",
+        "TYPE": "TYPE",
+        "ENTRY": "ENTRY",
+        "EXIT": "EXIT",
+        "SL": "S/L",
+        "TP": "T/P",
+        "SIZE": "SIZE",
+        "PROFIT_PIPS": "PROFIT PIPS",
+        "PNL": "P&L"
+      }
+    },
+    "PAGINATION": {
+      "PREV": "← Prev",
+      "NEXT": "Next →"
+    }
+  },
+  "TRADE_DETAIL": {
+    "LOADING": "Loading trade…",
+    "ERROR": "Failed to load trade.",
+    "NOT_FOUND": "Trade not found.",
+    "BACK": "Back",
+    "TOTAL_PNL": "TOTAL P&L",
+    "CHART_SUFFIX": "CHART",
+    "LEGEND": {
+      "ENTRY": "Entry",
+      "EXIT": "Exit",
+      "SL": "SL",
+      "TP": "TP"
+    },
+    "METRICS": {
+      "EFFICIENCY": "EFFICIENCY",
+      "MFE": "MFE",
+      "MAE": "MAE",
+      "PROFIT_PIPS": "PROFIT PIPS",
+      "PIPS": "Pips"
+    },
+    "SPECS": {
+      "TITLE": "EXECUTION SPECS",
+      "LOT_SIZE": "Lot Size",
+      "STOP_LOSS": "Stop Loss",
+      "TAKE_PROFIT": "Take Profit"
+    },
+    "TEMPORAL": {
+      "TITLE": "TEMPORAL DATA",
+      "ENTRY_TIME": "Entry Time",
+      "EXIT_TIME": "Exit Time",
+      "DURATION": "Duration",
+      "MINUTES": "Minutes"
+    },
+    "TIMESTAMPS": {
+      "LOGGED_AT": "Logged At",
+      "LAST_UPDATE": "Last Update"
+    },
+    "ACTIONS": {
+      "EXPORT": "EXPORT ANALYSIS",
+      "JOURNAL": "ADD JOURNAL ENTRY"
+    }
+  }
+}

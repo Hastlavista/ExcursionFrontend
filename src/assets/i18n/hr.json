@@ -1,0 +1,181 @@
+{
+  "MAIN": {
+    "BRAND_TITLE": "TradeVantiq",
+    "BRAND_PART1": "Trade",
+    "BRAND_PART2": "Vantiq"
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Dobrodošli nazad",
+      "SUBTITLE": "Prijavite se u svoj trading dnevnik.",
+      "EMAIL": "E-mail",
+      "EMAIL_PLACEHOLDER": "vi@primjer.com",
+      "PASSWORD": "Lozinka",
+      "PASSWORD_PLACEHOLDER": "Vaša lozinka",
+      "SUBMIT": "Prijavi se →",
+      "NO_ACCOUNT": "Nemate račun?",
+      "REGISTER_LINK": "Kreirajte ga",
+      "ERROR": "Neispravna e-mail adresa ili lozinka.",
+      "MARKETING": {
+        "HEADLINE_1": "Vaš edge.",
+        "HEADLINE_2": "Vaša prednost.",
+        "SUBTITLE": "Nastavite gdje ste stali. Svi vaši podaci, analitika i uvidi čekaju vas.",
+        "FEATURE_1_TITLE": "MAE & MFE analitika",
+        "FEATURE_1_DESC": "Dubinska analiza performansi trejdova s automatskim excursion metrikama.",
+        "FEATURE_2_TITLE": "Auto MT4/MT5 sinkronizacija",
+        "FEATURE_2_DESC": "Vaši trejdovi se sinkroniziraju automatski. Bez ručnog unosa, nikad."
+      },
+      "ERRORS": {
+        "EMAIL_REQUIRED": "E-mail je obavezan.",
+        "EMAIL_INVALID": "Unesite ispravnu e-mail adresu.",
+        "PASSWORD_REQUIRED": "Lozinka je obavezna.",
+        "UNAUTHORIZED": "Neispravna e-mail adresa ili lozinka.",
+        "UNAVAILABLE": "Servis nije dostupan. Pokušajte ponovo kasnije.",
+        "GENERIC": "Nešto je pošlo po krivu. Pokušajte ponovo."
+      },
+      "ARIA": {
+        "TOGGLE_PASSWORD": "Prikaži/sakrij lozinku"
+      }
+    },
+    "REGISTER": {
+      "TITLE": "Kreiranje računa",
+      "SUBTITLE": "Započnite svoj trading dnevnik danas.",
+      "EMAIL": "E-mail",
+      "EMAIL_PLACEHOLDER": "vi@primjer.com",
+      "PASSWORD": "Lozinka",
+      "PASSWORD_PLACEHOLDER": "Min. 8 znakova",
+      "CONFIRM_PASSWORD": "Potvrda lozinke",
+      "CONFIRM_PASSWORD_PLACEHOLDER": "Ponovite lozinku",
+      "TERMS": "Slažem se s <a class=\"terms-link\" href=\"#\">Uvjetima korištenja</a> i <a class=\"terms-link\" href=\"#\">Politikom privatnosti</a>.",
+      "SUBMIT": "Kreiraj račun →",
+      "HAS_ACCOUNT": "Već imate račun?",
+      "LOGIN_LINK": "Prijavite se",
+      "ERROR": "Registracija nije uspjela. Pokušajte ponovo.",
+      "MARKETING": {
+        "HEADLINE_1": "Profesionalna razina",
+        "HEADLINE_2": "Trading inteligencija.",
+        "SUBTITLE": "Dokumentirajte svoje trading putovanje s preciznim alatima za ozbiljne tradere.",
+        "FEATURE_1_TITLE": "MAE & MFE analitika",
+        "FEATURE_1_DESC": "Dubinska analiza performansi trgovine s automatskim metrikama.",
+        "FEATURE_2_TITLE": "Auto MT4/MT5 sinkronizacija",
+        "FEATURE_2_DESC": "Vaša trgovina dionica, forexa se sinkronizira automatski. Bez ručnog unosa, ikad."
+      },
+      "STRENGTH": {
+        "WEAK": "Slaba",
+        "MEDIUM": "Srednja",
+        "STRONG": "Jaka"
+      },
+      "ERRORS": {
+        "EMAIL_REQUIRED": "E-mail je obavezan.",
+        "EMAIL_INVALID": "Unesite ispravnu e-mail adresu.",
+        "PASSWORD_REQUIRED": "Lozinka je obavezna.",
+        "PASSWORD_MIN_LENGTH": "Lozinka mora imati najmanje 8 znakova.",
+        "CONFIRM_REQUIRED": "Molimo potvrdite lozinku.",
+        "PASSWORD_MISMATCH": "Lozinke se ne podudaraju.",
+        "TERMS_REQUIRED": "Morate prihvatiti uvjete za nastavak.",
+        "INVALID_DATA": "Neispravni podaci. Provjerite unose.",
+        "EMAIL_TAKEN": "Račun s ovom e-mail adresom već postoji.",
+        "UNAVAILABLE": "Servis nije dostupan. Pokušajte ponovo kasnije.",
+        "GENERIC": "Nešto je pošlo po krivu. Pokušajte ponovo."
+      },
+      "ARIA": {
+        "TOGGLE_PASSWORD": "Prikaži/sakrij lozinku",
+        "TOGGLE_CONFIRM_PASSWORD": "Prikaži/sakrij potvrdu lozinke"
+      }
+    }
+  },
+  "COMMON": {
+    "LOADING": "Učitavanje...",
+    "ERROR": "Nešto je pošlo po krivu"
+  },
+  "DASHBOARD": {
+    "NAV": {
+      "DASHBOARD": "Nadzorna ploča",
+      "TRADE_LOG": "Dnevnik trejdova",
+      "ANALYTICS": "Analitika",
+      "SETTINGS": "Postavke",
+      "SOON": "Uskoro",
+      "LOGOUT": "Odjava"
+    },
+    "TOPBAR": {
+      "WELCOME": "Dobrodošli nazad,",
+      "OPEN_POSITIONS": "Otvorene pozicije",
+      "TODAY_PNL": "Današnji P&L"
+    },
+    "LOADING": "Učitavanje trejdova…",
+    "ERROR": "Učitavanje trejdova nije uspjelo. Osvježite stranicu ili pokušajte ponovo.",
+    "STATS": {
+      "WIN_RATE": "WIN RATE",
+      "WIN_RATE_SUB": "zatvorenih trejdova",
+      "PROFIT_FACTOR": "PROFIT FACTOR",
+      "PROFIT_FACTOR_SUB": "omjer pobjeda / gubitaka",
+      "TOTAL_PROFIT": "UKUPNI PROFIT",
+      "TOTAL_PROFIT_SUB": "svi zatvoreni trejdovi",
+      "AVG_RR": "PROS. R:R",
+      "AVG_RR_SUB": "pros. pobjeda / pros. gubitak"
+    },
+    "TRADES": {
+      "TITLE": "Nedavni trejdovi",
+      "COUNT": "trejdova",
+      "EMPTY": "Nema trejdova.",
+      "TABLE": {
+        "DATE_TIME": "DATUM / VRIJEME",
+        "SYMBOL": "SIMBOL",
+        "TYPE": "TIP",
+        "ENTRY": "ULAZ",
+        "EXIT": "IZLAZ",
+        "SL": "S/L",
+        "TP": "T/P",
+        "SIZE": "VELIČINA",
+        "PROFIT_PIPS": "PROFIT PIPOVI",
+        "PNL": "P&L"
+      }
+    },
+    "PAGINATION": {
+      "PREV": "← Prethodno",
+      "NEXT": "Sljedeće →"
+    }
+  },
+  "TRADE_DETAIL": {
+    "LOADING": "Učitavanje trejda…",
+    "ERROR": "Učitavanje trejda nije uspjelo.",
+    "NOT_FOUND": "Trejd nije pronađen.",
+    "BACK": "Natrag",
+    "TOTAL_PNL": "UKUPNI P&L",
+    "CHART_SUFFIX": "CHART",
+    "LEGEND": {
+      "ENTRY": "Ulaz",
+      "EXIT": "Izlaz",
+      "SL": "SL",
+      "TP": "TP"
+    },
+    "METRICS": {
+      "EFFICIENCY": "EFIKASNOST",
+      "MFE": "MFE",
+      "MAE": "MAE",
+      "PROFIT_PIPS": "PROFIT PIPOVI",
+      "PIPS": "Pipova"
+    },
+    "SPECS": {
+      "TITLE": "PARAMETRI IZVRŠENJA",
+      "LOT_SIZE": "Veličina lota",
+      "STOP_LOSS": "Stop Loss",
+      "TAKE_PROFIT": "Take Profit"
+    },
+    "TEMPORAL": {
+      "TITLE": "VREMENSKI PODACI",
+      "ENTRY_TIME": "Vrijeme ulaza",
+      "EXIT_TIME": "Vrijeme izlaza",
+      "DURATION": "Trajanje",
+      "MINUTES": "Minuta"
+    },
+    "TIMESTAMPS": {
+      "LOGGED_AT": "Zabilježeno",
+      "LAST_UPDATE": "Zadnje ažuriranje"
+    },
+    "ACTIONS": {
+      "EXPORT": "IZVEZI ANALIZU",
+      "JOURNAL": "DODAJ ZAPIS"
+    }
+  }
+}

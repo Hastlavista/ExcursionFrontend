@@ -1,0 +1,168 @@
+<div class="detail-page">
+
+  @if (loading) {
+    <div class="full-loading">
+      <div class="spinner"></div>
+    </div>
+  }
+
+  @if (error) {
+    <div class="full-error">{{ error | translate }}</div>
+  }
+
+  @if (!loading && !error && trade) {
+
+    <!-- ── Header ───────────────────────────────────────────── -->
+    <div class="page-header">
+      <div class="header-left">
+        <a routerLink="/dashboard" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+          </svg>
+          {{ 'TRADE_DETAIL.BACK' | translate }}
+        </a>
+        <div class="header-meta">
+          <span class="status-badge" [class.status--open]="trade.status === TradeStatus.Open"
+                                     [class.status--closed]="trade.status === TradeStatus.Closed">
+            {{ trade.status }}
+          </span>
+          <span class="trade-id">{{ trade.id | slice:0:8 }}…</span>
+          <span class="ext-id">#{{ trade.externalId }}</span>
+        </div>
+        <div class="header-symbol-row">
+          <h1 class="symbol">{{ trade.symbol }}</h1>
+          <span class="direction-badge"
+                [class.direction--long]="directionLabel === 'LONG'"
+                [class.direction--short]="directionLabel === 'SHORT'">
+            {{ directionLabel }}
+          </span>
+        </div>
+      </div>
+      <div class="header-right">
+        <p class="pnl-label">{{ 'TRADE_DETAIL.TOTAL_PNL' | translate }}</p>
+        <p class="pnl-value"
+           [class.pnl--positive]="(trade.profit ?? 0) > 0"
+           [class.pnl--negative]="(trade.profit ?? 0) < 0">
+          {{ trade.status === TradeStatus.Open ? '—' : formatPnl(trade.profit ?? 0) }}
+        </p>
+      </div>
+    </div>
+
+    <!-- ── Body ─────────────────────────────────────────────── -->
+    <div class="detail-body">
+
+      <!-- Left: Chart column -->
+      <div class="chart-column">
+
+        <div class="chart-meta">
+          <div class="chart-legend">
+            <span class="legend-item"><span class="legend-dot dot--entry"></span> {{ 'TRADE_DETAIL.LEGEND.ENTRY' | translate }}</span>
+            <span class="legend-item"><span class="legend-dot dot--exit"></span> {{ 'TRADE_DETAIL.LEGEND.EXIT' | translate }}</span>
+            <span class="legend-item"><span class="legend-dot dot--sl"></span> {{ 'TRADE_DETAIL.LEGEND.SL' | translate }}</span>
+            <span class="legend-item"><span class="legend-dot dot--tp"></span> {{ 'TRADE_DETAIL.LEGEND.TP' | translate }}</span>
+          </div>
+          @if (chartTimeframe) {
+            <span class="timeframe-label">{{ chartTimeframe }} {{ 'TRADE_DETAIL.CHART_SUFFIX' | translate }}</span>
+          }
+        </div>
+
+        <div #chartContainer class="chart-container"></div>
+
+        <div class="metric-cards">
+          <div class="metric-card">
+            <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.EFFICIENCY' | translate }}</p>
+            <p class="metric-card__value"
+               [class.value--positive]="(trade.efficiency ?? 0) > 0"
+               [class.value--negative]="(trade.efficiency ?? 0) < 0">
+              {{ trade.efficiency != null ? (trade.efficiency | number:'1.1-1') + '%' : '—' }}
+            </p>
+          </div>
+          <div class="metric-card">
+            <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.MFE' | translate }}</p>
+            <p class="metric-card__value value--positive">
+              {{ formatPips(trade.mfe) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+            </p>
+          </div>
+          <div class="metric-card">
+            <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.MAE' | translate }}</p>
+            <p class="metric-card__value value--negative">
+              {{ formatPips(trade.mae) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+            </p>
+          </div>
+          <div class="metric-card">
+            <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.PROFIT_PIPS' | translate }}</p>
+            <p class="metric-card__value"
+               [class.value--positive]="(trade.profitPips ?? 0) > 0"
+               [class.value--negative]="(trade.profitPips ?? 0) < 0">
+              {{ formatPips(trade.profitPips) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Specs column -->
+      <div class="specs-column">
+
+        <div class="spec-card">
+          <h3 class="spec-card__title">{{ 'TRADE_DETAIL.SPECS.TITLE' | translate }}</h3>
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.LOT_SIZE' | translate }}</span>
+            <span class="spec-value">{{ trade.lotSize ?? '—' }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.STOP_LOSS' | translate }}</span>
+            <span class="spec-value value--negative">{{ trade.stopLoss ?? '—' }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.TAKE_PROFIT' | translate }}</span>
+            <span class="spec-value value--positive">{{ trade.takeProfit ?? '—' }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <h3 class="spec-card__title">{{ 'TRADE_DETAIL.TEMPORAL.TITLE' | translate }}</h3>
+          <div class="spec-row">
+            <span class="spec-label">
+              <span class="dot dot--entry"></span> {{ 'TRADE_DETAIL.TEMPORAL.ENTRY_TIME' | translate }}
+            </span>
+            <span class="spec-value">{{ formatDate(trade.entryTime) }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">
+              <span class="dot dot--exit"></span> {{ 'TRADE_DETAIL.TEMPORAL.EXIT_TIME' | translate }}
+            </span>
+            <span class="spec-value">{{ trade.exitTime ? formatDate(trade.exitTime) : '—' }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.TEMPORAL.DURATION' | translate }}</span>
+            <span class="spec-value">{{ trade.durationMinutes != null ? trade.durationMinutes + ' ' + ('TRADE_DETAIL.TEMPORAL.MINUTES' | translate) : '—' }}</span>
+          </div>
+        </div>
+
+        <div class="spec-card spec-card--timestamps">
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.TIMESTAMPS.LOGGED_AT' | translate }}</span>
+            <span class="spec-value spec-value--muted">{{ formatDate(trade.createdAt) }}</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.TIMESTAMPS.LAST_UPDATE' | translate }}</span>
+            <span class="spec-value spec-value--muted">{{ formatDate(trade.updatedAt) }}</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn--primary">{{ 'TRADE_DETAIL.ACTIONS.EXPORT' | translate }}</button>
+          <button class="btn btn--secondary">{{ 'TRADE_DETAIL.ACTIONS.JOURNAL' | translate }}</button>
+        </div>
+
+      </div>
+    </div>
+
+  }
+
+  @if (!loading && !error && !trade) {
+    <div class="full-error">{{ 'TRADE_DETAIL.NOT_FOUND' | translate }}</div>
+  }
+
+</div>

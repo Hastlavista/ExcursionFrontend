@@ -1,0 +1,202 @@
+<div class="register-page">
+  <app-language-switcher class="lang-switcher-overlay"></app-language-switcher>
+
+  <!-- ── Left: Marketing ──────────────────────────────────── -->
+  <div class="marketing">
+    <div class="marketing__inner">
+      <p class="brand-name">
+        <img src="assets/images/icon_brand.png" class="brand-icon" alt="logo">
+        <span class="logo--brand">{{ 'MAIN.BRAND_PART1' | translate }}</span> <span class="logo--suffix">{{ 'MAIN.BRAND_PART2' | translate }}</span>
+      </p>
+
+      <h1 class="marketing__headline">
+        <span class="marketing__headline--white">{{ 'AUTH.REGISTER.MARKETING.HEADLINE_1' | translate }}</span><br>
+        <span class="marketing__headline--blue">{{ 'AUTH.REGISTER.MARKETING.HEADLINE_2' | translate }}</span>
+      </h1>
+
+      <p class="marketing__sub">{{ 'AUTH.REGISTER.MARKETING.SUBTITLE' | translate }}</p>
+
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <div>
+            <p class="feature-card__title">{{ 'AUTH.REGISTER.MARKETING.FEATURE_1_TITLE' | translate }}</p>
+            <p class="feature-card__desc">{{ 'AUTH.REGISTER.MARKETING.FEATURE_1_DESC' | translate }}</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"/>
+              <polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+          </div>
+          <div>
+            <p class="feature-card__title">{{ 'AUTH.REGISTER.MARKETING.FEATURE_2_TITLE' | translate }}</p>
+            <p class="feature-card__desc">{{ 'AUTH.REGISTER.MARKETING.FEATURE_2_DESC' | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Right: Form ───────────────────────────────────────── -->
+  <div class="form-side">
+    <div class="form-card">
+      <h2 class="form-card__title">{{ 'AUTH.REGISTER.TITLE' | translate }}</h2>
+      <p class="form-card__sub">{{ 'AUTH.REGISTER.SUBTITLE' | translate }}</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">{{ 'AUTH.REGISTER.EMAIL' | translate }}</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            autocomplete="email"
+            [placeholder]="'AUTH.REGISTER.EMAIL_PLACEHOLDER' | translate"
+            [class.is-invalid]="form.get('email')?.invalid && form.get('email')?.touched"
+          />
+          @if (form.get('email')?.touched && form.get('email')?.hasError('required')) {
+            <span class="field-error">{{ 'AUTH.REGISTER.ERRORS.EMAIL_REQUIRED' | translate }}</span>
+          } @else if (form.get('email')?.touched && form.get('email')?.hasError('email')) {
+            <span class="field-error">{{ 'AUTH.REGISTER.ERRORS.EMAIL_INVALID' | translate }}</span>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">{{ 'AUTH.REGISTER.PASSWORD' | translate }}</label>
+          <div class="input-wrapper">
+            <input
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              autocomplete="new-password"
+              [placeholder]="'AUTH.REGISTER.PASSWORD_PLACEHOLDER' | translate"
+              [class.is-invalid]="form.get('password')?.invalid && form.get('password')?.touched"
+            />
+            <button
+              type="button"
+              class="toggle-visibility"
+              (click)="showPassword = !showPassword"
+              tabindex="-1"
+              [attr.aria-label]="'AUTH.REGISTER.ARIA.TOGGLE_PASSWORD' | translate"
+            >
+              @if (showPassword) {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              } @else {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              }
+            </button>
+          </div>
+
+          @if (passwordStrength) {
+            <div class="strength-bar">
+              <div class="strength-bar__track">
+                <div class="strength-bar__fill" [class]="'strength-bar__fill--' + passwordStrength"></div>
+              </div>
+              <span class="strength-bar__label" [class]="'strength-bar__label--' + passwordStrength">
+                {{ passwordStrengthKey | translate }}
+              </span>
+            </div>
+          }
+
+          @if (form.get('password')?.touched && form.get('password')?.hasError('required')) {
+            <span class="field-error">{{ 'AUTH.REGISTER.ERRORS.PASSWORD_REQUIRED' | translate }}</span>
+          } @else if (form.get('password')?.touched && form.get('password')?.hasError('minlength')) {
+            <span class="field-error">{{ 'AUTH.REGISTER.ERRORS.PASSWORD_MIN_LENGTH' | translate }}</span>
+          }
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirmPassword">{{ 'AUTH.REGISTER.CONFIRM_PASSWORD' | translate }}</label>
+          <div class="input-wrapper">
+            <input
+              id="confirmPassword"
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              formControlName="confirmPassword"
+              autocomplete="new-password"
+              [placeholder]="'AUTH.REGISTER.CONFIRM_PASSWORD_PLACEHOLDER' | translate"
+              [class.is-invalid]="(form.hasError('passwordMismatch') || form.get('confirmPassword')?.hasError('required')) && form.get('confirmPassword')?.touched"
+            />
+            <button
+              type="button"
+              class="toggle-visibility"
+              (click)="showConfirmPassword = !showConfirmPassword"
+              tabindex="-1"
+              [attr.aria-label]="'AUTH.REGISTER.ARIA.TOGGLE_CONFIRM_PASSWORD' | translate"
+            >
+              @if (showConfirmPassword) {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              } @else {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              }
+            </button>
+          </div>
+          @if (form.get('confirmPassword')?.touched && form.get('confirmPassword')?.hasError('required')) {
+            <span class="field-error">{{ 'AUTH.REGISTER.ERRORS.CONFIRM_REQUIRED' | translate }}</span>
+          } @else if (form.get('confirmPassword')?.touched && form.hasError('passwordMismatch')) {
+            <span class="field-error">{{ 'AUTH.REGISTER.ERRORS.PASSWORD_MISMATCH' | translate }}</span>
+          }
+        </div>
+
+        <!-- Terms -->
+        <div class="terms-group">
+          <label class="checkbox-label">
+            <input type="checkbox" formControlName="terms" class="checkbox-input" />
+            <span class="checkbox-custom"></span>
+            <span class="checkbox-text" [innerHTML]="'AUTH.REGISTER.TERMS' | translate"></span>
+          </label>
+          @if (form.get('terms')?.touched && form.get('terms')?.invalid) {
+            <span class="field-error">{{ 'AUTH.REGISTER.ERRORS.TERMS_REQUIRED' | translate }}</span>
+          }
+        </div>
+
+        <!-- Server error -->
+        @if (error) {
+          <p class="server-error">{{ error | translate }}</p>
+        }
+
+        <!-- Submit -->
+        <button type="submit" class="btn-submit" [disabled]="loading">
+          @if (loading) {
+            <span class="btn-spinner"></span>
+          } @else {
+            {{ 'AUTH.REGISTER.SUBMIT' | translate }}
+          }
+        </button>
+
+      </form>
+
+      <p class="login-link">
+        {{ 'AUTH.REGISTER.HAS_ACCOUNT' | translate }}
+        <a routerLink="/auth/login">{{ 'AUTH.REGISTER.LOGIN_LINK' | translate }}</a>
+      </p>
+    </div>
+  </div>
+
+</div>
