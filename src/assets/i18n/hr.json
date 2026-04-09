@@ -143,6 +143,11 @@
     "BACK": "Natrag",
     "TOTAL_PNL": "UKUPNI P&L",
     "CHART_SUFFIX": "CHART",
+    "CHART_NO_DATA": "Nema podataka za prikaz.",
+    "TAB": {
+      "BEFORE": "Prije ulaza",
+      "AFTER": "Nakon ulaza"
+    },
     "LEGEND": {
       "ENTRY": "Ulaz",
       "EXIT": "Izlaz",

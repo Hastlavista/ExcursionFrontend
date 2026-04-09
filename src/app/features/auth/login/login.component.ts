@@ -1,5 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -7,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from '../../../core/services/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 import { LanguageSwitcherComponent } from '../../../shared/language-switcher/language-switcher.component';
 
 @Component({
@@ -18,11 +18,10 @@ import { LanguageSwitcherComponent } from '../../../shared/language-switcher/lan
 })
 export class LoginComponent {
   form: FormGroup;
-  loading = false;
-  error: string | null = null;
+  loading = signal(false);
   showPassword = false;
 
-  private destroyRef = inject(DestroyRef);
+  private toastService = inject(ToastService);
 
   constructor(
     private fb: FormBuilder,
@@ -32,10 +31,6 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-
-    this.form.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      if (this.error) this.error = null;
-    });
   }
 
   onSubmit(): void {
@@ -44,14 +39,13 @@ export class LoginComponent {
       return;
     }
 
-    this.loading = true;
-    this.error = null;
+    this.loading.set(true);
 
     this.authService.login(this.form.value).pipe(
-      finalize(() => { this.loading = false; })
+      finalize(() => this.loading.set(false))
     ).subscribe({
       error: (err: HttpErrorResponse) => {
-        this.error = this.resolveError(err);
+        this.toastService.show(this.resolveError(err), 'error');
       }
     });
   }

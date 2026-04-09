@@ -335,6 +335,61 @@
   }
 }
 
+// ── Chart tabs ────────────────────────────────────────────────────────────────
+
+.chart-tabs {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-wrap: wrap;
+}
+
+.chart-tab {
+  padding: 6px 16px;
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  background: $bg-secondary;
+  color: $text-secondary;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  font-family: $font-family;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color $transition-fast, border-color $transition-fast, background-color $transition-fast;
+
+  &:hover:not(:disabled) {
+    color: $text-primary;
+    border-color: $text-muted;
+  }
+
+  &--active {
+    background: $accent-primary;
+    border-color: $accent-primary;
+    color: #fff;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
+.chart-tabs__meta {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 380px;
+  color: $text-muted;
+  font-size: $font-size-sm;
+}
+
 // ── Animation ─────────────────────────────────────────────────────────────────
 
 @keyframes spin {

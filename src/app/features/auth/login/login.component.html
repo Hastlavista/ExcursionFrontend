@@ -110,14 +110,9 @@
           }
         </div>
 
-        <!-- Server error -->
-        @if (error) {
-          <p class="server-error">{{ error | translate }}</p>
-        }
-
         <!-- Submit -->
-        <button type="submit" class="btn-submit" [disabled]="loading">
-          @if (loading) {
+        <button type="submit" class="btn-submit" [disabled]="loading()">
+          @if (loading()) {
             <span class="btn-spinner"></span>
           } @else {
             {{ 'AUTH.LOGIN.SUBMIT' | translate }}

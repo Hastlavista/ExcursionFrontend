@@ -143,6 +143,11 @@
     "BACK": "Back",
     "TOTAL_PNL": "TOTAL P&L",
     "CHART_SUFFIX": "CHART",
+    "CHART_NO_DATA": "No chart data available.",
+    "TAB": {
+      "BEFORE": "Before Entry",
+      "AFTER": "After Entry"
+    },
     "LEGEND": {
       "ENTRY": "Entry",
       "EXIT": "Exit",

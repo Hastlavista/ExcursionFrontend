@@ -54,19 +54,39 @@
       <!-- Left: Chart column -->
       <div class="chart-column">
 
-        <div class="chart-meta">
-          <div class="chart-legend">
-            <span class="legend-item"><span class="legend-dot dot--entry"></span> {{ 'TRADE_DETAIL.LEGEND.ENTRY' | translate }}</span>
-            <span class="legend-item"><span class="legend-dot dot--exit"></span> {{ 'TRADE_DETAIL.LEGEND.EXIT' | translate }}</span>
-            <span class="legend-item"><span class="legend-dot dot--sl"></span> {{ 'TRADE_DETAIL.LEGEND.SL' | translate }}</span>
-            <span class="legend-item"><span class="legend-dot dot--tp"></span> {{ 'TRADE_DETAIL.LEGEND.TP' | translate }}</span>
+        <div class="chart-tabs">
+          <button class="chart-tab"
+                  [class.chart-tab--active]="activeTab() === 'before'"
+                  [disabled]="!hasBefore"
+                  (click)="switchTab('before')">
+            {{ 'TRADE_DETAIL.TAB.BEFORE' | translate }}
+          </button>
+          <button class="chart-tab"
+                  [class.chart-tab--active]="activeTab() === 'after'"
+                  [disabled]="!hasAfter"
+                  (click)="switchTab('after')">
+            {{ 'TRADE_DETAIL.TAB.AFTER' | translate }}
+          </button>
+          <div class="chart-tabs__meta">
+            <div class="chart-legend">
+              <span class="legend-item"><span class="legend-dot dot--entry"></span> {{ 'TRADE_DETAIL.LEGEND.ENTRY' | translate }}</span>
+              @if (activeTab() === 'after') {
+                <span class="legend-item"><span class="legend-dot dot--exit"></span> {{ 'TRADE_DETAIL.LEGEND.EXIT' | translate }}</span>
+              }
+              <span class="legend-item"><span class="legend-dot dot--sl"></span> {{ 'TRADE_DETAIL.LEGEND.SL' | translate }}</span>
+              <span class="legend-item"><span class="legend-dot dot--tp"></span> {{ 'TRADE_DETAIL.LEGEND.TP' | translate }}</span>
+            </div>
+            @if (chartTimeframe) {
+              <span class="timeframe-label">{{ chartTimeframe }} {{ 'TRADE_DETAIL.CHART_SUFFIX' | translate }}</span>
+            }
           </div>
-          @if (chartTimeframe) {
-            <span class="timeframe-label">{{ chartTimeframe }} {{ 'TRADE_DETAIL.CHART_SUFFIX' | translate }}</span>
-          }
         </div>
 
-        <div #chartContainer class="chart-container"></div>
+        <div #chartContainer class="chart-container">
+          @if ((activeTab() === 'before' && !hasBefore) || (activeTab() === 'after' && !hasAfter)) {
+            <div class="chart-empty">{{ 'TRADE_DETAIL.CHART_NO_DATA' | translate }}</div>
+          }
+        </div>
 
         <div class="metric-cards">
           <div class="metric-card">

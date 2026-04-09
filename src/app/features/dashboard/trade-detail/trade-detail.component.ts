@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
@@ -20,6 +20,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
   trade: Trade | null = null;
   loading = true;
   error: string | null = null;
+  activeTab = signal<'before' | 'after'>('before');
   readonly TradeStatus = TradeStatus;
 
   private sub?: Subscription;
@@ -53,14 +54,37 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     this.chart?.remove();
   }
 
+  switchTab(tab: 'before' | 'after'): void {
+    if (this.activeTab() === tab) return;
+    this.chart?.remove();
+    this.chart = undefined;
+    this.activeTab.set(tab);
+    setTimeout(() => this.initChart(), 0);
+  }
+
+  get hasBefore(): boolean {
+    return (this.trade?.chartData?.ohlcDataBefore?.candles?.length ?? 0) > 0;
+  }
+
+  get hasAfter(): boolean {
+    return (this.trade?.chartData?.ohlcDataAfter?.candles?.length ?? 0) > 0;
+  }
+
+  get chartTimeframe(): string {
+    const tab = this.activeTab();
+    return tab === 'before'
+      ? (this.trade?.chartData?.ohlcDataBefore?.timeframe ?? '')
+      : (this.trade?.chartData?.ohlcDataAfter?.timeframe ?? '');
+  }
+
   private initChart(): void {
     if (!this.chartContainer || !this.trade) return;
-    const before = this.trade.chartData?.ohlcDataBefore?.candles ?? [];
-    const after  = this.trade.chartData?.ohlcDataAfter?.candles  ?? [];
-    const seen = new Set<number>();
-    const candles = [...before, ...after]
-      .sort((a, b) => a.time - b.time)
-      .filter(c => !seen.has(c.time) && seen.add(c.time));
+
+    const tab = this.activeTab();
+    const candles = (tab === 'before'
+      ? this.trade.chartData?.ohlcDataBefore?.candles
+      : this.trade.chartData?.ohlcDataAfter?.candles) ?? [];
+
     if (!candles.length) return;
 
     const container = this.chartContainer.nativeElement as HTMLElement;
@@ -110,7 +134,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
         title: `ENTRY: ${this.trade.entryPrice}`,
       });
     }
-    if (this.trade.exitPrice != null) {
+    if (tab === 'after' && this.trade.exitPrice != null) {
       series.createPriceLine({
         price: this.trade.exitPrice,
         color: '#26a69a',
@@ -146,12 +170,6 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
 
   get directionLabel(): string {
     return this.trade?.direction?.toLowerCase() === 'buy' ? 'LONG' : 'SHORT';
-  }
-
-  get chartTimeframe(): string {
-    return this.trade?.chartData?.ohlcDataAfter?.timeframe
-      ?? this.trade?.chartData?.ohlcDataBefore?.timeframe
-      ?? '';
   }
 
   formatDate(dateStr: string): string {
