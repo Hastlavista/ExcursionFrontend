@@ -150,6 +150,10 @@
   }
 }
 
+.detail-main {
+  min-width: 0;
+}
+
 // ── Chart column ──────────────────────────────────────────────────────────────
 
 .chart-column {
@@ -297,18 +301,47 @@
   &--muted { color: $text-secondary; font-weight: 400; }
 }
 
+.spec-input {
+  width: 110px;
+  padding: 4px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  font-family: $font-family;
+  text-align: right;
+  transition: border-color $transition-fast, background $transition-fast;
+
+  &:hover {
+    border-color: $border-color;
+    background: $bg-input;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $accent-primary;
+    background: $bg-input;
+  }
+
+  &::placeholder { color: $text-muted; font-weight: 400; }
+
+  // Remove number spinners
+  &[type='number'] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  }
+
+  // datetime-local needs more width
+  &[type='datetime-local'] { width: 160px; font-size: 0.7rem; }
+}
+
 // ── Value colors ──────────────────────────────────────────────────────────────
 
 .value--positive { color: $success; }
 .value--negative { color: $danger; }
-
-// ── Action buttons ────────────────────────────────────────────────────────────
-
-.action-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-sm;
-}
 
 .btn {
   width: 100%;
@@ -335,50 +368,46 @@
   }
 }
 
-// ── Chart tabs ────────────────────────────────────────────────────────────────
+// ── Main Tabs ─────────────────────────────────────────────────────────────────
 
-.chart-tabs {
+.main-tabs {
   display: flex;
   align-items: center;
-  gap: $spacing-xs;
-  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: $spacing-xl;
+  border-bottom: 1px solid $border-color;
 }
 
-.chart-tab {
-  padding: 6px 16px;
-  border: 1px solid $border-color;
-  border-radius: $radius-sm;
-  background: $bg-secondary;
+.main-tab {
+  padding: 10px 24px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
   color: $text-secondary;
   font-size: $font-size-sm;
   font-weight: 600;
   font-family: $font-family;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  transition: color $transition-fast, border-color $transition-fast, background-color $transition-fast;
+  margin-bottom: -1px;
+  transition: color $transition-fast, border-color $transition-fast;
 
-  &:hover:not(:disabled) {
+  &:hover {
     color: $text-primary;
-    border-color: $text-muted;
   }
 
   &--active {
-    background: $accent-primary;
-    border-color: $accent-primary;
-    color: #fff;
-  }
-
-  &:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
+    color: $accent-primary;
+    border-bottom-color: $accent-primary;
   }
 }
 
-.chart-tabs__meta {
-  margin-left: auto;
+// ── Chart meta (legend + timeframe) ──────────────────────────────────────────
+
+.chart-meta {
   display: flex;
   align-items: center;
-  gap: $spacing-md;
+  justify-content: space-between;
 }
 
 .chart-empty {
@@ -388,6 +417,106 @@
   height: 380px;
   color: $text-muted;
   font-size: $font-size-sm;
+}
+
+// ── Screenshots panel ─────────────────────────────────────────────────────────
+
+.screenshots-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xl;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.screenshot-card {
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  overflow: hidden;
+
+  &__title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: $text-secondary;
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 1px solid $border-color;
+    margin: 0;
+  }
+}
+
+.screenshot-zone {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: $bg-primary;
+}
+
+.screenshot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.screenshot-empty {
+  color: $text-muted;
+  font-size: $font-size-sm;
+}
+
+.screenshot-url-row {
+  padding: $spacing-sm $spacing-md $spacing-md;
+  border-top: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.screenshot-link {
+  font-size: $font-size-xs;
+  color: $accent-primary;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover { text-decoration: underline; }
+}
+
+.screenshot-url-input {
+  width: 100%;
+  padding: 8px $spacing-md;
+  background: $bg-primary;
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  color: $text-primary;
+  font-size: $font-size-sm;
+  font-family: $font-family;
+  box-sizing: border-box;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $accent-primary;
+  }
+
+  &::placeholder { color: $text-muted; }
+}
+
+.screenshots-save-row {
+  margin-top: $spacing-md;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.screenshots-save-btn {
+  width: auto;
+  padding: 10px $spacing-xl;
 }
 
 // ── Animation ─────────────────────────────────────────────────────────────────

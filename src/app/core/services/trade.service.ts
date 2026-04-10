@@ -17,4 +17,20 @@ export class TradeService {
   getTradeById(id: string): Observable<Trade> {
     return this.http.post<Trade>(`${this.api}/api/trades/gettrade`, { id });
   }
+
+  updateTrade(trade: Trade): Observable<any> {
+    return this.http.post<any>(`${this.api}/api/trades/updatetrade`, trade);
+  }
+
+  updateScreenshot(id: string, screenshotBefore: string | null, screenshotAfter: string | null): Observable<any> {
+    return this.http.post<any>(`${this.api}/api/trades/updatescreenshots`, {
+      id,
+      screenshotBefore,
+      screenshotAfter,
+    });
+  }
+
+  openTrade(payload: Trade): Observable<any> {
+    return this.http.post<any>(`${this.api}/api/trades/opentrade`, payload);
+  }
 }

@@ -134,6 +134,41 @@
     "PAGINATION": {
       "PREV": "← Prev",
       "NEXT": "Next →"
+    },
+    "QUICK_MENU": {
+      "DETAILS": "Details",
+      "SCREENSHOTS": "Quick screenshots update"
+    },
+    "SCREENSHOT_MODAL": {
+      "BEFORE_LABEL": "SCREENSHOT BEFORE ENTRY",
+      "AFTER_LABEL": "SCREENSHOT AFTER ENTRY",
+      "URL_PLACEHOLDER": "Paste image URL…",
+      "SAVE": "Save Screenshots",
+      "SAVING": "Saving…",
+      "CANCEL": "Cancel"
+    },
+    "ADD_TRADE": {
+      "TITLE": "Add Trade",
+      "BTN": "Add Trade",
+      "SYMBOL": "SYMBOL",
+      "DIRECTION": "DIRECTION",
+      "BUY": "Buy",
+      "SELL": "Sell",
+      "STATUS": "STATUS",
+      "OPEN": "Open",
+      "CLOSED": "Closed",
+      "ENTRY_PRICE": "ENTRY PRICE",
+      "EXIT_PRICE": "EXIT PRICE",
+      "STOP_LOSS": "STOP LOSS",
+      "TAKE_PROFIT": "TAKE PROFIT",
+      "LOT_SIZE": "LOT SIZE",
+      "ENTRY_TIME": "ENTRY TIME",
+      "EXIT_TIME": "EXIT TIME",
+      "SCREENSHOT_BEFORE": "SCREENSHOT BEFORE",
+      "SCREENSHOT_AFTER": "SCREENSHOT AFTER",
+      "SAVE": "Save Trade",
+      "SAVING": "Saving…",
+      "CANCEL": "Cancel"
     }
   },
   "TRADE_DETAIL": {
@@ -144,9 +179,32 @@
     "TOTAL_PNL": "TOTAL P&L",
     "CHART_SUFFIX": "CHART",
     "CHART_NO_DATA": "No chart data available.",
-    "TAB": {
-      "BEFORE": "Before Entry",
-      "AFTER": "After Entry"
+    "MAIN_TAB": {
+      "OHLC": "OHLC CHART",
+      "SCREENSHOTS": "SCREENSHOTS",
+      "EDIT": "EDIT TRADE"
+    },
+    "SCREENSHOTS": {
+      "BEFORE": "BEFORE ENTRY",
+      "AFTER": "AFTER ENTRY",
+      "NO_DATA": "No screenshot available.",
+      "URL_PLACEHOLDER": "Paste image URL…",
+      "SAVE": "Save Screenshots",
+      "SAVING": "Saving…",
+      "SAVED": "Saved ✓",
+      "SAVE_SUCCESS": "Screenshots saved successfully.",
+      "SAVE_ERROR": "Failed to save screenshots. Please try again."
+    },
+    "EDIT": {
+      "EXIT_PRICE": "EXIT PRICE",
+      "EXIT_TIME": "EXIT TIME",
+      "STOP_LOSS": "STOP LOSS",
+      "TAKE_PROFIT": "TAKE PROFIT",
+      "SAVE": "Save Changes",
+      "SAVING": "Saving…",
+      "SAVED": "Saved ✓",
+      "SAVE_SUCCESS": "Trade updated successfully.",
+      "SAVE_ERROR": "Failed to update trade. Please try again."
     },
     "LEGEND": {
       "ENTRY": "Entry",
@@ -163,6 +221,7 @@
     },
     "SPECS": {
       "TITLE": "EXECUTION SPECS",
+      "EXIT_PRICE": "Exit Price",
       "LOT_SIZE": "Lot Size",
       "STOP_LOSS": "Stop Loss",
       "TAKE_PROFIT": "Take Profit"

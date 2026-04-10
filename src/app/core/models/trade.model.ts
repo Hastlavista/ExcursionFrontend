@@ -16,6 +16,8 @@ export interface OhlcData {
 export interface ChartData {
   ohlcDataBefore?: OhlcData;
   ohlcDataAfter?: OhlcData;
+  screenshotUrlBefore?: string | null;
+  screenshotUrlAfter?: string | null;
 }
 
 export enum TradeStatus {
@@ -23,11 +25,16 @@ export enum TradeStatus {
   Closed = 'Closed'
 }
 
+export enum Direction {
+  Buy = 'Buy',
+  Sell = 'Sell',
+}
+
 export interface Trade {
   id: string;
   externalId?: number | null;
   symbol: string;
-  direction: string;
+  direction: Direction;
   entryPrice?: number | null;
   exitPrice?: number | null;
   stopLoss?: number | null;

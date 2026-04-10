@@ -134,6 +134,41 @@
     "PAGINATION": {
       "PREV": "← Prethodno",
       "NEXT": "Sljedeće →"
+    },
+    "QUICK_MENU": {
+      "DETAILS": "Detalji",
+      "SCREENSHOTS": "Brzi screenshot update"
+    },
+    "SCREENSHOT_MODAL": {
+      "BEFORE_LABEL": "SCREENSHOT PRIJE ULAZA",
+      "AFTER_LABEL": "SCREENSHOT NAKON ULAZA",
+      "URL_PLACEHOLDER": "Zalijepite URL slike…",
+      "SAVE": "Spremi screenshote",
+      "SAVING": "Spremanje…",
+      "CANCEL": "Odustani"
+    },
+    "ADD_TRADE": {
+      "TITLE": "Dodaj trejd",
+      "BTN": "+ Dodaj trejd",
+      "SYMBOL": "SIMBOL",
+      "DIRECTION": "SMJER",
+      "BUY": "Kupovina",
+      "SELL": "Prodaja",
+      "STATUS": "STATUS",
+      "OPEN": "Otvoren",
+      "CLOSED": "Zatvoren",
+      "ENTRY_PRICE": "CIJENA ULAZA",
+      "EXIT_PRICE": "CIJENA IZLAZA",
+      "STOP_LOSS": "STOP LOSS",
+      "TAKE_PROFIT": "TAKE PROFIT",
+      "LOT_SIZE": "VELIČINA LOTA",
+      "ENTRY_TIME": "VRIJEME ULAZA",
+      "EXIT_TIME": "VRIJEME IZLAZA",
+      "SCREENSHOT_BEFORE": "SCREENSHOT PRIJE",
+      "SCREENSHOT_AFTER": "SCREENSHOT NAKON",
+      "SAVE": "Spremi trejd",
+      "SAVING": "Spremanje…",
+      "CANCEL": "Odustani"
     }
   },
   "TRADE_DETAIL": {
@@ -144,9 +179,32 @@
     "TOTAL_PNL": "UKUPNI P&L",
     "CHART_SUFFIX": "CHART",
     "CHART_NO_DATA": "Nema podataka za prikaz.",
-    "TAB": {
-      "BEFORE": "Prije ulaza",
-      "AFTER": "Nakon ulaza"
+    "MAIN_TAB": {
+      "OHLC": "OHLC GRAF",
+      "SCREENSHOTS": "SCREENSHOTI",
+      "EDIT": "UREDI TREJD"
+    },
+    "SCREENSHOTS": {
+      "BEFORE": "PRIJE ULAZA",
+      "AFTER": "NAKON ULAZA",
+      "NO_DATA": "Screenshot nije dostupan.",
+      "URL_PLACEHOLDER": "Zalijepite URL slike…",
+      "SAVE": "Spremi screenshote",
+      "SAVING": "Spremanje…",
+      "SAVED": "Spremljeno ✓",
+      "SAVE_SUCCESS": "Screenshoti su uspješno spremljeni.",
+      "SAVE_ERROR": "Spremanje screenshota nije uspjelo. Pokušajte ponovo."
+    },
+    "EDIT": {
+      "EXIT_PRICE": "CIJENA IZLAZA",
+      "EXIT_TIME": "VRIJEME IZLAZA",
+      "STOP_LOSS": "STOP LOSS",
+      "TAKE_PROFIT": "TAKE PROFIT",
+      "SAVE": "Spremi promjene",
+      "SAVING": "Spremanje…",
+      "SAVED": "Spremljeno ✓",
+      "SAVE_SUCCESS": "Trejd je uspješno ažuriran.",
+      "SAVE_ERROR": "Ažuriranje trejda nije uspjelo. Pokušajte ponovo."
     },
     "LEGEND": {
       "ENTRY": "Ulaz",
@@ -163,6 +221,7 @@
     },
     "SPECS": {
       "TITLE": "PARAMETRI IZVRŠENJA",
+      "EXIT_PRICE": "Cijena izlaza",
       "LOT_SIZE": "Veličina lota",
       "STOP_LOSS": "Stop Loss",
       "TAKE_PROFIT": "Take Profit"

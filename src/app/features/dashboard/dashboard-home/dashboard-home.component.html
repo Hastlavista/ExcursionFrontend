@@ -56,7 +56,15 @@
     <div class="trades-section">
       <div class="trades-header">
         <h2>{{ 'DASHBOARD.TRADES.TITLE' | translate }}</h2>
-        <span class="trades-count">{{ trades.length }} {{ 'DASHBOARD.TRADES.COUNT' | translate }}</span>
+        <div class="trades-header__right">
+          <span class="trades-count">{{ trades.length }} {{ 'DASHBOARD.TRADES.COUNT' | translate }}</span>
+          <button class="add-trade-btn" (click)="openAddTradeModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            {{ 'DASHBOARD.ADD_TRADE.BTN' | translate }}
+          </button>
+        </div>
       </div>
 
       @if (trades.length === 0) {
@@ -90,7 +98,8 @@
                 <tr class="trade-row"
                     [class.trade-row--profit]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) > 0"
                     [class.trade-row--loss]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) < 0"
-                    (click)="openTrade(trade)">
+                    [class.trade-row--active]="popoverTrade?.id === trade.id"
+                    (click)="onRowClick($event, trade)">
                   <td class="cell-date">{{ formatDate(trade.entryTime) }}</td>
                   <td class="cell-symbol">{{ trade.symbol }}</td>
                   <td>
@@ -136,3 +145,196 @@
   }
 
 </div>
+
+<!-- ── Row Popover ────────────────────────────────────────────────────────────── -->
+@if (popoverTrade) {
+  <div class="row-popover"
+       [style.left.px]="popoverX"
+       [style.top.px]="popoverY"
+       (click)="$event.stopPropagation()">
+    <p class="row-popover__trade">
+      <span class="row-popover__symbol">{{ popoverTrade.symbol }}</span>
+      <span class="row-popover__id">#{{ popoverTrade.externalId }}</span>
+    </p>
+    <button class="row-popover__item" (click)="openDetails()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/>
+        <line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="15" x2="13" y2="15"/>
+      </svg>
+      {{ 'DASHBOARD.QUICK_MENU.DETAILS' | translate }}
+    </button>
+    <button class="row-popover__item" (click)="openScreenshotModal()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+        <polyline points="21 15 16 10 5 21"/>
+      </svg>
+      {{ 'DASHBOARD.QUICK_MENU.SCREENSHOTS' | translate }}
+    </button>
+  </div>
+}
+
+<!-- ── Screenshot Modal ───────────────────────────────────────────────────────── -->
+@if (modalTrade) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+
+      <div class="modal__header">
+        <div class="modal__title-group">
+          <span class="modal__symbol">{{ modalTrade.symbol }}</span>
+          <span class="modal__id">#{{ modalTrade.externalId }}</span>
+        </div>
+        <button class="modal__close" (click)="closeModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal__body">
+        <div class="modal__field">
+          <label class="modal__label">{{ 'DASHBOARD.SCREENSHOT_MODAL.BEFORE_LABEL' | translate }}</label>
+          <input class="modal__input"
+                 type="url"
+                 [(ngModel)]="screenshotBefore"
+                 [placeholder]="'DASHBOARD.SCREENSHOT_MODAL.URL_PLACEHOLDER' | translate" />
+          @if (screenshotBefore) {
+            <div class="modal__preview">
+              <img [src]="screenshotBefore" alt="Before" (error)="$any($event.target).style.display='none'" />
+            </div>
+          }
+        </div>
+
+        <div class="modal__field">
+          <label class="modal__label">{{ 'DASHBOARD.SCREENSHOT_MODAL.AFTER_LABEL' | translate }}</label>
+          <input class="modal__input"
+                 type="url"
+                 [(ngModel)]="screenshotAfter"
+                 [placeholder]="'DASHBOARD.SCREENSHOT_MODAL.URL_PLACEHOLDER' | translate" />
+          @if (screenshotAfter) {
+            <div class="modal__preview">
+              <img [src]="screenshotAfter" alt="After" (error)="$any($event.target).style.display='none'" />
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="modal__footer">
+        <button class="modal__btn modal__btn--cancel" (click)="closeModal()">
+          {{ 'DASHBOARD.SCREENSHOT_MODAL.CANCEL' | translate }}
+        </button>
+        <button class="modal__btn modal__btn--save" (click)="saveScreenshots()" [disabled]="saving">
+          {{ saving ? ('DASHBOARD.SCREENSHOT_MODAL.SAVING' | translate) : ('DASHBOARD.SCREENSHOT_MODAL.SAVE' | translate) }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+}
+
+<!-- ── Add Trade Modal ────────────────────────────────────────────────────────── -->
+@if (addTradeOpen) {
+  <div class="modal-backdrop" (click)="closeAddTradeModal()">
+    <div class="modal modal--wide" (click)="$event.stopPropagation()">
+
+      <div class="modal__header">
+        <div class="modal__title-group">
+          <span class="modal__symbol">{{ 'DASHBOARD.ADD_TRADE.TITLE' | translate }}</span>
+        </div>
+        <button class="modal__close" (click)="closeAddTradeModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal__body">
+
+        <!-- Row 1: Symbol + Direction + Status -->
+        <div class="trade-form__row trade-form__row--3">
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.SYMBOL' | translate }} *</label>
+            <input class="modal__input" type="text" [(ngModel)]="addTradeForm.symbol"
+                   placeholder="EURUSD" />
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.DIRECTION' | translate }} *</label>
+            <select class="modal__input modal__select" [(ngModel)]="addTradeForm.direction">
+              <option value="Buy">{{ 'DASHBOARD.ADD_TRADE.BUY' | translate }}</option>
+              <option value="Sell">{{ 'DASHBOARD.ADD_TRADE.SELL' | translate }}</option>
+            </select>
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.STATUS' | translate }} *</label>
+            <select class="modal__input modal__select" [(ngModel)]="addTradeForm.status">
+              <option value="Open">{{ 'DASHBOARD.ADD_TRADE.OPEN' | translate }}</option>
+              <option value="Closed">{{ 'DASHBOARD.ADD_TRADE.CLOSED' | translate }}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 2: Price levels -->
+        <div class="trade-form__row trade-form__row--4">
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.ENTRY_PRICE' | translate }}</label>
+            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.entryPrice" placeholder="0.00000" />
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.EXIT_PRICE' | translate }}</label>
+            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.exitPrice" placeholder="0.00000" />
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.STOP_LOSS' | translate }}</label>
+            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.stopLoss" placeholder="0.00000" />
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.TAKE_PROFIT' | translate }}</label>
+            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.takeProfit" placeholder="0.00000" />
+          </div>
+        </div>
+
+        <!-- Row 3: Lot size + Times -->
+        <div class="trade-form__row trade-form__row--3">
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.LOT_SIZE' | translate }}</label>
+            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.lotSize" placeholder="0.01" />
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.ENTRY_TIME' | translate }} *</label>
+            <input class="modal__input" type="datetime-local" [(ngModel)]="addTradeForm.entryTime" />
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.EXIT_TIME' | translate }}</label>
+            <input class="modal__input" type="datetime-local" [(ngModel)]="addTradeForm.exitTime" />
+          </div>
+        </div>
+
+        <!-- Row 4: Screenshots -->
+        <div class="trade-form__row trade-form__row--2">
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.SCREENSHOT_BEFORE' | translate }}</label>
+            <input class="modal__input" type="url" [(ngModel)]="addTradeForm.chartData!.screenshotUrlBefore"
+                   [placeholder]="'DASHBOARD.SCREENSHOT_MODAL.URL_PLACEHOLDER' | translate" />
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.SCREENSHOT_AFTER' | translate }}</label>
+            <input class="modal__input" type="url" [(ngModel)]="addTradeForm.chartData!.screenshotUrlAfter"
+                   [placeholder]="'DASHBOARD.SCREENSHOT_MODAL.URL_PLACEHOLDER' | translate" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal__footer">
+        <button class="modal__btn modal__btn--cancel" (click)="closeAddTradeModal()">
+          {{ 'DASHBOARD.ADD_TRADE.CANCEL' | translate }}
+        </button>
+        <button class="modal__btn modal__btn--save"
+                (click)="submitTrade()"
+                [disabled]="addTradeSaving || !addTradeForm.symbol || !addTradeForm.entryTime">
+          {{ addTradeSaving ? ('DASHBOARD.ADD_TRADE.SAVING' | translate) : ('DASHBOARD.ADD_TRADE.SAVE' | translate) }}
+        </button>
+      </div>
+
+    </div>
+  </div>
+}

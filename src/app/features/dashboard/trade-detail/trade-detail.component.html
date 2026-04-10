@@ -48,95 +48,166 @@
       </div>
     </div>
 
-    <!-- ── Body ─────────────────────────────────────────────── -->
+    <!-- ── Main Tabs ─────────────────────────────────────────── -->
+    <div class="main-tabs">
+      <button class="main-tab"
+              [class.main-tab--active]="activeMainTab() === 'ohlc'"
+              (click)="switchMainTab('ohlc')">
+        {{ 'TRADE_DETAIL.MAIN_TAB.OHLC' | translate }}
+      </button>
+      <button class="main-tab"
+              [class.main-tab--active]="activeMainTab() === 'screenshots'"
+              (click)="switchMainTab('screenshots')">
+        {{ 'TRADE_DETAIL.MAIN_TAB.SCREENSHOTS' | translate }}
+      </button>
+    </div>
+
+    <!-- ── Layout: tabbed left + persistent right ───────────── -->
     <div class="detail-body">
 
-      <!-- Left: Chart column -->
-      <div class="chart-column">
+      <!-- LEFT: switches per tab -->
+      <div class="detail-main">
 
-        <div class="chart-tabs">
-          <button class="chart-tab"
-                  [class.chart-tab--active]="activeTab() === 'before'"
-                  [disabled]="!hasBefore"
-                  (click)="switchTab('before')">
-            {{ 'TRADE_DETAIL.TAB.BEFORE' | translate }}
-          </button>
-          <button class="chart-tab"
-                  [class.chart-tab--active]="activeTab() === 'after'"
-                  [disabled]="!hasAfter"
-                  (click)="switchTab('after')">
-            {{ 'TRADE_DETAIL.TAB.AFTER' | translate }}
-          </button>
-          <div class="chart-tabs__meta">
-            <div class="chart-legend">
-              <span class="legend-item"><span class="legend-dot dot--entry"></span> {{ 'TRADE_DETAIL.LEGEND.ENTRY' | translate }}</span>
-              @if (activeTab() === 'after') {
-                <span class="legend-item"><span class="legend-dot dot--exit"></span> {{ 'TRADE_DETAIL.LEGEND.EXIT' | translate }}</span>
+        @if (activeMainTab() === 'ohlc') {
+          <div class="chart-column">
+
+            <div class="chart-meta">
+              <div class="chart-legend">
+                <span class="legend-item"><span class="legend-dot dot--entry"></span> {{ 'TRADE_DETAIL.LEGEND.ENTRY' | translate }}</span>
+                @if (trade.exitPrice != null) {
+                  <span class="legend-item"><span class="legend-dot dot--exit"></span> {{ 'TRADE_DETAIL.LEGEND.EXIT' | translate }}</span>
+                }
+                <span class="legend-item"><span class="legend-dot dot--sl"></span> {{ 'TRADE_DETAIL.LEGEND.SL' | translate }}</span>
+                <span class="legend-item"><span class="legend-dot dot--tp"></span> {{ 'TRADE_DETAIL.LEGEND.TP' | translate }}</span>
+              </div>
+              @if (chartTimeframe) {
+                <span class="timeframe-label">{{ chartTimeframe }} {{ 'TRADE_DETAIL.CHART_SUFFIX' | translate }}</span>
               }
-              <span class="legend-item"><span class="legend-dot dot--sl"></span> {{ 'TRADE_DETAIL.LEGEND.SL' | translate }}</span>
-              <span class="legend-item"><span class="legend-dot dot--tp"></span> {{ 'TRADE_DETAIL.LEGEND.TP' | translate }}</span>
             </div>
-            @if (chartTimeframe) {
-              <span class="timeframe-label">{{ chartTimeframe }} {{ 'TRADE_DETAIL.CHART_SUFFIX' | translate }}</span>
-            }
-          </div>
-        </div>
 
-        <div #chartContainer class="chart-container">
-          @if ((activeTab() === 'before' && !hasBefore) || (activeTab() === 'after' && !hasAfter)) {
-            <div class="chart-empty">{{ 'TRADE_DETAIL.CHART_NO_DATA' | translate }}</div>
-          }
-        </div>
+            <div #chartContainer class="chart-container">
+              @if (!hasOhlcData) {
+                <div class="chart-empty">{{ 'TRADE_DETAIL.CHART_NO_DATA' | translate }}</div>
+              }
+            </div>
 
-        <div class="metric-cards">
-          <div class="metric-card">
-            <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.EFFICIENCY' | translate }}</p>
-            <p class="metric-card__value"
-               [class.value--positive]="(trade.efficiency ?? 0) > 0"
-               [class.value--negative]="(trade.efficiency ?? 0) < 0">
-              {{ trade.efficiency != null ? (trade.efficiency | number:'1.1-1') + '%' : '—' }}
-            </p>
+            <div class="metric-cards">
+              <div class="metric-card">
+                <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.EFFICIENCY' | translate }}</p>
+                <p class="metric-card__value"
+                   [class.value--positive]="(trade.efficiency ?? 0) > 0"
+                   [class.value--negative]="(trade.efficiency ?? 0) < 0">
+                  {{ trade.efficiency != null ? (trade.efficiency | number:'1.1-1') + '%' : '—' }}
+                </p>
+              </div>
+              <div class="metric-card">
+                <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.MFE' | translate }}</p>
+                <p class="metric-card__value value--positive">
+                  {{ formatPips(trade.mfe) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+                </p>
+              </div>
+              <div class="metric-card">
+                <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.MAE' | translate }}</p>
+                <p class="metric-card__value value--negative">
+                  {{ formatPips(trade.mae) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+                </p>
+              </div>
+              <div class="metric-card">
+                <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.PROFIT_PIPS' | translate }}</p>
+                <p class="metric-card__value"
+                   [class.value--positive]="(trade.profitPips ?? 0) > 0"
+                   [class.value--negative]="(trade.profitPips ?? 0) < 0">
+                  {{ formatPips(trade.profitPips) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+                </p>
+              </div>
+            </div>
+
           </div>
-          <div class="metric-card">
-            <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.MFE' | translate }}</p>
-            <p class="metric-card__value value--positive">
-              {{ formatPips(trade.mfe) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
-            </p>
+        }
+
+        @if (activeMainTab() === 'screenshots') {
+          <div class="screenshots-panel">
+
+            <div class="screenshot-card">
+              <h3 class="screenshot-card__title">{{ 'TRADE_DETAIL.SCREENSHOTS.BEFORE' | translate }}</h3>
+              <div class="screenshot-zone">
+                @if (screenshotBefore) {
+                  <img [src]="screenshotBefore" class="screenshot-img" alt="Screenshot before entry" />
+                } @else {
+                  <span class="screenshot-empty">{{ 'TRADE_DETAIL.SCREENSHOTS.NO_DATA' | translate }}</span>
+                }
+              </div>
+              <div class="screenshot-url-row">
+                @if (screenshotBefore) {
+                  <a [href]="screenshotBefore" target="_blank" class="screenshot-link">{{ screenshotBefore }}</a>
+                }
+                <input class="screenshot-url-input"
+                       type="url"
+                       [(ngModel)]="screenshotBefore"
+                       [placeholder]="'TRADE_DETAIL.SCREENSHOTS.URL_PLACEHOLDER' | translate" />
+              </div>
+            </div>
+
+            <div class="screenshot-card">
+              <h3 class="screenshot-card__title">{{ 'TRADE_DETAIL.SCREENSHOTS.AFTER' | translate }}</h3>
+              <div class="screenshot-zone">
+                @if (screenshotAfter) {
+                  <img [src]="screenshotAfter" class="screenshot-img" alt="Screenshot after entry" />
+                } @else {
+                  <span class="screenshot-empty">{{ 'TRADE_DETAIL.SCREENSHOTS.NO_DATA' | translate }}</span>
+                }
+              </div>
+              <div class="screenshot-url-row">
+                @if (screenshotAfter) {
+                  <a [href]="screenshotAfter" target="_blank" class="screenshot-link">{{ screenshotAfter }}</a>
+                }
+                <input class="screenshot-url-input"
+                       type="url"
+                       [(ngModel)]="screenshotAfter"
+                       [placeholder]="'TRADE_DETAIL.SCREENSHOTS.URL_PLACEHOLDER' | translate" />
+              </div>
+            </div>
+
           </div>
-          <div class="metric-card">
-            <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.MAE' | translate }}</p>
-            <p class="metric-card__value value--negative">
-              {{ formatPips(trade.mae) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
-            </p>
+
+          <div class="screenshots-save-row">
+            <button class="btn btn--primary screenshots-save-btn"
+                    (click)="saveScreenshots()"
+                    [disabled]="savingScreenshots">
+              @if (screenshotsSaved) {
+                {{ 'TRADE_DETAIL.SCREENSHOTS.SAVED' | translate }}
+              } @else {
+                {{ savingScreenshots ? ('TRADE_DETAIL.SCREENSHOTS.SAVING' | translate) : ('TRADE_DETAIL.SCREENSHOTS.SAVE' | translate) }}
+              }
+            </button>
           </div>
-          <div class="metric-card">
-            <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.PROFIT_PIPS' | translate }}</p>
-            <p class="metric-card__value"
-               [class.value--positive]="(trade.profitPips ?? 0) > 0"
-               [class.value--negative]="(trade.profitPips ?? 0) < 0">
-              {{ formatPips(trade.profitPips) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
-            </p>
-          </div>
-        </div>
+        }
 
       </div>
 
-      <!-- Right: Specs column -->
+      <!-- RIGHT: always visible specs + edit -->
       <div class="specs-column">
 
         <div class="spec-card">
           <h3 class="spec-card__title">{{ 'TRADE_DETAIL.SPECS.TITLE' | translate }}</h3>
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.EXIT_PRICE' | translate }}</span>
+            <input class="spec-input" type="number" step="any"
+                   [(ngModel)]="editExitPrice" placeholder="—" />
+          </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.LOT_SIZE' | translate }}</span>
             <span class="spec-value">{{ trade.lotSize ?? '—' }}</span>
           </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.STOP_LOSS' | translate }}</span>
-            <span class="spec-value value--negative">{{ trade.stopLoss ?? '—' }}</span>
+            <input class="spec-input value--negative" type="number" step="any"
+                   [(ngModel)]="editStopLoss" placeholder="—" />
           </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.TAKE_PROFIT' | translate }}</span>
-            <span class="spec-value value--positive">{{ trade.takeProfit ?? '—' }}</span>
+            <input class="spec-input value--positive" type="number" step="any"
+                   [(ngModel)]="editTakeProfit" placeholder="—" />
           </div>
         </div>
 
@@ -152,7 +223,8 @@
             <span class="spec-label">
               <span class="dot dot--exit"></span> {{ 'TRADE_DETAIL.TEMPORAL.EXIT_TIME' | translate }}
             </span>
-            <span class="spec-value">{{ trade.exitTime ? formatDate(trade.exitTime) : '—' }}</span>
+            <input class="spec-input" type="datetime-local"
+                   [(ngModel)]="editExitTime" />
           </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.TEMPORAL.DURATION' | translate }}</span>
@@ -171,10 +243,15 @@
           </div>
         </div>
 
-        <div class="action-buttons">
-          <button class="btn btn--primary">{{ 'TRADE_DETAIL.ACTIONS.EXPORT' | translate }}</button>
-          <button class="btn btn--secondary">{{ 'TRADE_DETAIL.ACTIONS.JOURNAL' | translate }}</button>
-        </div>
+        <button class="btn btn--primary"
+                (click)="saveTradeDetails()"
+                [disabled]="savingDetails">
+          @if (detailsSaved) {
+            {{ 'TRADE_DETAIL.EDIT.SAVED' | translate }}
+          } @else {
+            {{ savingDetails ? ('TRADE_DETAIL.EDIT.SAVING' | translate) : ('TRADE_DETAIL.EDIT.SAVE' | translate) }}
+          }
+        </button>
 
       </div>
     </div>

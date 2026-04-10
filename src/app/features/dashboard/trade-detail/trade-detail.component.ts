@@ -1,27 +1,50 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { createChart, ColorType, LineStyle, CandlestickSeries } from 'lightweight-charts';
 import { TradeService } from '../../../core/services/trade.service';
-import { Trade, TradeStatus } from '../../../core/models/trade.model';
+import { ToastService } from '../../../core/services/toast.service';
+import { Trade, TradeStatus, Candle } from '../../../core/models/trade.model';
 
 @Component({
   selector: 'app-trade-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule],
   templateUrl: './trade-detail.component.html',
   styleUrl: './trade-detail.component.scss'
 })
 export class TradeDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('chartContainer') chartContainer!: ElementRef;
+  private _chartContainer?: ElementRef;
+
+  @ViewChild('chartContainer') set chartContainer(el: ElementRef | undefined) {
+    this._chartContainer = el;
+    if (el && this.trade && !this.chart) {
+      this.initChart();
+    }
+  }
 
   trade: Trade | null = null;
   loading = true;
   error: string | null = null;
-  activeTab = signal<'before' | 'after'>('before');
+  activeMainTab = signal<'ohlc' | 'screenshots'>('ohlc');
   readonly TradeStatus = TradeStatus;
+
+  // Screenshot editing
+  screenshotBefore = '';
+  screenshotAfter = '';
+  savingScreenshots = false;
+  screenshotsSaved = false;
+
+  // Trade detail editing
+  editExitPrice: number | null = null;
+  editExitTime = '';
+  editStopLoss: number | null = null;
+  editTakeProfit: number | null = null;
+  savingDetails = false;
+  detailsSaved = false;
 
   private sub?: Subscription;
   private chart?: ReturnType<typeof createChart>;
@@ -29,6 +52,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private tradeService: TradeService,
+    private toastService: ToastService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -37,9 +61,15 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     this.sub = this.tradeService.getTradeById(id).subscribe({
       next: trade => {
         this.trade = trade;
+        this.screenshotBefore = trade.chartData?.screenshotUrlBefore ?? '';
+        this.screenshotAfter  = trade.chartData?.screenshotUrlAfter  ?? '';
+        this.editExitPrice  = trade.exitPrice  ?? null;
+        this.editStopLoss   = trade.stopLoss   ?? null;
+        this.editTakeProfit = trade.takeProfit ?? null;
+        this.editExitTime   = trade.exitTime   ? this.toDatetimeLocal(trade.exitTime) : '';
         this.loading = false;
         this.cdr.detectChanges();
-        setTimeout(() => this.initChart(), 0);
+        // ViewChild setter handles initChart when the element appears
       },
       error: () => {
         this.error = 'TRADE_DETAIL.ERROR';
@@ -54,40 +84,40 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     this.chart?.remove();
   }
 
-  switchTab(tab: 'before' | 'after'): void {
-    if (this.activeTab() === tab) return;
+  switchMainTab(tab: 'ohlc' | 'screenshots'): void {
+    if (this.activeMainTab() === tab) return;
     this.chart?.remove();
     this.chart = undefined;
-    this.activeTab.set(tab);
-    setTimeout(() => this.initChart(), 0);
+    this.activeMainTab.set(tab);
+    // ViewChild setter will call initChart() when #chartContainer appears
   }
 
-  get hasBefore(): boolean {
-    return (this.trade?.chartData?.ohlcDataBefore?.candles?.length ?? 0) > 0;
-  }
-
-  get hasAfter(): boolean {
-    return (this.trade?.chartData?.ohlcDataAfter?.candles?.length ?? 0) > 0;
+  get hasOhlcData(): boolean {
+    return (this.trade?.chartData?.ohlcDataBefore?.candles?.length ?? 0) > 0 ||
+           (this.trade?.chartData?.ohlcDataAfter?.candles?.length ?? 0) > 0;
   }
 
   get chartTimeframe(): string {
-    const tab = this.activeTab();
-    return tab === 'before'
-      ? (this.trade?.chartData?.ohlcDataBefore?.timeframe ?? '')
-      : (this.trade?.chartData?.ohlcDataAfter?.timeframe ?? '');
+    return this.trade?.chartData?.ohlcDataBefore?.timeframe
+      ?? this.trade?.chartData?.ohlcDataAfter?.timeframe
+      ?? '';
+  }
+
+  private mergedCandles(): Candle[] {
+    const before = this.trade?.chartData?.ohlcDataBefore?.candles ?? [];
+    const after = this.trade?.chartData?.ohlcDataAfter?.candles ?? [];
+    const map = new Map<number, Candle>();
+    [...before, ...after].forEach(c => map.set(c.time, c));
+    return Array.from(map.values()).sort((a, b) => a.time - b.time);
   }
 
   private initChart(): void {
-    if (!this.chartContainer || !this.trade) return;
+    if (!this._chartContainer || !this.trade) return;
 
-    const tab = this.activeTab();
-    const candles = (tab === 'before'
-      ? this.trade.chartData?.ohlcDataBefore?.candles
-      : this.trade.chartData?.ohlcDataAfter?.candles) ?? [];
-
+    const candles = this.mergedCandles();
     if (!candles.length) return;
 
-    const container = this.chartContainer.nativeElement as HTMLElement;
+    const container = this._chartContainer.nativeElement as HTMLElement;
 
     this.chart = createChart(container, {
       autoSize: true,
@@ -134,7 +164,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
         title: `ENTRY: ${this.trade.entryPrice}`,
       });
     }
-    if (tab === 'after' && this.trade.exitPrice != null) {
+    if (this.trade.exitPrice != null) {
       series.createPriceLine({
         price: this.trade.exitPrice,
         color: '#26a69a',
@@ -166,6 +196,72 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     }
 
     this.chart.timeScale().fitContent();
+  }
+
+  saveScreenshots(): void {
+    if (!this.trade || this.savingScreenshots) return;
+
+    const before = this.screenshotBefore.trim() || null;
+    const after = this.screenshotAfter.trim() || null;
+
+    this.savingScreenshots = true;
+    this.screenshotsSaved = false;
+    this.tradeService.updateScreenshot(this.trade.id, before, after).subscribe({
+      next: () => {
+        this.trade = {
+          ...this.trade!,
+          chartData: {
+            ...this.trade!.chartData,
+            screenshotUrlBefore: before,
+            screenshotUrlAfter: after,
+          }
+        };
+        this.screenshotBefore = before ?? '';
+        this.screenshotAfter = after ?? '';
+        this.savingScreenshots = false;
+        this.screenshotsSaved = true;
+        this.toastService.show('TRADE_DETAIL.SCREENSHOTS.SAVE_SUCCESS', 'success');
+        setTimeout(() => { this.screenshotsSaved = false; }, 3000);
+      },
+      error: () => {
+        this.savingScreenshots = false;
+        this.toastService.show('TRADE_DETAIL.SCREENSHOTS.SAVE_ERROR', 'error');
+      }
+    });
+  }
+
+  saveTradeDetails(): void {
+    if (!this.trade || this.savingDetails) return;
+
+    const updated: Trade = {
+      ...this.trade,
+      exitPrice:   this.editExitPrice,
+      stopLoss:    this.editStopLoss,
+      takeProfit:  this.editTakeProfit,
+      exitTime:    this.editExitTime || null,
+    };
+
+    this.savingDetails = true;
+    this.detailsSaved = false;
+    this.tradeService.updateTrade(updated).subscribe({
+      next: () => {
+        this.trade = updated;
+        this.savingDetails = false;
+        this.detailsSaved = true;
+        this.toastService.show('TRADE_DETAIL.EDIT.SAVE_SUCCESS', 'success');
+        setTimeout(() => { this.detailsSaved = false; }, 3000);
+      },
+      error: () => {
+        this.savingDetails = false;
+        this.toastService.show('TRADE_DETAIL.EDIT.SAVE_ERROR', 'error');
+      }
+    });
+  }
+
+  private toDatetimeLocal(iso: string): string {
+    const d = new Date(iso);
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 
   get directionLabel(): string {

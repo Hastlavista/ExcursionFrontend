@@ -50,4 +50,15 @@ export class DashboardStateService {
     this.pollSub = undefined;
     this._loading.set(true);
   }
+
+  patchTrade(updated: Trade): void {
+    this._trades.update(list => list.map(t => t.id === updated.id ? updated : t));
+  }
+
+  refresh(): void {
+    this.tradeService.getTrades().subscribe({
+      next: trades => this._trades.set(trades ?? []),
+      error: () => {}
+    });
+  }
 }
