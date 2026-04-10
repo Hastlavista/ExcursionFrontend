@@ -55,6 +55,10 @@ export class DashboardStateService {
     this._trades.update(list => list.map(t => t.id === updated.id ? updated : t));
   }
 
+  removeTrade(id: string): void {
+    this._trades.update(list => list.filter(t => t.id !== id));
+  }
+
   refresh(): void {
     this.tradeService.getTrades().subscribe({
       next: trades => this._trades.set(trades ?? []),

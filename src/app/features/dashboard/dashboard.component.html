@@ -5,12 +5,12 @@
 
   <!-- ── Sidebar ─────────────────────────────────────────── -->
   <aside class="sidebar">
-    <div class="sidebar__logo">
+    <a class="sidebar__logo" routerLink="/dashboard" (click)="sidebarOpen = false">
       <img src="assets/images/icon_brand.png" class="sidebar__logo-icon" alt="logo">
       <span class="sidebar__logo-text">
         <span class="logo--brand">{{ 'MAIN.BRAND_PART1' | translate }}</span> <span class="logo--suffix">{{ 'MAIN.BRAND_PART2' | translate }}</span>
       </span>
-    </div>
+    </a>
 
     <nav class="sidebar__nav">
       <a class="nav-item"
@@ -27,16 +27,6 @@
 
       <a class="nav-item nav-item--disabled">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
-          <line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/>
-          <line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
-        </svg>
-        {{ 'DASHBOARD.NAV.TRADE_LOG' | translate }}
-        <span class="nav-item__soon">{{ 'DASHBOARD.NAV.SOON' | translate }}</span>
-      </a>
-
-      <a class="nav-item nav-item--disabled">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
           <line x1="6" y1="20" x2="6" y2="14"/>
         </svg>
@@ -44,13 +34,15 @@
         <span class="nav-item__soon">{{ 'DASHBOARD.NAV.SOON' | translate }}</span>
       </a>
 
-      <a class="nav-item nav-item--disabled">
+      <a class="nav-item"
+         routerLink="/dashboard/settings"
+         routerLinkActive="nav-item--active"
+         (click)="sidebarOpen = false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="3"/>
           <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
         </svg>
         {{ 'DASHBOARD.NAV.SETTINGS' | translate }}
-        <span class="nav-item__soon">{{ 'DASHBOARD.NAV.SOON' | translate }}</span>
       </a>
     </nav>
   </aside>

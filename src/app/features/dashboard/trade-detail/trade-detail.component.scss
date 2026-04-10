@@ -54,12 +54,27 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  padding: 6px 12px 6px 8px;
   color: $text-secondary;
   text-decoration: none;
   font-size: $font-size-sm;
-  transition: color $transition-fast;
+  font-weight: 500;
+  border-radius: $radius-full;
+  border: 1px solid transparent;
+  transition: color $transition-fast, background $transition-fast, border-color $transition-fast;
 
-  &:hover { color: $text-primary; }
+  svg {
+    flex-shrink: 0;
+    transition: transform $transition-fast;
+  }
+
+  &:hover {
+    color: $text-primary;
+    background: $bg-secondary;
+    border-color: $border-color;
+
+    svg { transform: translateX(-2px); }
+  }
 }
 
 .header-meta {
@@ -299,6 +314,11 @@
   text-align: right;
 
   &--muted { color: $text-secondary; font-weight: 400; }
+
+  &--editable {
+    cursor: pointer;
+    &:hover { color: $accent-primary; }
+  }
 }
 
 .spec-input {
@@ -334,8 +354,7 @@
     &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
   }
 
-  // datetime-local needs more width
-  &[type='datetime-local'] { width: 160px; font-size: 0.7rem; }
+  &[type='datetime-local'] { width: 160px; }
 }
 
 // ── Value colors ──────────────────────────────────────────────────────────────

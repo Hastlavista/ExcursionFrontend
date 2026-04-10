@@ -57,7 +57,10 @@
       <div class="trades-header">
         <h2>{{ 'DASHBOARD.TRADES.TITLE' | translate }}</h2>
         <div class="trades-header__right">
-          <span class="trades-count">{{ trades.length }} {{ 'DASHBOARD.TRADES.COUNT' | translate }}</span>
+          <span class="trades-count">
+            {{ isFiltered() ? filteredTrades().length + ' / ' + state.trades().length : state.trades().length }}
+            {{ 'DASHBOARD.TRADES.COUNT' | translate }}
+          </span>
           <button class="add-trade-btn" (click)="openAddTradeModal()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
               <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
@@ -67,7 +70,34 @@
         </div>
       </div>
 
-      @if (trades.length === 0) {
+      <div class="filter-bar">
+        <div class="filter-bar__field">
+          <svg class="filter-bar__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input class="filter-bar__input"
+                 type="text"
+                 [ngModel]="filterSymbol()"
+                 (ngModelChange)="setFilterSymbol($event)"
+                 [placeholder]="'DASHBOARD.FILTER.SYMBOL' | translate" />
+        </div>
+        <select class="filter-bar__select"
+                [ngModel]="filterDirection()"
+                (ngModelChange)="setFilterDirection($event)">
+          <option value="">{{ 'DASHBOARD.FILTER.ALL_DIRECTIONS' | translate }}</option>
+          <option value="Buy">{{ 'DASHBOARD.FILTER.BUY' | translate }}</option>
+          <option value="Sell">{{ 'DASHBOARD.FILTER.SELL' | translate }}</option>
+        </select>
+        <select class="filter-bar__select"
+                [ngModel]="filterStatus()"
+                (ngModelChange)="setFilterStatus($event)">
+          <option value="">{{ 'DASHBOARD.FILTER.ALL_STATUSES' | translate }}</option>
+          <option value="Open">{{ 'DASHBOARD.FILTER.OPEN' | translate }}</option>
+          <option value="Closed">{{ 'DASHBOARD.FILTER.CLOSED' | translate }}</option>
+        </select>
+      </div>
+
+      @if (state.trades().length === 0) {
         <div class="empty-state">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -76,7 +106,7 @@
         </div>
       }
 
-      @if (trades.length > 0) {
+      @if (state.trades().length > 0) {
         <div class="table-wrapper">
           <table class="trades-table">
             <thead>
@@ -128,13 +158,13 @@
           </table>
         </div>
 
-        @if (totalPages > 1) {
+        @if (totalPages() > 1) {
           <div class="pagination">
             <button class="pagination__btn" (click)="prevPage()" [disabled]="currentPage === 0">
               {{ 'DASHBOARD.PAGINATION.PREV' | translate }}
             </button>
-            <span class="pagination__info">{{ currentPage + 1 }} / {{ totalPages }}</span>
-            <button class="pagination__btn" (click)="nextPage()" [disabled]="currentPage === totalPages - 1">
+            <span class="pagination__info">{{ currentPage + 1 }} / {{ totalPages() }}</span>
+            <button class="pagination__btn" (click)="nextPage()" [disabled]="currentPage === totalPages() - 1">
               {{ 'DASHBOARD.PAGINATION.NEXT' | translate }}
             </button>
           </div>
@@ -169,6 +199,13 @@
         <polyline points="21 15 16 10 5 21"/>
       </svg>
       {{ 'DASHBOARD.QUICK_MENU.SCREENSHOTS' | translate }}
+    </button>
+    <button class="row-popover__item row-popover__item--danger" (click)="deleteTrade()" [disabled]="deleting">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/>
+        <path d="M9 6V4h6v2"/>
+      </svg>
+      {{ 'DASHBOARD.QUICK_MENU.DELETE' | translate }}
     </button>
   </div>
 }

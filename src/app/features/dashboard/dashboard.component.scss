@@ -66,6 +66,8 @@
   display: flex;
   align-items: center;
   gap: $spacing-sm;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .sidebar__logo-text {

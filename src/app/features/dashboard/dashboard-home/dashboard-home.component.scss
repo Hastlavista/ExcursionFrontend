@@ -172,6 +172,64 @@
   }
 }
 
+// ─── Filter bar ───────────────────────────────────────────────────────────────
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-xl;
+  border-bottom: 1px solid $border-color;
+  background: $bg-secondary;
+
+  &__field {
+    position: relative;
+    flex: 1;
+    min-width: 120px;
+    max-width: 240px;
+  }
+
+  &__icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    pointer-events: none;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 6px 10px 6px 32px;
+    background: $bg-input;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-family: $font-family;
+    box-sizing: border-box;
+    transition: border-color $transition-fast;
+
+    &::placeholder { color: $text-muted; }
+    &:focus { outline: none; border-color: $accent-primary; }
+  }
+
+  &__select {
+    padding: 6px 10px;
+    background: $bg-input;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-family: $font-family;
+    cursor: pointer;
+    transition: border-color $transition-fast;
+
+    option { background: $bg-card; }
+    &:focus { outline: none; border-color: $accent-primary; }
+  }
+}
+
 // ─── Table ────────────────────────────────────────────────────────────────────
 
 .table-wrapper {
@@ -299,6 +357,15 @@
     }
 
     svg { flex-shrink: 0; color: $text-muted; }
+
+    &--danger {
+      color: $danger;
+      svg { color: $danger; }
+      &:hover {
+        background: rgba($danger, 0.1);
+        color: $danger;
+      }
+    }
   }
 }
 

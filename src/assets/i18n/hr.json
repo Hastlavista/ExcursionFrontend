@@ -131,13 +131,23 @@
         "PNL": "P&L"
       }
     },
+    "FILTER": {
+      "SYMBOL": "Symbol…",
+      "ALL_DIRECTIONS": "Svi smjerovi",
+      "BUY": "Buy",
+      "SELL": "Sell",
+      "ALL_STATUSES": "Svi statusi",
+      "OPEN": "Otvoreni",
+      "CLOSED": "Zatvoreni"
+    },
     "PAGINATION": {
       "PREV": "← Prethodno",
       "NEXT": "Sljedeće →"
     },
     "QUICK_MENU": {
       "DETAILS": "Detalji",
-      "SCREENSHOTS": "Brzi screenshot update"
+      "SCREENSHOTS": "Brzi screenshot update",
+      "DELETE": "Izbriši trade"
     },
     "SCREENSHOT_MODAL": {
       "BEFORE_LABEL": "SCREENSHOT PRIJE ULAZA",
@@ -240,6 +250,56 @@
     "ACTIONS": {
       "EXPORT": "IZVEZI ANALIZU",
       "JOURNAL": "DODAJ ZAPIS"
+    }
+  },
+  "SETTINGS": {
+    "ACCOUNT": {
+      "TITLE": "INFORMACIJE O RAČUNU",
+      "EMAIL": "Email",
+      "PLAN": "Plan"
+    },
+    "API_KEY": {
+      "TITLE": "API KLJUČ",
+      "DESC": "Koristite ovaj ključ za spajanje vašeg Expert Advisora (MT4/MT5) na TradeVantiq.",
+      "COPY": "Kopiraj",
+      "COPIED": "Kopirano!",
+      "REGENERATE": "Regeneriraj",
+      "REGENERATE_TITLE": "Regenerirati API ključ?",
+      "REGENERATE_BODY": "Jeste li sigurni? Vaš EA neće raditi dok ne ažurirate ključ.",
+      "REGENERATE_SUCCESS": "API ključ je regeneriran.",
+      "REGENERATE_ERROR": "Greška pri regeneriranju API ključa."
+    },
+    "PASSWORD": {
+      "TITLE": "PROMJENA LOZINKE",
+      "CURRENT": "TRENUTNA LOZINKA",
+      "NEW": "NOVA LOZINKA",
+      "CONFIRM": "POTVRDI NOVU LOZINKU",
+      "SAVE": "Spremi promjene",
+      "SAVING": "Spremanje…",
+      "MISMATCH": "Lozinke se ne podudaraju.",
+      "SUCCESS": "Lozinka je uspješno promijenjena.",
+      "ERROR_WRONG_CURRENT": "Trenutna lozinka nije ispravna.",
+      "STRENGTH": {
+        "WEAK": "Slaba",
+        "MEDIUM": "Srednja",
+        "STRONG": "Jaka"
+      }
+    },
+    "DANGER": {
+      "TITLE": "OPASNA ZONA",
+      "DESC": "Ove radnje su nepovratne. Nastavite s oprezom.",
+      "DELETE_TITLE": "Izbriši račun",
+      "DELETE_HINT": "Trajno briše vaš račun i sve podatke o tradovima.",
+      "DELETE_BTN": "Izbriši račun",
+      "MODAL_TITLE": "Izbrisati račun?",
+      "MODAL_BODY": "Ovo će trajno izbrisati vaš račun i sve povezane podatke o tradovima. Ova radnja se ne može poništiti.",
+      "MODAL_CONFIRM": "Da, izbriši moj račun",
+      "ERROR": "Greška pri brisanju računa."
+    },
+    "MODAL": {
+      "CANCEL": "Odustani",
+      "CONFIRM": "Potvrdi",
+      "CONFIRMING": "Molimo pričekajte…"
     }
   }
 }

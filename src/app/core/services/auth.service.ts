@@ -8,6 +8,7 @@ export interface AuthUser {
   id: string;
   email: string;
   token: string;
+  apiKey?: string;
 }
 
 export interface LoginPayload {
@@ -33,6 +34,7 @@ export class AuthService {
     return this.http.post<AuthUser>(`${this.api}/api/public/auth/login`, payload).pipe(
       tap(user => {
         localStorage.setItem(this.TOKEN_KEY, user.token);
+        if (user.apiKey) localStorage.setItem('api_key', user.apiKey);
         this.isAuthenticated.set(true);
         this.router.navigate(['/dashboard']);
       })
@@ -49,8 +51,13 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem('api_key');
     this.isAuthenticated.set(false);
     this.router.navigate(['/auth/login']);
+  }
+
+  saveToken(token: string): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getToken(): string | null {

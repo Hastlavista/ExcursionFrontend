@@ -223,8 +223,15 @@
             <span class="spec-label">
               <span class="dot dot--exit"></span> {{ 'TRADE_DETAIL.TEMPORAL.EXIT_TIME' | translate }}
             </span>
-            <input class="spec-input" type="datetime-local"
-                   [(ngModel)]="editExitTime" />
+            @if (!editingExitTime) {
+              <span class="spec-value spec-value--editable" (click)="startEditExitTime()">
+                {{ editExitTime ? formatDate(editExitTime) : '—' }}
+              </span>
+            } @else {
+              <input class="spec-input exit-time-input" type="datetime-local"
+                     [(ngModel)]="editExitTime"
+                     (blur)="editingExitTime = false" />
+            }
           </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.TEMPORAL.DURATION' | translate }}</span>

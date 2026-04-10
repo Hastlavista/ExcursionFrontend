@@ -1,0 +1,219 @@
+<div class="settings-page">
+
+  <!-- ── Account Info ─────────────────────────────────────────────────────── -->
+  <section class="settings-section">
+    <h2 class="settings-section__title">{{ 'SETTINGS.ACCOUNT.TITLE' | translate }}</h2>
+
+    <div class="settings-card">
+      <div class="settings-row">
+        <div class="settings-row__label">
+          <span class="settings-row__name">{{ 'SETTINGS.ACCOUNT.EMAIL' | translate }}</span>
+        </div>
+        <span class="settings-row__value">{{ userEmail }}</span>
+      </div>
+
+      <div class="settings-row settings-row--last">
+        <div class="settings-row__label">
+          <span class="settings-row__name">{{ 'SETTINGS.ACCOUNT.PLAN' | translate }}</span>
+        </div>
+        <span class="plan-badge" [class.plan-badge--pro]="userPlan === 'Pro'">
+          {{ userPlan }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── API Key ───────────────────────────────────────────────────────────── -->
+  <section class="settings-section">
+    <h2 class="settings-section__title">{{ 'SETTINGS.API_KEY.TITLE' | translate }}</h2>
+    <p class="settings-section__desc">{{ 'SETTINGS.API_KEY.DESC' | translate }}</p>
+
+    <div class="settings-card">
+      <div class="settings-row settings-row--last">
+        <span class="api-key-display">{{ apiKeyMasked || '—' }}</span>
+        <div class="settings-row__actions">
+          <button class="btn btn--ghost" (click)="copyApiKey()" [disabled]="!apiKey">
+            {{ copyLabel | translate }}
+          </button>
+          <button class="btn btn--ghost" (click)="showRegenerateModal = true" [disabled]="regenerating">
+            {{ 'SETTINGS.API_KEY.REGENERATE' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Change Password ───────────────────────────────────────────────────── -->
+  <section class="settings-section">
+    <h2 class="settings-section__title">{{ 'SETTINGS.PASSWORD.TITLE' | translate }}</h2>
+
+    <div class="settings-card settings-card--form">
+      <div class="form-field">
+        <label class="form-field__label">{{ 'SETTINGS.PASSWORD.CURRENT' | translate }}</label>
+        <div class="form-field__input-wrap">
+          <input class="form-field__input"
+                 [type]="showCurrentPassword ? 'text' : 'password'"
+                 [(ngModel)]="currentPassword"
+                 autocomplete="current-password" />
+          <button class="form-field__eye" type="button" (click)="showCurrentPassword = !showCurrentPassword">
+            @if (!showCurrentPassword) {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            } @else {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            }
+          </button>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">{{ 'SETTINGS.PASSWORD.NEW' | translate }}</label>
+        <div class="form-field__input-wrap">
+          <input class="form-field__input"
+                 [type]="showNewPassword ? 'text' : 'password'"
+                 [(ngModel)]="newPassword"
+                 autocomplete="new-password" />
+          <button class="form-field__eye" type="button" (click)="showNewPassword = !showNewPassword">
+            @if (!showNewPassword) {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            } @else {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            }
+          </button>
+        </div>
+        @if (newPasswordStrength) {
+          <div class="strength-bar">
+            <div class="strength-bar__track">
+              <div class="strength-bar__fill"
+                   [class.strength-bar__fill--weak]="newPasswordStrength === 'weak'"
+                   [class.strength-bar__fill--medium]="newPasswordStrength === 'medium'"
+                   [class.strength-bar__fill--strong]="newPasswordStrength === 'strong'">
+              </div>
+            </div>
+            <span class="strength-bar__label"
+                  [class.strength-bar__label--weak]="newPasswordStrength === 'weak'"
+                  [class.strength-bar__label--medium]="newPasswordStrength === 'medium'"
+                  [class.strength-bar__label--strong]="newPasswordStrength === 'strong'">
+              {{ 'SETTINGS.PASSWORD.STRENGTH.' + (newPasswordStrength | uppercase) | translate }}
+            </span>
+          </div>
+        }
+      </div>
+
+      <div class="form-field">
+        <label class="form-field__label">{{ 'SETTINGS.PASSWORD.CONFIRM' | translate }}</label>
+        <div class="form-field__input-wrap">
+          <input class="form-field__input"
+                 [type]="showConfirmPassword ? 'text' : 'password'"
+                 [(ngModel)]="confirmPassword"
+                 autocomplete="new-password"
+                 [class.form-field__input--error]="confirmPassword && !passwordsMatch" />
+          <button class="form-field__eye" type="button" (click)="showConfirmPassword = !showConfirmPassword">
+            @if (!showConfirmPassword) {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            } @else {
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            }
+          </button>
+        </div>
+        @if (confirmPassword && !passwordsMatch) {
+          <span class="form-field__error">{{ 'SETTINGS.PASSWORD.MISMATCH' | translate }}</span>
+        }
+      </div>
+
+      @if (passwordError) {
+        <p class="form-error">{{ passwordError | translate }}</p>
+      }
+
+      <div class="form-footer">
+        <button class="btn btn--primary" (click)="savePassword()" [disabled]="!passwordFormValid || savingPassword">
+          {{ savingPassword ? ('SETTINGS.PASSWORD.SAVING' | translate) : ('SETTINGS.PASSWORD.SAVE' | translate) }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Danger Zone ───────────────────────────────────────────────────────── -->
+  <section class="settings-section settings-section--danger">
+    <h2 class="settings-section__title settings-section__title--danger">{{ 'SETTINGS.DANGER.TITLE' | translate }}</h2>
+    <p class="settings-section__desc">{{ 'SETTINGS.DANGER.DESC' | translate }}</p>
+
+    <div class="settings-card settings-card--danger">
+      <div class="settings-row settings-row--last">
+        <div class="settings-row__label">
+          <span class="settings-row__name">{{ 'SETTINGS.DANGER.DELETE_TITLE' | translate }}</span>
+          <span class="settings-row__hint">{{ 'SETTINGS.DANGER.DELETE_HINT' | translate }}</span>
+        </div>
+        <button class="btn btn--danger" (click)="showDeleteModal = true">
+          {{ 'SETTINGS.DANGER.DELETE_BTN' | translate }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── Regenerate API Key Modal ──────────────────────────────────────────────── -->
+@if (showRegenerateModal) {
+  <div class="modal-backdrop" (click)="showRegenerateModal = false">
+    <div class="confirm-modal" (click)="$event.stopPropagation()">
+      <div class="confirm-modal__icon confirm-modal__icon--warn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <h3 class="confirm-modal__title">{{ 'SETTINGS.API_KEY.REGENERATE_TITLE' | translate }}</h3>
+      <p class="confirm-modal__body">{{ 'SETTINGS.API_KEY.REGENERATE_BODY' | translate }}</p>
+      <div class="confirm-modal__actions">
+        <button class="btn btn--ghost" (click)="showRegenerateModal = false" [disabled]="regenerating">
+          {{ 'SETTINGS.MODAL.CANCEL' | translate }}
+        </button>
+        <button class="btn btn--primary" (click)="confirmRegenerate()" [disabled]="regenerating">
+          {{ regenerating ? ('SETTINGS.MODAL.CONFIRMING' | translate) : ('SETTINGS.MODAL.CONFIRM' | translate) }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ── Delete Account Modal ──────────────────────────────────────────────────── -->
+@if (showDeleteModal) {
+  <div class="modal-backdrop" (click)="showDeleteModal = false">
+    <div class="confirm-modal" (click)="$event.stopPropagation()">
+      <div class="confirm-modal__icon confirm-modal__icon--danger">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/>
+          <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+        </svg>
+      </div>
+      <h3 class="confirm-modal__title">{{ 'SETTINGS.DANGER.MODAL_TITLE' | translate }}</h3>
+      <p class="confirm-modal__body">{{ 'SETTINGS.DANGER.MODAL_BODY' | translate }}</p>
+      <div class="confirm-modal__actions">
+        <button class="btn btn--ghost" (click)="showDeleteModal = false" [disabled]="deleting">
+          {{ 'SETTINGS.MODAL.CANCEL' | translate }}
+        </button>
+        <button class="btn btn--danger" (click)="confirmDeleteAccount()" [disabled]="deleting">
+          {{ deleting ? ('SETTINGS.MODAL.CONFIRMING' | translate) : ('SETTINGS.DANGER.MODAL_CONFIRM' | translate) }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

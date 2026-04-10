@@ -131,13 +131,23 @@
         "PNL": "P&L"
       }
     },
+    "FILTER": {
+      "SYMBOL": "Symbol…",
+      "ALL_DIRECTIONS": "All directions",
+      "BUY": "Buy",
+      "SELL": "Sell",
+      "ALL_STATUSES": "All statuses",
+      "OPEN": "Open",
+      "CLOSED": "Closed"
+    },
     "PAGINATION": {
       "PREV": "← Prev",
       "NEXT": "Next →"
     },
     "QUICK_MENU": {
       "DETAILS": "Details",
-      "SCREENSHOTS": "Quick screenshots update"
+      "SCREENSHOTS": "Quick screenshots update",
+      "DELETE": "Delete trade"
     },
     "SCREENSHOT_MODAL": {
       "BEFORE_LABEL": "SCREENSHOT BEFORE ENTRY",
@@ -240,6 +250,56 @@
     "ACTIONS": {
       "EXPORT": "EXPORT ANALYSIS",
       "JOURNAL": "ADD JOURNAL ENTRY"
+    }
+  },
+  "SETTINGS": {
+    "ACCOUNT": {
+      "TITLE": "ACCOUNT INFO",
+      "EMAIL": "Email",
+      "PLAN": "Plan"
+    },
+    "API_KEY": {
+      "TITLE": "API KEY",
+      "DESC": "Use this key to connect your Expert Advisor (MT4/MT5) to TradeVantiq.",
+      "COPY": "Copy",
+      "COPIED": "Copied!",
+      "REGENERATE": "Regenerate",
+      "REGENERATE_TITLE": "Regenerate API Key?",
+      "REGENERATE_BODY": "Are you sure? Your EA will stop working until you update the key.",
+      "REGENERATE_SUCCESS": "API key regenerated.",
+      "REGENERATE_ERROR": "Failed to regenerate API key."
+    },
+    "PASSWORD": {
+      "TITLE": "CHANGE PASSWORD",
+      "CURRENT": "CURRENT PASSWORD",
+      "NEW": "NEW PASSWORD",
+      "CONFIRM": "CONFIRM NEW PASSWORD",
+      "SAVE": "Save Changes",
+      "SAVING": "Saving…",
+      "MISMATCH": "Passwords do not match.",
+      "SUCCESS": "Password changed successfully.",
+      "ERROR_WRONG_CURRENT": "Current password is incorrect.",
+      "STRENGTH": {
+        "WEAK": "Weak",
+        "MEDIUM": "Medium",
+        "STRONG": "Strong"
+      }
+    },
+    "DANGER": {
+      "TITLE": "DANGER ZONE",
+      "DESC": "These actions are irreversible. Please proceed with caution.",
+      "DELETE_TITLE": "Delete Account",
+      "DELETE_HINT": "Permanently delete your account and all trade data.",
+      "DELETE_BTN": "Delete Account",
+      "MODAL_TITLE": "Delete Account?",
+      "MODAL_BODY": "This will permanently delete your account and all associated trade data. This action cannot be undone.",
+      "MODAL_CONFIRM": "Yes, Delete My Account",
+      "ERROR": "Failed to delete account."
+    },
+    "MODAL": {
+      "CANCEL": "Cancel",
+      "CONFIRM": "Confirm",
+      "CONFIRMING": "Please wait…"
     }
   }
 }

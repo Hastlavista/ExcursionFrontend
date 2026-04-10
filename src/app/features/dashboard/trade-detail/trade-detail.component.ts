@@ -41,6 +41,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
   // Trade detail editing
   editExitPrice: number | null = null;
   editExitTime = '';
+  editingExitTime = false;
   editStopLoss: number | null = null;
   editTakeProfit: number | null = null;
   savingDetails = false;
@@ -258,6 +259,15 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  startEditExitTime(): void {
+    this.editingExitTime = true;
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      const el = document.querySelector<HTMLInputElement>('.exit-time-input');
+      el?.focus();
+    }, 0);
+  }
+
   private toDatetimeLocal(iso: string): string {
     const d = new Date(iso);
     const pad = (n: number) => n.toString().padStart(2, '0');
@@ -271,7 +281,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
   formatDate(dateStr: string): string {
     const d = new Date(dateStr);
     return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-      + ' ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+      + ' ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
   }
 
   formatPnl(value: number): string {

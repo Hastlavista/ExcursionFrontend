@@ -33,4 +33,8 @@ export class TradeService {
   openTrade(payload: Trade): Observable<any> {
     return this.http.post<any>(`${this.api}/api/trades/opentrade`, payload);
   }
+
+  deleteTrade(id: string): Observable<any> {
+    return this.http.post<any>(`${this.api}/api/trades/deletetrade`, { id });
+  }
 }

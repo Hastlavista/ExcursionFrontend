@@ -1,0 +1,348 @@
+@use '../../../../styles/variables' as *;
+
+.settings-page {
+  padding: $spacing-xl;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  @media (max-width: 768px) {
+    padding: $spacing-md;
+  }
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: $text-secondary;
+
+    &--danger { color: $danger; }
+  }
+
+  &__desc {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    margin: 0;
+  }
+}
+
+// ── Card ──────────────────────────────────────────────────────────────────────
+
+.settings-card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  &--form {
+    padding: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &--danger {
+    border-color: rgba($danger, 0.3);
+  }
+}
+
+// ── Row ───────────────────────────────────────────────────────────────────────
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 1px solid $border-color;
+
+  &--last { border-bottom: none; }
+
+  &__label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-primary;
+  }
+
+  &__hint {
+    font-size: $font-size-xs;
+    color: $text-muted;
+  }
+
+  &__value {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    text-align: right;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+  }
+}
+
+// ── Plan badge ────────────────────────────────────────────────────────────────
+
+.plan-badge {
+  padding: 3px 12px;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba($text-muted, 0.15);
+  color: $text-muted;
+
+  &--pro {
+    background: rgba($accent-primary, 0.15);
+    color: $accent-primary;
+    border: 1px solid rgba($accent-primary, 0.3);
+  }
+}
+
+// ── API Key display ───────────────────────────────────────────────────────────
+
+.api-key-display {
+  font-family: monospace;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  letter-spacing: 0.04em;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px $spacing-md;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  font-family: $font-family;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: none;
+  transition: opacity $transition-fast, background $transition-fast;
+  white-space: nowrap;
+
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  &--primary {
+    background: $accent-primary;
+    color: #fff;
+    &:not(:disabled):hover { opacity: 0.85; }
+  }
+
+  &--ghost {
+    background: transparent;
+    border: 1px solid $border-color;
+    color: $text-secondary;
+    &:not(:disabled):hover { border-color: $text-secondary; color: $text-primary; }
+  }
+
+  &--danger {
+    background: rgba($danger, 0.12);
+    border: 1px solid rgba($danger, 0.3);
+    color: $danger;
+    &:not(:disabled):hover { background: rgba($danger, 0.2); }
+  }
+}
+
+// ── Form fields ───────────────────────────────────────────────────────────────
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  &__label {
+    font-size: $font-size-xs;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: $text-secondary;
+  }
+
+  &__input-wrap {
+    position: relative;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 10px $spacing-md;
+    padding-right: 44px;
+    background: $bg-input;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-family: $font-family;
+    box-sizing: border-box;
+    transition: border-color $transition-fast;
+
+    &:focus { outline: none; border-color: $accent-primary; }
+    &::placeholder { color: $text-muted; }
+    &--error { border-color: $danger; }
+  }
+
+  &__eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: $text-muted;
+    display: flex;
+    align-items: center;
+    transition: color $transition-fast;
+    &:hover { color: $text-secondary; }
+  }
+
+  &__error {
+    font-size: $font-size-xs;
+    color: $danger;
+  }
+}
+
+.form-error {
+  font-size: $font-size-sm;
+  color: $danger;
+  background: rgba($danger, 0.08);
+  border: 1px solid rgba($danger, 0.2);
+  border-radius: $radius-md;
+  padding: 10px $spacing-md;
+  margin: 0;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: $spacing-xs;
+  border-top: 1px solid $border-color;
+
+  .btn { min-width: 140px; }
+}
+
+// ── Password strength ─────────────────────────────────────────────────────────
+
+.strength-bar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-top: 2px;
+
+  &__track {
+    flex: 1;
+    height: 3px;
+    background: $border-color;
+    border-radius: $radius-full;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    border-radius: $radius-full;
+    transition: width $transition-base, background $transition-base;
+
+    &--weak   { width: 33%; background: $danger; }
+    &--medium { width: 66%; background: $warning; }
+    &--strong { width: 100%; background: $success; }
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    font-weight: 600;
+    white-space: nowrap;
+
+    &--weak   { color: $danger; }
+    &--medium { color: $warning; }
+    &--strong { color: $success; }
+  }
+}
+
+// ── Confirm Modals ────────────────────────────────────────────────────────────
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 400;
+  padding: $spacing-md;
+}
+
+.confirm-modal {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  text-align: center;
+
+  &__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--warn   { background: rgba($warning, 0.12); color: $warning; border: 1px solid rgba($warning, 0.3); }
+    &--danger { background: rgba($danger, 0.12);  color: $danger;  border: 1px solid rgba($danger, 0.3);  }
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__body {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    width: 100%;
+    margin-top: $spacing-xs;
+
+    .btn { flex: 1; justify-content: center; }
+  }
+}

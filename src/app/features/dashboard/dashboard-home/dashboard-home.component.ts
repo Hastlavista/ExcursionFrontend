@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,6 +19,31 @@ export class DashboardHomeComponent {
   readonly PAGE_SIZE = 10;
   readonly TradeStatus = TradeStatus;
 
+  // Filters — signals so computed() can track them
+  readonly filterSymbol    = signal('');
+  readonly filterDirection = signal('');
+  readonly filterStatus    = signal('');
+
+  // Derived state — recomputes only when state.trades() or a filter signal changes
+  readonly filteredTrades = computed(() => {
+    const sym = this.filterSymbol().trim().toLowerCase();
+    const dir = this.filterDirection();
+    const stat = this.filterStatus();
+    return [...this.state.trades()]
+      .filter(t => !sym || t.symbol?.toLowerCase().includes(sym))
+      .filter(t => !dir || t.direction === dir)
+      .filter(t => !stat || t.status === stat)
+      .sort((a, b) => new Date(b.entryTime).getTime() - new Date(a.entryTime).getTime());
+  });
+
+  readonly totalPages = computed(() =>
+    Math.max(1, Math.ceil(this.filteredTrades().length / this.PAGE_SIZE))
+  );
+
+  readonly isFiltered = computed(() =>
+    !!this.filterSymbol().trim() || !!this.filterDirection() || !!this.filterStatus()
+  );
+
   // Popover
   popoverTrade: Trade | null = null;
   popoverX = 0;
@@ -30,6 +55,9 @@ export class DashboardHomeComponent {
   screenshotBefore = '';
   screenshotAfter = '';
   saving = false;
+
+  // Delete
+  deleting = false;
 
   // Add Trade modal
   addTradeOpen = false;
@@ -75,23 +103,17 @@ export class DashboardHomeComponent {
     return avgWin / avgLoss;
   }
 
-  get sortedTrades(): Trade[] {
-    return [...this.trades].sort(
-      (a, b) => new Date(b.entryTime).getTime() - new Date(a.entryTime).getTime()
-    );
-  }
-
   get paginatedTrades(): Trade[] {
     const start = this.currentPage * this.PAGE_SIZE;
-    return this.sortedTrades.slice(start, start + this.PAGE_SIZE);
+    return this.filteredTrades().slice(start, start + this.PAGE_SIZE);
   }
 
-  get totalPages(): number {
-    return Math.max(1, Math.ceil(this.trades.length / this.PAGE_SIZE));
-  }
+  setFilterSymbol(v: string):    void { this.filterSymbol.set(v);    this.currentPage = 0; }
+  setFilterDirection(v: string): void { this.filterDirection.set(v); this.currentPage = 0; }
+  setFilterStatus(v: string):    void { this.filterStatus.set(v);    this.currentPage = 0; }
 
   prevPage(): void { if (this.currentPage > 0) this.currentPage--; }
-  nextPage(): void { if (this.currentPage < this.totalPages - 1) this.currentPage++; }
+  nextPage(): void { if (this.currentPage < this.totalPages() - 1) this.currentPage++; }
 
   // ── Popover ───────────────────────────────────────────────────────────────────
 
@@ -125,6 +147,24 @@ export class DashboardHomeComponent {
     if (!this.popoverTrade) return;
     this.router.navigate(['/dashboard/trade', this.popoverTrade.id]);
     this.popoverTrade = null;
+  }
+
+  deleteTrade(): void {
+    if (!this.popoverTrade || this.deleting) return;
+    const trade = this.popoverTrade;
+    this.popoverTrade = null;
+
+    const label = trade.externalId != null ? `${trade.symbol} #${trade.externalId}` : trade.symbol;
+    if (!confirm(`Delete trade ${label}?`)) return;
+
+    this.deleting = true;
+    this.tradeService.deleteTrade(trade.id).subscribe({
+      next: () => {
+        this.state.removeTrade(trade.id);
+        this.deleting = false;
+      },
+      error: () => { this.deleting = false; }
+    });
   }
 
   openScreenshotModal(): void {
