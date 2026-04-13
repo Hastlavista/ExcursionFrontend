@@ -33,7 +33,12 @@ export class DashboardHomeComponent {
       .filter(t => !sym || t.symbol?.toLowerCase().includes(sym))
       .filter(t => !dir || t.direction === dir)
       .filter(t => !stat || t.status === stat)
-      .sort((a, b) => new Date(b.entryTime).getTime() - new Date(a.entryTime).getTime());
+      .sort((a, b) => {
+        const aOpen = a.status === TradeStatus.Open ? 0 : 1;
+        const bOpen = b.status === TradeStatus.Open ? 0 : 1;
+        if (aOpen !== bOpen) return aOpen - bOpen;
+        return new Date(b.entryTime).getTime() - new Date(a.entryTime).getTime();
+      });
   });
 
   readonly totalPages = computed(() =>

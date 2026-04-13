@@ -121,11 +121,13 @@
                 <th>{{ 'DASHBOARD.TRADES.TABLE.SIZE' | translate }}</th>
                 <th>{{ 'DASHBOARD.TRADES.TABLE.PROFIT_PIPS' | translate }}</th>
                 <th>{{ 'DASHBOARD.TRADES.TABLE.PNL' | translate }}</th>
+                <th>{{ 'DASHBOARD.TRADES.TABLE.STATUS' | translate }}</th>
               </tr>
             </thead>
             <tbody>
               @for (trade of paginatedTrades; track trade.id) {
                 <tr class="trade-row"
+                    [class.trade-row--open]="trade.status === TradeStatus.Open"
                     [class.trade-row--profit]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) > 0"
                     [class.trade-row--loss]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) < 0"
                     [class.trade-row--active]="popoverTrade?.id === trade.id"
@@ -151,6 +153,13 @@
                   <td [class.pnl--positive]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) > 0"
                       [class.pnl--negative]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) < 0">
                     {{ trade.status === TradeStatus.Open ? '—' : formatPnl(trade.profit ?? 0) }}
+                  </td>
+                  <td>
+                    <span class="badge"
+                          [class.badge--open]="trade.status === TradeStatus.Open"
+                          [class.badge--closed]="trade.status === TradeStatus.Closed">
+                      {{ trade.status }}
+                    </span>
                   </td>
                 </tr>
               }

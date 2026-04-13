@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -43,7 +43,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private accountService: AccountService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +60,13 @@ export class SettingsComponent implements OnInit {
   }
 
   // ── API Key ────────────────────────────────────────────────────────────────
+
+  downloadEa(): void {
+    const a = document.createElement('a');
+    a.href = 'assets/ea/LogynqoEA.ex5';
+    a.download = 'LogynqoEA.ex5';
+    a.click();
+  }
 
   copyApiKey(): void {
     if (!this.apiKey) return;
@@ -78,10 +86,13 @@ export class SettingsComponent implements OnInit {
         this.showRegenerateModal = false;
         this.regenerating = false;
         this.toastService.show('SETTINGS.API_KEY.REGENERATE_SUCCESS', 'success');
+        this.cdr.detectChanges();
       },
       error: () => {
+        this.showRegenerateModal = false;
         this.regenerating = false;
         this.toastService.show('SETTINGS.API_KEY.REGENERATE_ERROR', 'error');
+        this.cdr.detectChanges();
       }
     });
   }
@@ -122,10 +133,12 @@ export class SettingsComponent implements OnInit {
         this.confirmPassword = '';
         this.savingPassword = false;
         this.toastService.show('SETTINGS.PASSWORD.SUCCESS', 'success');
+        this.cdr.detectChanges();
       },
       error: () => {
         this.savingPassword = false;
         this.passwordError = 'SETTINGS.PASSWORD.ERROR_WRONG_CURRENT';
+        this.cdr.detectChanges();
       }
     });
   }
@@ -142,6 +155,7 @@ export class SettingsComponent implements OnInit {
       error: () => {
         this.deleting = false;
         this.toastService.show('SETTINGS.DANGER.ERROR', 'error');
+        this.cdr.detectChanges();
       }
     });
   }

@@ -270,12 +270,19 @@
   transition: background-color $transition-fast;
 
   &:hover { background: rgba($accent-primary, 0.04); }
+  &--open   {
+    font-weight: 600;
+    border-left: 2px solid $accent-primary;
+    &:hover { background: rgba($accent-primary, 0.06); }
+    td { color: $text-primary !important; }
+  }
   &--profit { background: rgba($success, 0.04); &:hover { background: rgba($success, 0.08); } }
   &--loss   { background: rgba($danger, 0.04);  &:hover { background: rgba($danger, 0.08);  } }
 }
 
 .cell-date   { font-size: $font-size-xs; color: $text-muted !important; }
-.cell-symbol { font-weight: 700; color: $text-primary !important; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.cell-symbol { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.trade-row--open .cell-symbol { font-weight: 700; color: $text-primary !important; }
 
 .badge {
   display: inline-block;
@@ -286,8 +293,10 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 
-  &--buy  { background: rgba($success, 0.15); color: $success; }
-  &--sell { background: rgba($danger, 0.15);  color: $danger;  }
+  &--buy    { background: rgba($success, 0.15); color: $success; }
+  &--sell   { background: rgba($danger, 0.15);  color: $danger;  }
+  &--open   { background: rgba($accent-primary, 0.15); color: $accent-primary; }
+  &--closed { background: rgba($text-muted, 0.15); color: $text-muted; }
 }
 
 .pnl--positive { color: $success !important; font-weight: 600; }

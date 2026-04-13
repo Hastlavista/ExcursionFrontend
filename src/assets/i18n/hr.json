@@ -1,8 +1,8 @@
 {
   "MAIN": {
-    "BRAND_TITLE": "TradeVantiq",
-    "BRAND_PART1": "Trade",
-    "BRAND_PART2": "Vantiq"
+    "BRAND_TITLE": "LogynQO",
+    "BRAND_PART1": "Logyn",
+    "BRAND_PART2": "QO"
   },
   "AUTH": {
     "LOGIN": {
@@ -128,7 +128,8 @@
         "TP": "T/P",
         "SIZE": "VELIČINA",
         "PROFIT_PIPS": "PROFIT PIPOVI",
-        "PNL": "P&L"
+        "PNL": "P&L",
+        "STATUS": "STATUS"
       }
     },
     "FILTER": {
@@ -260,14 +261,16 @@
     },
     "API_KEY": {
       "TITLE": "API KLJUČ",
-      "DESC": "Koristite ovaj ključ za spajanje vašeg Expert Advisora (MT4/MT5) na TradeVantiq.",
+      "DESC": "Koristite ovaj ključ za spajanje vašeg Expert Advisora (MT4/MT5) na Logynqo.",
       "COPY": "Kopiraj",
       "COPIED": "Kopirano!",
       "REGENERATE": "Regeneriraj",
       "REGENERATE_TITLE": "Regenerirati API ključ?",
       "REGENERATE_BODY": "Jeste li sigurni? Vaš EA neće raditi dok ne ažurirate ključ.",
       "REGENERATE_SUCCESS": "API ključ je regeneriran.",
-      "REGENERATE_ERROR": "Greška pri regeneriranju API ključa."
+      "REGENERATE_ERROR": "Greška pri regeneriranju API ključa.",
+      "DOWNLOAD_EA": "Preuzmi EA",
+      "DOWNLOAD_EA_HINT": "Preuzmite datoteku Expert Advisora i ubacite svoj API ključ."
     },
     "PASSWORD": {
       "TITLE": "PROMJENA LOZINKE",

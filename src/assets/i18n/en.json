@@ -1,8 +1,8 @@
 {
   "MAIN": {
-    "BRAND_TITLE": "TradeVantiq",
-    "BRAND_PART1": "Trade",
-    "BRAND_PART2": "Vantiq"
+    "BRAND_TITLE": "LogynQO",
+    "BRAND_PART1": "Logyn",
+    "BRAND_PART2": "QO"
   },
   "AUTH": {
     "LOGIN": {
@@ -128,7 +128,8 @@
         "TP": "T/P",
         "SIZE": "SIZE",
         "PROFIT_PIPS": "PROFIT PIPS",
-        "PNL": "P&L"
+        "PNL": "P&L",
+        "STATUS": "STATUS"
       }
     },
     "FILTER": {
@@ -260,14 +261,16 @@
     },
     "API_KEY": {
       "TITLE": "API KEY",
-      "DESC": "Use this key to connect your Expert Advisor (MT4/MT5) to TradeVantiq.",
+      "DESC": "Use this key to connect your Expert Advisor (MT4/MT5) to Logynqo.",
       "COPY": "Copy",
       "COPIED": "Copied!",
       "REGENERATE": "Regenerate",
       "REGENERATE_TITLE": "Regenerate API Key?",
       "REGENERATE_BODY": "Are you sure? Your EA will stop working until you update the key.",
       "REGENERATE_SUCCESS": "API key regenerated.",
-      "REGENERATE_ERROR": "Failed to regenerate API key."
+      "REGENERATE_ERROR": "Failed to regenerate API key.",
+      "DOWNLOAD_EA": "Download EA",
+      "DOWNLOAD_EA_HINT": "Download the Expert Advisor file and insert your API key."
     },
     "PASSWORD": {
       "TITLE": "CHANGE PASSWORD",

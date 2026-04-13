@@ -29,7 +29,7 @@
     <p class="settings-section__desc">{{ 'SETTINGS.API_KEY.DESC' | translate }}</p>
 
     <div class="settings-card">
-      <div class="settings-row settings-row--last">
+      <div class="settings-row">
         <span class="api-key-display">{{ apiKeyMasked || '—' }}</span>
         <div class="settings-row__actions">
           <button class="btn btn--ghost" (click)="copyApiKey()" [disabled]="!apiKey">
@@ -39,6 +39,15 @@
             {{ 'SETTINGS.API_KEY.REGENERATE' | translate }}
           </button>
         </div>
+      </div>
+      <div class="settings-row settings-row--last">
+        <div class="settings-row__label">
+          <span class="settings-row__name">{{ 'SETTINGS.API_KEY.DOWNLOAD_EA' | translate }}</span>
+          <span class="settings-row__hint">{{ 'SETTINGS.API_KEY.DOWNLOAD_EA_HINT' | translate }}</span>
+        </div>
+        <button class="btn btn--primary" (click)="downloadEa()">
+          {{ 'SETTINGS.API_KEY.DOWNLOAD_EA' | translate }}
+        </button>
       </div>
     </div>
   </section>
