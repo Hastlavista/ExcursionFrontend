@@ -102,6 +102,10 @@
       "OPEN_POSITIONS": "Otvorene pozicije",
       "TODAY_PNL": "Današnji P&L"
     },
+    "PLAN_BADGE": {
+      "FREE": "FREE",
+      "PRO": "PRO"
+    },
     "LOADING": "Učitavanje trejdova…",
     "ERROR": "Učitavanje trejdova nije uspjelo. Osvježite stranicu ili pokušajte ponovo.",
     "STATS": {
@@ -180,6 +184,11 @@
       "SAVE": "Spremi trejd",
       "SAVING": "Spremanje…",
       "CANCEL": "Odustani"
+    },
+    "LIMIT_BANNER": {
+      "MESSAGE": "Dostigli ste mjesečni limit od 25 trejdova.",
+      "UPGRADE": "Nadogradite na Pro za neograničene trejdove.",
+      "BTN": "Nadogradi"
     }
   },
   "TRADE_DETAIL": {
@@ -254,6 +263,21 @@
     }
   },
   "SETTINGS": {
+    "PLAN": {
+      "TITLE": "PLAN",
+      "FREE_BADGE": "FREE",
+      "PRO_BADGE": "PRO",
+      "TRADES_USED": "{{used}}/{{limit}} trejdova ovaj mjesec",
+      "UNLIMITED": "Neograničeni trejdovi",
+      "UPGRADE_BTN": "Nadogradi na Pro",
+      "MANAGE_BTN": "Upravljaj pretplatom",
+      "UPGRADE_MODAL_TITLE": "Nadogradi na Pro",
+      "UPGRADE_MODAL_PRICE": "$9.99 / mjesec",
+      "UPGRADE_MODAL_FEATURE_1": "Neograničeni trejdovi miesečno",
+      "UPGRADE_MODAL_FEATURE_2": "Prioritetna podrška",
+      "UPGRADE_MODAL_SUBSCRIBE": "Pretplati se",
+      "COMING_SOON": "Uskoro — integracija plaćanja je u pripremi!"
+    },
     "ACCOUNT": {
       "TITLE": "INFORMACIJE O RAČUNU",
       "EMAIL": "Email",

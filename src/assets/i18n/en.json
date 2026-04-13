@@ -102,6 +102,10 @@
       "OPEN_POSITIONS": "Open Positions",
       "TODAY_PNL": "Today's P&L"
     },
+    "PLAN_BADGE": {
+      "FREE": "FREE",
+      "PRO": "PRO"
+    },
     "LOADING": "Loading trades…",
     "ERROR": "Failed to load trades. Please refresh or try again later.",
     "STATS": {
@@ -180,6 +184,11 @@
       "SAVE": "Save Trade",
       "SAVING": "Saving…",
       "CANCEL": "Cancel"
+    },
+    "LIMIT_BANNER": {
+      "MESSAGE": "You've reached your monthly limit of 25 trades.",
+      "UPGRADE": "Upgrade to Pro for unlimited trades.",
+      "BTN": "Upgrade Now"
     }
   },
   "TRADE_DETAIL": {
@@ -254,6 +263,21 @@
     }
   },
   "SETTINGS": {
+    "PLAN": {
+      "TITLE": "PLAN",
+      "FREE_BADGE": "FREE",
+      "PRO_BADGE": "PRO",
+      "TRADES_USED": "{{used}}/{{limit}} trades this month",
+      "UNLIMITED": "Unlimited trades",
+      "UPGRADE_BTN": "Upgrade to Pro",
+      "MANAGE_BTN": "Manage Subscription",
+      "UPGRADE_MODAL_TITLE": "Upgrade to Pro",
+      "UPGRADE_MODAL_PRICE": "$9.99 / month",
+      "UPGRADE_MODAL_FEATURE_1": "Unlimited trades per month",
+      "UPGRADE_MODAL_FEATURE_2": "Priority support",
+      "UPGRADE_MODAL_SUBSCRIBE": "Subscribe Now",
+      "COMING_SOON": "Coming Soon — payment integration is on the way!"
+    },
     "ACCOUNT": {
       "TITLE": "ACCOUNT INFO",
       "EMAIL": "Email",

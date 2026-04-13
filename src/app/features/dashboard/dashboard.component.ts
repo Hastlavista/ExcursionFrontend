@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
 import { DashboardStateService } from '../../core/services/dashboard-state.service';
@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
+    private router: Router,
     public state: DashboardStateService
   ) {}
 
@@ -35,6 +36,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   get initials(): string {
     return (this.authService.getUserEmail() || 'T')[0].toUpperCase();
+  }
+
+  get isPro(): boolean {
+    return this.authService.getIsPro();
+  }
+
+  goToPlan(): void {
+    this.router.navigate(['/dashboard/settings'], { fragment: 'plan' });
   }
 
   @HostListener('document:click', ['$event'])

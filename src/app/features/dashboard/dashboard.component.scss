@@ -192,6 +192,67 @@
 
 .topbar__right {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.plan-badge-btn {
+  padding: 3px 10px;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: 1px solid rgba($text-muted, 0.3);
+  background: rgba($text-muted, 0.1);
+  color: $text-muted;
+  transition: opacity $transition-fast;
+
+  &:hover { opacity: 0.75; }
+
+  &--pro {
+    background: rgba(#f4b942, 0.15);
+    border-color: rgba(#f4b942, 0.4);
+    color: #f4b942;
+  }
+}
+
+// ─── Limit banner ─────────────────────────────────────────────────────────────
+
+.limit-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  padding: $spacing-sm $spacing-xl;
+  background: rgba($danger, 0.12);
+  border-bottom: 1px solid rgba($danger, 0.25);
+  flex-wrap: wrap;
+
+  &__text {
+    font-size: $font-size-sm;
+    color: $text-primary;
+
+    strong { color: $danger; margin-right: 4px; }
+  }
+
+  &__btn {
+    padding: 5px $spacing-md;
+    border-radius: $radius-md;
+    background: $danger;
+    color: #fff;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    font-family: $font-family;
+    letter-spacing: 0.06em;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity $transition-fast;
+
+    &:hover { opacity: 0.85; }
+  }
 }
 
 .hamburger {

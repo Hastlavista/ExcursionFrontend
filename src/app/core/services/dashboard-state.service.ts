@@ -9,11 +9,17 @@ export class DashboardStateService {
   private readonly _trades = signal<Trade[]>([]);
   private readonly _loading = signal(true);
   private readonly _error = signal<string | null>(null);
+  private readonly _tradeLimitReached = signal(false);
   private pollSub?: Subscription;
 
   readonly trades = this._trades.asReadonly();
   readonly loading = this._loading.asReadonly();
   readonly error = this._error.asReadonly();
+  readonly tradeLimitReached = this._tradeLimitReached.asReadonly();
+
+  setTradeLimitReached(value: boolean): void {
+    this._tradeLimitReached.set(value);
+  }
 
   readonly openPositions = computed(() =>
     this._trades().filter(t => t.status === TradeStatus.Open).length

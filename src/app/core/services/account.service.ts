@@ -9,6 +9,12 @@ interface RegenerateApiKeyResponse {
   apiKey: string;
 }
 
+export interface PlanResponse {
+  isPro: boolean;
+  tradesThisMonth: number;
+  tradeLimit: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   private readonly api = environment.apiUrl;
@@ -47,5 +53,9 @@ export class AccountService {
 
   deleteAccount(): Observable<any> {
     return this.http.delete(`${this.api}/api/account/deleteaccount`);
+  }
+
+  getPlan(): Observable<PlanResponse> {
+    return this.http.get<PlanResponse>(`${this.api}/api/account/getplan`);
   }
 }

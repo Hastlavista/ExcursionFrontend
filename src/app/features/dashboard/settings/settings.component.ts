@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../core/services/auth.service';
-import { AccountService } from '../../../core/services/account.service';
+import { AccountService, PlanResponse } from '../../../core/services/account.service';
 import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
@@ -14,6 +14,11 @@ import { ToastService } from '../../../core/services/toast.service';
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent implements OnInit {
+
+  // Plan
+  plan: PlanResponse | null = null;
+  showUpgradeModal = false;
+  upgradeComingSoon = false;
 
   // Account
   userEmail = '';
@@ -51,6 +56,24 @@ export class SettingsComponent implements OnInit {
     this.userEmail = this.authService.getUserEmail();
     this.apiKey = this.accountService.getApiKey();
     this.apiKeyMasked = this.maskKey(this.apiKey);
+    this.loadPlan();
+  }
+
+  loadPlan(): void {
+    this.accountService.getPlan().subscribe({
+      next: plan => {
+        this.plan = plan;
+        this.authService.setIsPro(plan.isPro);
+        this.cdr.detectChanges();
+      },
+      error: () => {}
+    });
+  }
+
+  openUpgradeModal(): void {
+    this.upgradeComingSoon = false;
+    this.showUpgradeModal = true;
+    this.cdr.detectChanges();
   }
 
   private maskKey(key: string): string {

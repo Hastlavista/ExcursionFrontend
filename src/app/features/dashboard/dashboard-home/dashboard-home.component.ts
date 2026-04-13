@@ -259,7 +259,13 @@ export class DashboardHomeComponent {
         this.closeAddTradeModal();
         this.state.refresh();
       },
-      error: () => { this.addTradeSaving = false; }
+      error: (err) => {
+        this.addTradeSaving = false;
+        if (err?.status === 402) {
+          this.closeAddTradeModal();
+          this.state.setTradeLimitReached(true);
+        }
+      }
     });
   }
 

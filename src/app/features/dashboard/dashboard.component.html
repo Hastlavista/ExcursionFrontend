@@ -77,6 +77,12 @@
       </div>
 
       <div class="topbar__right">
+        <button class="plan-badge-btn"
+                [class.plan-badge-btn--pro]="isPro"
+                (click)="goToPlan()"
+                title="View plan">
+          {{ isPro ? ('DASHBOARD.PLAN_BADGE.PRO' | translate) : ('DASHBOARD.PLAN_BADGE.FREE' | translate) }}
+        </button>
         <div class="profile-menu">
           <button class="profile-avatar" (click)="toggleProfile($event)" [class.profile-avatar--open]="profileOpen">
             {{ initials }}
@@ -97,6 +103,19 @@
         </div>
       </div>
     </header>
+
+    <!-- Trade limit banner -->
+    @if (state.tradeLimitReached()) {
+      <div class="limit-banner">
+        <div class="limit-banner__text">
+          <strong>{{ 'DASHBOARD.LIMIT_BANNER.MESSAGE' | translate }}</strong>
+          {{ 'DASHBOARD.LIMIT_BANNER.UPGRADE' | translate }}
+        </div>
+        <button class="limit-banner__btn" (click)="goToPlan()">
+          {{ 'DASHBOARD.LIMIT_BANNER.BTN' | translate }}
+        </button>
+      </div>
+    }
 
     <!-- Routed content -->
     <router-outlet />

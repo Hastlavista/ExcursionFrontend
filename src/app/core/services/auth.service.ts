@@ -24,6 +24,7 @@ export interface RegisterPayload {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly TOKEN_KEY = 'auth_token';
+  private readonly IS_PRO_KEY = 'is_pro';
   private readonly api = environment.apiUrl;
 
   isAuthenticated = signal<boolean>(this.hasToken());
@@ -35,6 +36,7 @@ export class AuthService {
       tap(user => {
         localStorage.setItem(this.TOKEN_KEY, user.token);
         if (user.apiKey) localStorage.setItem('api_key', user.apiKey);
+        localStorage.setItem(this.IS_PRO_KEY, String(user.isPro ?? false));
         this.isAuthenticated.set(true);
         this.router.navigate(['/dashboard']);
       })
@@ -52,8 +54,17 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem('api_key');
+    localStorage.removeItem(this.IS_PRO_KEY);
     this.isAuthenticated.set(false);
     this.router.navigate(['/auth/login']);
+  }
+
+  getIsPro(): boolean {
+    return localStorage.getItem(this.IS_PRO_KEY) === 'true';
+  }
+
+  setIsPro(value: boolean): void {
+    localStorage.setItem(this.IS_PRO_KEY, String(value));
   }
 
   saveToken(token: string): void {

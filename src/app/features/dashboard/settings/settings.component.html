@@ -1,5 +1,53 @@
 <div class="settings-page">
 
+  <!-- ── Plan ─────────────────────────────────────────────────────────────── -->
+  <section class="settings-section" id="plan">
+    <h2 class="settings-section__title">{{ 'SETTINGS.PLAN.TITLE' | translate }}</h2>
+
+    <div class="settings-card">
+      @if (plan) {
+        @if (!plan.isPro) {
+          <!-- Free plan -->
+          <div class="settings-row">
+            <div class="settings-row__label">
+              <span class="settings-row__name">
+                <span class="plan-badge">{{ 'SETTINGS.PLAN.FREE_BADGE' | translate }}</span>
+              </span>
+              <span class="settings-row__hint">
+                {{ 'SETTINGS.PLAN.TRADES_USED' | translate : { used: plan.tradesThisMonth, limit: plan.tradeLimit } }}
+              </span>
+            </div>
+            <button class="btn btn--primary" (click)="openUpgradeModal()">
+              {{ 'SETTINGS.PLAN.UPGRADE_BTN' | translate }}
+            </button>
+          </div>
+          <div class="settings-row settings-row--last settings-row--progress">
+            <div class="trade-progress">
+              <div class="trade-progress__bar"
+                   [style.width.%]="(plan.tradesThisMonth / plan.tradeLimit) * 100"
+                   [class.trade-progress__bar--warn]="plan.tradesThisMonth / plan.tradeLimit >= 0.8"
+                   [class.trade-progress__bar--full]="plan.tradesThisMonth >= plan.tradeLimit">
+              </div>
+            </div>
+          </div>
+        } @else {
+          <!-- Pro plan -->
+          <div class="settings-row settings-row--last">
+            <div class="settings-row__label">
+              <span class="settings-row__name">
+                <span class="plan-badge plan-badge--pro">{{ 'SETTINGS.PLAN.PRO_BADGE' | translate }}</span>
+              </span>
+              <span class="settings-row__hint">{{ 'SETTINGS.PLAN.UNLIMITED' | translate }}</span>
+            </div>
+            <button class="btn btn--ghost">
+              {{ 'SETTINGS.PLAN.MANAGE_BTN' | translate }}
+            </button>
+          </div>
+        }
+      }
+    </div>
+  </section>
+
   <!-- ── Account Info ─────────────────────────────────────────────────────── -->
   <section class="settings-section">
     <h2 class="settings-section__title">{{ 'SETTINGS.ACCOUNT.TITLE' | translate }}</h2>
@@ -221,6 +269,43 @@
         </button>
         <button class="btn btn--danger" (click)="confirmDeleteAccount()" [disabled]="deleting">
           {{ deleting ? ('SETTINGS.MODAL.CONFIRMING' | translate) : ('SETTINGS.DANGER.MODAL_CONFIRM' | translate) }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- ── Upgrade to Pro Modal ──────────────────────────────────────────────────── -->
+@if (showUpgradeModal) {
+  <div class="modal-backdrop" (click)="showUpgradeModal = false">
+    <div class="confirm-modal upgrade-modal" (click)="$event.stopPropagation()">
+      <div class="upgrade-modal__header">
+        <h3 class="confirm-modal__title">{{ 'SETTINGS.PLAN.UPGRADE_MODAL_TITLE' | translate }}</h3>
+        <span class="upgrade-modal__price">{{ 'SETTINGS.PLAN.UPGRADE_MODAL_PRICE' | translate }}</span>
+      </div>
+      <ul class="upgrade-modal__features">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          {{ 'SETTINGS.PLAN.UPGRADE_MODAL_FEATURE_1' | translate }}
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          {{ 'SETTINGS.PLAN.UPGRADE_MODAL_FEATURE_2' | translate }}
+        </li>
+      </ul>
+      @if (upgradeComingSoon) {
+        <p class="upgrade-modal__coming-soon">{{ 'SETTINGS.PLAN.COMING_SOON' | translate }}</p>
+      }
+      <div class="confirm-modal__actions">
+        <button class="btn btn--ghost" (click)="showUpgradeModal = false">
+          {{ 'SETTINGS.MODAL.CANCEL' | translate }}
+        </button>
+        <button class="btn btn--primary" (click)="upgradeComingSoon = true">
+          {{ 'SETTINGS.PLAN.UPGRADE_MODAL_SUBSCRIBE' | translate }}
         </button>
       </div>
     </div>
