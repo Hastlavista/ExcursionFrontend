@@ -9,6 +9,7 @@ export interface AuthUser {
   email: string;
   token: string;
   apiKey?: string;
+  isPro?: boolean;
 }
 
 export interface LoginPayload {

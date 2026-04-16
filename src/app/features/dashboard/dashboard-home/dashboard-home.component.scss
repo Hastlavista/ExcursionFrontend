@@ -150,25 +150,273 @@
   padding: 2px 10px;
 }
 
-.empty-state {
+// ─── Get Started card (empty state) ──────────────────────────────────────────
+
+.get-started-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $spacing-sm;
+  gap: $spacing-md;
   padding: $spacing-2xl $spacing-md;
   text-align: center;
 
-  svg {
-    width: 40px;
-    height: 40px;
-    color: $text-muted;
-    margin-bottom: $spacing-xs;
+  &__logo {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($accent-primary, 0.1);
+    border: 1px solid rgba($accent-primary, 0.2);
+    border-radius: $radius-lg;
+    color: $accent-primary;
   }
 
-  p {
-    font-size: $font-size-base;
-    font-weight: 500;
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
     color: $text-secondary;
+    max-width: 340px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: $spacing-xs;
+  }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px $spacing-lg;
+    border-radius: $radius-md;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    font-family: $font-family;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: opacity $transition-fast, background $transition-fast;
+    border: none;
+
+    &--primary {
+      background: $accent-primary;
+      color: #fff;
+      &:hover { opacity: 0.85; }
+    }
+
+    &--outline {
+      background: transparent;
+      border: 1px solid $border-color;
+      color: $text-secondary;
+      &:hover { border-color: $text-secondary; color: $text-primary; }
+    }
+  }
+}
+
+// ─── Onboarding modal extras ──────────────────────────────────────────────────
+
+.modal--onboarding {
+  max-width: 500px;
+}
+
+.onboarding-progress {
+  padding: $spacing-md $spacing-lg;
+  border-bottom: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &__track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 240px;
+  }
+
+  &__step {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    background: $bg-input;
+    border: 2px solid $border-color;
+    color: $text-muted;
+    flex-shrink: 0;
+    transition: background $transition-fast, border-color $transition-fast, color $transition-fast;
+
+    &--active {
+      background: $accent-primary;
+      border-color: $accent-primary;
+      color: #fff;
+    }
+
+    &--done {
+      background: rgba($accent-primary, 0.15);
+      border-color: $accent-primary;
+      color: $accent-primary;
+    }
+  }
+
+  &__line {
+    flex: 1;
+    height: 2px;
+    background: $border-color;
+    transition: background $transition-fast;
+
+    &--done { background: $accent-primary; }
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    margin: 0;
+  }
+}
+
+.onboarding-body {
+  min-height: 220px;
+}
+
+.onboarding-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+  text-align: center;
+
+  &__icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($accent-primary, 0.1);
+    border: 1px solid rgba($accent-primary, 0.2);
+    border-radius: $radius-lg;
+    color: $accent-primary;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    line-height: 1.6;
+    max-width: 360px;
+    margin: 0;
+  }
+
+  &__action {
+    margin-top: $spacing-xs;
+  }
+}
+
+.onboarding-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  width: 100%;
+  max-width: 400px;
+  padding: $spacing-sm $spacing-md;
+  background: rgba($accent-primary, 0.06);
+  border: 1px solid rgba($accent-primary, 0.18);
+  border-radius: $radius-md;
+  color: $text-secondary;
+  font-size: $font-size-xs;
+  line-height: 1.5;
+  text-align: left;
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: $accent-primary;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__url {
+    display: inline-block;
+    font-family: monospace;
+    font-size: $font-size-xs;
+    color: $accent-primary;
+    background: rgba($accent-primary, 0.1);
+    border: 1px solid rgba($accent-primary, 0.25);
+    border-radius: $radius-sm;
+    padding: 2px 8px;
+    letter-spacing: 0.02em;
+    user-select: all;
+  }
+}
+
+.video-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-width: 400px;
+  background: $bg-secondary;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  color: $text-muted;
+
+  svg { opacity: 0.5; }
+
+  span {
+    font-size: $font-size-xs;
+    font-weight: 500;
+  }
+}
+
+.onboarding-api-key {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  max-width: 400px;
+  background: $bg-input;
+  border: 1px solid $border-color;
+  border-radius: $radius-md;
+  padding: $spacing-xs $spacing-sm $spacing-xs $spacing-md;
+
+  &__value {
+    flex: 1;
+    font-family: monospace;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    letter-spacing: 0.04em;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

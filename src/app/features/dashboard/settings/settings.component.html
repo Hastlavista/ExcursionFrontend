@@ -207,6 +207,56 @@
     </div>
   </section>
 
+  <!-- ── Tutorials & Resources ────────────────────────────────────────────── -->
+  <section class="settings-section">
+    <h2 class="settings-section__title">{{ 'SETTINGS.TUTORIALS.TITLE' | translate }}</h2>
+    <p class="settings-section__desc">{{ 'SETTINGS.TUTORIALS.DESC' | translate }}</p>
+
+    <div class="tutorial-grid">
+      <div class="tutorial-card">
+        <div class="tutorial-card__video">
+          <div class="tutorial-card__placeholder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>{{ 'SETTINGS.TUTORIALS.VIDEO_SOON' | translate }}</span>
+          </div>
+        </div>
+        <div class="tutorial-card__body">
+          <p class="tutorial-card__title">{{ 'SETTINGS.TUTORIALS.CARD1_TITLE' | translate }}</p>
+          <p class="tutorial-card__desc">{{ 'SETTINGS.TUTORIALS.CARD1_DESC' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="tutorial-card">
+        <div class="tutorial-card__video">
+          <div class="tutorial-card__placeholder">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            <span>{{ 'SETTINGS.TUTORIALS.VIDEO_SOON' | translate }}</span>
+          </div>
+        </div>
+        <div class="tutorial-card__body">
+          <p class="tutorial-card__title">{{ 'SETTINGS.TUTORIALS.CARD2_TITLE' | translate }}</p>
+          <p class="tutorial-card__desc">{{ 'SETTINGS.TUTORIALS.CARD2_DESC' | translate }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-card">
+      <div class="settings-row settings-row--last">
+        <div class="settings-row__label">
+          <span class="settings-row__name">{{ 'SETTINGS.TUTORIALS.DOWNLOAD_EA_TITLE' | translate }}</span>
+          <span class="settings-row__hint">{{ 'SETTINGS.TUTORIALS.DOWNLOAD_EA_HINT' | translate }}</span>
+        </div>
+        <button class="btn btn--primary" (click)="downloadEa()">
+          {{ 'SETTINGS.API_KEY.DOWNLOAD_EA' | translate }}
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Danger Zone ───────────────────────────────────────────────────────── -->
   <section class="settings-section settings-section--danger">
     <h2 class="settings-section__title settings-section__title--danger">{{ 'SETTINGS.DANGER.TITLE' | translate }}</h2>

@@ -357,6 +357,70 @@
   }
 }
 
+// ── Tutorial grid ─────────────────────────────────────────────────────────────
+
+.tutorial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+
+  @media (max-width: 540px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tutorial-card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  &__video {
+    aspect-ratio: 16 / 9;
+    background: $bg-secondary;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    color: $text-muted;
+
+    svg { opacity: 0.45; }
+
+    span {
+      font-size: $font-size-xs;
+      font-weight: 500;
+    }
+  }
+
+  &__body {
+    padding: $spacing-md;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  &__desc {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
 // ── Confirm Modals ────────────────────────────────────────────────────────────
 
 .modal-backdrop {

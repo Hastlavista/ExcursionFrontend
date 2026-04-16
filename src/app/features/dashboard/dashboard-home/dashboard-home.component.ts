@@ -1,10 +1,11 @@
-import { Component, HostListener, signal, computed } from '@angular/core';
+import { Component, HostListener, signal, computed, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { DashboardStateService } from '../../../core/services/dashboard-state.service';
 import { TradeService } from '../../../core/services/trade.service';
+import { AccountService } from '../../../core/services/account.service';
 import { Trade, TradeStatus } from '../../../core/models/trade.model';
 
 @Component({
@@ -69,11 +70,21 @@ export class DashboardHomeComponent {
   addTradeSaving = false;
   addTradeForm: Trade = this.emptyForm();
 
+  // Onboarding modal
+  onboardingModalOpen = false;
+  onboardingStep = 1;
+  apiKey = '';
+  copyOnboardingLabel = 'DASHBOARD.ONBOARDING.COPY';
+
   constructor(
     public state: DashboardStateService,
     private tradeService: TradeService,
-    private router: Router
-  ) {}
+    private accountService: AccountService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {
+    this.apiKey = this.accountService.getApiKey();
+  }
 
   get trades(): Trade[] { return this.state.trades(); }
   get loading(): boolean { return this.state.loading(); }
@@ -146,6 +157,7 @@ export class DashboardHomeComponent {
   onEscape(): void {
     this.popoverTrade = null;
     this.closeModal();
+    this.closeOnboardingModal();
   }
 
   openDetails(): void {
@@ -209,6 +221,44 @@ export class DashboardHomeComponent {
       },
       error: () => { this.saving = false; }
     });
+  }
+
+  // ── Onboarding Modal ─────────────────────────────────────────────────────────
+
+  openOnboardingModal(): void {
+    this.onboardingStep = 1;
+    this.onboardingModalOpen = true;
+  }
+
+  closeOnboardingModal(): void {
+    this.onboardingModalOpen = false;
+  }
+
+  onboardingNext(): void {
+    if (this.onboardingStep < 2) this.onboardingStep++;
+  }
+
+  onboardingBack(): void {
+    if (this.onboardingStep > 1) this.onboardingStep--;
+  }
+
+  copyOnboardingApiKey(): void {
+    if (!this.apiKey) return;
+    navigator.clipboard.writeText(this.apiKey).then(() => {
+      this.copyOnboardingLabel = 'DASHBOARD.ONBOARDING.COPIED';
+      this.cdr.detectChanges();
+      setTimeout(() => {
+        this.copyOnboardingLabel = 'DASHBOARD.ONBOARDING.COPY';
+        this.cdr.detectChanges();
+      }, 2000);
+    });
+  }
+
+  downloadEa(): void {
+    const a = document.createElement('a');
+    a.href = 'assets/ea/LogynqoEA.ex5';
+    a.download = 'LogynqoEA.ex5';
+    a.click();
   }
 
   // ── Add Trade Modal ───────────────────────────────────────────────────────────

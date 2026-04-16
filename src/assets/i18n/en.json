@@ -4,6 +4,111 @@
     "BRAND_PART1": "Logyn",
     "BRAND_PART2": "QO"
   },
+  "LANDING": {
+    "NAV": {
+      "FEATURES": "Features",
+      "PRICING": "Pricing",
+      "COMPARE": "Why it helps",
+      "LOGIN": "Login",
+      "REGISTER": "Get Started"
+    },
+    "HERO": {
+      "EYEBROW": "Trading Journal",
+      "TITLE": "Your trades log themselves. No more guessing what's working or what's not.",
+      "SUBTITLE": "Logynqo helps you track performance, review execution, and spot repeatable patterns without the spreadsheet mess.",
+      "PRIMARY_CTA": "Connect MetaTrader Demo",
+      "SECONDARY_CTA": "Go to Login",
+      "STAT_1": "trades synced",
+      "STAT_2": "win-rate visibility",
+      "STAT_3": "to get set up"
+    },
+    "PROOF": {
+      "ITEM_1_TITLE": "Sync your trades",
+      "ITEM_1_BODY": "Import broker activity automatically and keep every position logged in one clean place.",
+      "ITEM_2_TITLE": "Find what matters",
+      "ITEM_2_BODY": "Review setups, outcomes, and recurring mistakes without digging through screenshots.",
+      "ITEM_3_TITLE": "Reflect with context",
+      "ITEM_3_BODY": "Understand what your edge looks like when you have every trade tagged and time-stamped."
+    },
+    "JOURNAL": {
+      "EYEBROW": "A simpler way to keep a trading journal",
+      "TITLE": "A simpler way to keep a trading journal",
+      "SUBTITLE": "Track every idea, every setup, and every result in one place so your review process stays consistent.",
+      "POINT_1": "Automatic import from MT4 and MT5",
+      "POINT_2": "Clean trade cards with context",
+      "POINT_3": "Average excursion analytics",
+      "POINT_4": "Simple review flow after every session"
+    },
+    "SETUP": {
+      "EYEBROW": "Setup in minutes",
+      "TITLE": "Setup in minutes",
+      "SUBTITLE": "You do not need a complicated routine to start journaling with discipline.",
+      "STEP_1_TITLE": "Create your account",
+      "STEP_1_BODY": "Start with a clean workspace and your own private trading journal.",
+      "STEP_2_TITLE": "Connect your platform",
+      "STEP_2_BODY": "Use the EA link and API key to sync trades from MetaTrader automatically.",
+      "STEP_3_TITLE": "Review your performance",
+      "STEP_3_BODY": "Open your dashboard, inspect patterns, and build a repeatable feedback loop."
+    },
+    "METRICS": {
+      "EYEBROW": "Refine your edge",
+      "TITLE": "Reply. Course.",
+      "SUBTITLE": "See momentum build when your routine captures enough detail to make your data useful.",
+      "CARD_1_TAG": "Performance History",
+      "CARD_1_VALUE": "+18.4%",
+      "CARD_2_TAG": "Average win-rate",
+      "CARD_2_BODY": "Better process awareness after only a few weeks of structured journaling.",
+      "TABLE": {
+        "HEAD_1": "Symbol",
+        "HEAD_2": "Result",
+        "HEAD_3": "Outcome"
+      }
+    },
+    "WHY": {
+      "EYEBROW": "Why it helps",
+      "TITLE": "Why it helps",
+      "SUBTITLE": "Journaling only works if it is fast enough to use and clear enough to trust.",
+      "REASON_1_TITLE": "Review after each session",
+      "REASON_1_BODY": "Build a light routine that makes reflection part of execution, not a separate project.",
+      "REASON_2_TITLE": "Measure your trading habits",
+      "REASON_2_BODY": "Notice recurring overtrading, late entries, and ignored setups before they calcify.",
+      "REASON_3_TITLE": "Validate the setups",
+      "REASON_3_BODY": "Find which conditions actually produce good trades and which ones only feel productive."
+    },
+    "PRICING": {
+      "EYEBROW": "Simple Pricing",
+      "TITLE": "Simple Pricing",
+      "SUBTITLE": "Start free, then upgrade when you want more history and deeper review tools.",
+      "FREE_LABEL": "Free",
+      "FREE_PRICE": "$0",
+      "FREE_DESC": "Best for getting started with your first trade journal routine.",
+      "FREE_FEATURE_1": "50 trades per month",
+      "FREE_FEATURE_2": "Dashboard overview",
+      "FREE_FEATURE_3": "Basic trade review",
+      "FREE_CTA": "Get Started",
+      "PRO_BADGE": "Popular",
+      "PRO_LABEL": "Pro",
+      "PRO_PRICE": "€10",
+      "PRO_DESC": "For traders who want unlimited tracking and tighter feedback loops.",
+      "PRO_FEATURE_1": "Unlimited trades",
+      "PRO_FEATURE_2": "MT4 and MT5 syncing",
+      "PRO_FEATURE_3": "Advanced excursion analytics",
+      "PRO_FEATURE_4": "Priority support",
+      "PRO_CTA": "Start Pro"
+    },
+    "CTA": {
+      "EYEBROW": "Start tracking your trades automatically",
+      "TITLE": "Start tracking your trades automatically",
+      "SUBTITLE": "Join Logynqo and build a review habit around data you can actually use.",
+      "PRIMARY": "Connect MetaTrader Demo",
+      "SECONDARY": "Go to Login"
+    },
+    "FOOTER": {
+      "COPY": "Journal smarter. Review faster.",
+      "LOGIN": "Login",
+      "REGISTER": "Register"
+    }
+  },
   "AUTH": {
     "LOGIN": {
       "TITLE": "Welcome Back",
@@ -185,6 +290,28 @@
       "SAVING": "Saving…",
       "CANCEL": "Cancel"
     },
+    "ONBOARDING": {
+      "WELCOME_TITLE": "Welcome to Logynqo",
+      "WELCOME_SUBTITLE": "Connect your MT4/MT5 and start tracking your trades automatically",
+      "GET_STARTED_BTN": "Get Started →",
+      "DOWNLOAD_EA_BTN": "Download EA",
+      "TITLE": "Get Started",
+      "STEP": "Step",
+      "BACK": "← Back",
+      "NEXT": "Next →",
+      "DONE": "Done",
+      "COPY": "Copy",
+      "COPIED": "Copied!",
+      "VIDEO_SOON": "Video tutorial coming soon",
+      "STEP1_TITLE": "Download EA",
+      "STEP1_DESC": "Download the Expert Advisor file and add it to your MetaTrader data folder.",
+      "STEP1_BTN": "Download LogynqoEA.ex5",
+      "STEP2_TITLE": "Install EA",
+      "STEP2_DESC": "Open MetaTrader 5, go to File → Open Data Folder → MQL5 → Experts, paste the EA file, and restart MT5. Drag the EA onto your chart and enable AutoTrading.",
+      "STEP2_WEBREQUEST": "Important: go to Tools → Options → Expert Advisors, enable WebRequest and add the following URL to the allowed list:",
+      "STEP3_TITLE": "Enter API Key",
+      "STEP3_DESC": "Copy your API key below and paste it into the EA settings in MT5. Your trades will start syncing automatically."
+    },
     "LIMIT_BANNER": {
       "MESSAGE": "You've reached your monthly limit of 25 trades.",
       "UPGRADE": "Upgrade to Pro for unlimited trades.",
@@ -322,6 +449,17 @@
       "MODAL_BODY": "This will permanently delete your account and all associated trade data. This action cannot be undone.",
       "MODAL_CONFIRM": "Yes, Delete My Account",
       "ERROR": "Failed to delete account."
+    },
+    "TUTORIALS": {
+      "TITLE": "TUTORIALS & RESOURCES",
+      "DESC": "Learn how to set up Logynqo and get the most out of your trading journal.",
+      "VIDEO_SOON": "Video coming soon",
+      "CARD1_TITLE": "How to install EA",
+      "CARD1_DESC": "Step-by-step guide to installing the Expert Advisor in MetaTrader 5.",
+      "CARD2_TITLE": "How to use Logynqo",
+      "CARD2_DESC": "Overview of the dashboard, trade tracking, and performance analytics.",
+      "DOWNLOAD_EA_TITLE": "Download Expert Advisor",
+      "DOWNLOAD_EA_HINT": "Get the latest version of LogynqoEA.ex5 for MetaTrader 5."
     },
     "MODAL": {
       "CANCEL": "Cancel",

@@ -4,6 +4,111 @@
     "BRAND_PART1": "Logyn",
     "BRAND_PART2": "QO"
   },
+  "LANDING": {
+    "NAV": {
+      "FEATURES": "Značajke",
+      "PRICING": "Cijene",
+      "COMPARE": "Zašto pomaže",
+      "LOGIN": "Prijava",
+      "REGISTER": "Započni"
+    },
+    "HERO": {
+      "EYEBROW": "Trading dnevnik",
+      "TITLE": "Tvoji se tradeovi bilježe sami. Nema više nagađanja što radi, a što ne.",
+      "SUBTITLE": "Logynqo ti pomaže pratiti performanse, analizirati egzekuciju i prepoznati obrasce bez kaosa u tablicama.",
+      "PRIMARY_CTA": "Poveži MetaTrader Demo",
+      "SECONDARY_CTA": "Idi na prijavu",
+      "STAT_1": "sinkroniziranih tradeova",
+      "STAT_2": "vidljivosti win-ratea",
+      "STAT_3": "za početno postavljanje"
+    },
+    "PROOF": {
+      "ITEM_1_TITLE": "Sinkroniziraj tradeove",
+      "ITEM_1_BODY": "Automatski uvezi brokersku aktivnost i drži svaku poziciju zapisanu na jednom mjestu.",
+      "ITEM_2_TITLE": "Pronađi što je bitno",
+      "ITEM_2_BODY": "Pregledaj setupove, rezultate i ponavljajuće greške bez kopanja po screenshotovima.",
+      "ITEM_3_TITLE": "Reflektiraj s kontekstom",
+      "ITEM_3_BODY": "Lakše vidi kako tvoj edge izgleda kad je svaki trade označen i vremenski zabilježen."
+    },
+    "JOURNAL": {
+      "EYEBROW": "Jednostavniji način za vođenje trading dnevnika",
+      "TITLE": "Jednostavniji način za vođenje trading dnevnika",
+      "SUBTITLE": "Prati svaku ideju, svaki setup i svaki rezultat na jednom mjestu kako bi tvoj review ostao dosljedan.",
+      "POINT_1": "Automatski import iz MT4 i MT5",
+      "POINT_2": "Čiste trade kartice s kontekstom",
+      "POINT_3": "Analitika average excursion metrika",
+      "POINT_4": "Jednostavan review nakon svake sesije"
+    },
+    "SETUP": {
+      "EYEBROW": "Postavi u nekoliko minuta",
+      "TITLE": "Postavi u nekoliko minuta",
+      "SUBTITLE": "Ne treba ti komplicirana rutina da kreneš journaling raditi disciplinirano.",
+      "STEP_1_TITLE": "Kreiraj račun",
+      "STEP_1_BODY": "Započni s urednim workspaceom i vlastitim privatnim trading dnevnikom.",
+      "STEP_2_TITLE": "Poveži platformu",
+      "STEP_2_BODY": "Koristi EA link i API ključ kako bi MetaTrader tradeove sinkronizirao automatski.",
+      "STEP_3_TITLE": "Pregledaj performanse",
+      "STEP_3_BODY": "Otvori dashboard, prouči obrasce i izgradi ponovljiv feedback loop."
+    },
+    "METRICS": {
+      "EYEBROW": "Usavrši edge",
+      "TITLE": "Prilagodi smjer",
+      "SUBTITLE": "Vidi kako napredak izgleda kad tvoja rutina bilježi dovoljno detalja da podaci postanu korisni.",
+      "CARD_1_TAG": "Povijest performansi",
+      "CARD_1_VALUE": "+18.4%",
+      "CARD_2_TAG": "Prosječan win-rate",
+      "CARD_2_BODY": "Bolja svjesnost procesa već nakon nekoliko tjedana strukturiranog journalinga.",
+      "TABLE": {
+        "HEAD_1": "Simbol",
+        "HEAD_2": "Rezultat",
+        "HEAD_3": "Ishod"
+      }
+    },
+    "WHY": {
+      "EYEBROW": "Zašto pomaže",
+      "TITLE": "Zašto pomaže",
+      "SUBTITLE": "Journaling ima smisla samo ako je dovoljno brz za korištenje i dovoljno jasan da mu vjeruješ.",
+      "REASON_1_TITLE": "Review nakon svake sesije",
+      "REASON_1_BODY": "Izgradi laganu rutinu koja refleksiju pretvara u dio egzekucije, a ne poseban projekt.",
+      "REASON_2_TITLE": "Mjeri svoje navike",
+      "REASON_2_BODY": "Primijeti overtrading, kasne ulaze i ignorirane setupove prije nego postanu obrazac.",
+      "REASON_3_TITLE": "Potvrdi setupove",
+      "REASON_3_BODY": "Otkrij koji uvjeti stvarno daju kvalitetne tradeove, a koji samo djeluju produktivno."
+    },
+    "PRICING": {
+      "EYEBROW": "Jednostavne cijene",
+      "TITLE": "Jednostavne cijene",
+      "SUBTITLE": "Kreni besplatno, pa nadogradi kada poželiš više povijesti i dublji review.",
+      "FREE_LABEL": "Free",
+      "FREE_PRICE": "€0",
+      "FREE_DESC": "Najbolje za početak i izgradnju prve trading journal rutine.",
+      "FREE_FEATURE_1": "25 tradeova mjesečno",
+      "FREE_FEATURE_2": "Pregled dashboarda",
+      "FREE_FEATURE_3": "Osnovni trade review",
+      "FREE_CTA": "Započni",
+      "PRO_BADGE": "Popularno",
+      "PRO_LABEL": "Pro",
+      "PRO_PRICE": "€10",
+      "PRO_DESC": "Za tradere koji žele neograničeno praćenje i čvršći feedback loop.",
+      "PRO_FEATURE_1": "Neograničeni tradeovi",
+      "PRO_FEATURE_2": "MT4 i MT5 sinkronizacija",
+      "PRO_FEATURE_3": "Napredna excursion analitika",
+      "PRO_FEATURE_4": "Prioritetna podrška",
+      "PRO_CTA": "Pokreni Pro besplatno"
+    },
+    "CTA": {
+      "EYEBROW": "Počni automatski pratiti svoje tradeove",
+      "TITLE": "Počni automatski pratiti svoje tradeove",
+      "SUBTITLE": "Pridruži se Logynqo i izgradi review naviku oko podataka koje stvarno možeš koristiti.",
+      "PRIMARY": "Poveži MetaTrader Demo",
+      "SECONDARY": "Idi na prijavu"
+    },
+    "FOOTER": {
+      "COPY": "Pametniji journal. Brži review.",
+      "LOGIN": "Prijava",
+      "REGISTER": "Registracija"
+    }
+  },
   "AUTH": {
     "LOGIN": {
       "TITLE": "Dobrodošli nazad",
@@ -185,6 +290,28 @@
       "SAVING": "Spremanje…",
       "CANCEL": "Odustani"
     },
+    "ONBOARDING": {
+      "WELCOME_TITLE": "Dobrodošli u Logynqo",
+      "WELCOME_SUBTITLE": "Povežite vaš MT4/MT5 i automatski pratite svoje trejdove",
+      "GET_STARTED_BTN": "Počni →",
+      "DOWNLOAD_EA_BTN": "Preuzmi EA",
+      "TITLE": "Početak",
+      "STEP": "Korak",
+      "BACK": "← Natrag",
+      "NEXT": "Dalje →",
+      "DONE": "Gotovo",
+      "COPY": "Kopiraj",
+      "COPIED": "Kopirano!",
+      "VIDEO_SOON": "Video tutorial uskoro",
+      "STEP1_TITLE": "Preuzmi EA",
+      "STEP1_DESC": "Preuzmite datoteku Expert Advisora i dodajte je u mapu podataka MetaTradea.",
+      "STEP1_BTN": "Preuzmi LogynqoEA.ex5",
+      "STEP2_TITLE": "Instaliraj EA",
+      "STEP2_DESC": "Otvorite MetaTrader 5, idite na File → Open Data Folder → MQL5 → Experts, zalijepite EA datoteku i restartajte MT5. Povucite EA na grafikon i uključite AutoTrading.",
+      "STEP2_WEBREQUEST": "Važno: idite na Tools → Options → Expert Advisors, uključite WebRequest i dodajte sljedeći URL na popis dopuštenih adresa:",
+      "STEP3_TITLE": "Unesite API ključ",
+      "STEP3_DESC": "Kopirajte vaš API ključ ispod i zalijepite ga u postavke EA unutar MT5. Vaši trejdovi će se početi automatski sinkronizirati."
+    },
     "LIMIT_BANNER": {
       "MESSAGE": "Dostigli ste mjesečni limit od 25 trejdova.",
       "UPGRADE": "Nadogradite na Pro za neograničene trejdove.",
@@ -322,6 +449,17 @@
       "MODAL_BODY": "Ovo će trajno izbrisati vaš račun i sve povezane podatke o tradovima. Ova radnja se ne može poništiti.",
       "MODAL_CONFIRM": "Da, izbriši moj račun",
       "ERROR": "Greška pri brisanju računa."
+    },
+    "TUTORIALS": {
+      "TITLE": "TUTORIALI I RESURSI",
+      "DESC": "Naučite kako postaviti Logynqo i izvući maksimum iz vašeg trading dnevnika.",
+      "VIDEO_SOON": "Video uskoro",
+      "CARD1_TITLE": "Kako instalirati EA",
+      "CARD1_DESC": "Korak po korak vodič za instalaciju Expert Advisora u MetaTrader 5.",
+      "CARD2_TITLE": "Kako koristiti Logynqo",
+      "CARD2_DESC": "Pregled dashboarda, praćenja trejdova i analitike performansi.",
+      "DOWNLOAD_EA_TITLE": "Preuzmi Expert Advisor",
+      "DOWNLOAD_EA_HINT": "Preuzmite najnoviju verziju LogynqoEA.ex5 za MetaTrader 5."
     },
     "MODAL": {
       "CANCEL": "Odustani",

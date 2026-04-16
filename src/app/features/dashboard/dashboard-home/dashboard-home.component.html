@@ -98,11 +98,22 @@
       </div>
 
       @if (state.trades().length === 0) {
-        <div class="empty-state">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-          </svg>
-          <p>{{ 'DASHBOARD.TRADES.EMPTY' | translate }}</p>
+        <div class="get-started-card">
+          <div class="get-started-card__logo">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3 class="get-started-card__title">{{ 'DASHBOARD.ONBOARDING.WELCOME_TITLE' | translate }}</h3>
+          <p class="get-started-card__subtitle">{{ 'DASHBOARD.ONBOARDING.WELCOME_SUBTITLE' | translate }}</p>
+          <div class="get-started-card__actions">
+            <button class="get-started-card__btn get-started-card__btn--primary" (click)="openOnboardingModal()">
+              {{ 'DASHBOARD.ONBOARDING.GET_STARTED_BTN' | translate }}
+            </button>
+            <button class="get-started-card__btn get-started-card__btn--outline" (click)="downloadEa()">
+              {{ 'DASHBOARD.ONBOARDING.DOWNLOAD_EA_BTN' | translate }}
+            </button>
+          </div>
         </div>
       }
 
@@ -271,6 +282,106 @@
         <button class="modal__btn modal__btn--save" (click)="saveScreenshots()" [disabled]="saving">
           {{ saving ? ('DASHBOARD.SCREENSHOT_MODAL.SAVING' | translate) : ('DASHBOARD.SCREENSHOT_MODAL.SAVE' | translate) }}
         </button>
+      </div>
+
+    </div>
+  </div>
+}
+
+<!-- ── Onboarding Modal ───────────────────────────────────────────────────────── -->
+@if (onboardingModalOpen) {
+  <div class="modal-backdrop" (click)="closeOnboardingModal()">
+    <div class="modal modal--onboarding" (click)="$event.stopPropagation()">
+
+      <div class="modal__header">
+        <div class="modal__title-group">
+          <span class="modal__symbol">{{ 'DASHBOARD.ONBOARDING.TITLE' | translate }}</span>
+        </div>
+        <button class="modal__close" (click)="closeOnboardingModal()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Progress indicator -->
+      <div class="onboarding-progress">
+        <div class="onboarding-progress__track">
+          <div class="onboarding-progress__step" [class.onboarding-progress__step--active]="onboardingStep >= 1" [class.onboarding-progress__step--done]="onboardingStep > 1">1</div>
+          <div class="onboarding-progress__line" [class.onboarding-progress__line--done]="onboardingStep > 1"></div>
+          <div class="onboarding-progress__step" [class.onboarding-progress__step--active]="onboardingStep >= 2">2</div>
+        </div>
+        <p class="onboarding-progress__label">{{ 'DASHBOARD.ONBOARDING.STEP' | translate }} {{ onboardingStep }}/2</p>
+      </div>
+
+      <div class="modal__body onboarding-body">
+
+        @if (onboardingStep === 1) {
+          <div class="onboarding-step">
+            <div class="onboarding-step__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </div>
+            <h4 class="onboarding-step__title">{{ 'DASHBOARD.ONBOARDING.STEP1_TITLE' | translate }}</h4>
+            <p class="onboarding-step__desc">{{ 'DASHBOARD.ONBOARDING.STEP1_DESC' | translate }}</p>
+            <button class="modal__btn modal__btn--save onboarding-step__action" (click)="downloadEa()">
+              {{ 'DASHBOARD.ONBOARDING.STEP1_BTN' | translate }}
+            </button>
+          </div>
+        }
+
+        @if (onboardingStep === 2) {
+          <div class="onboarding-step">
+            <div class="onboarding-step__icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <h4 class="onboarding-step__title">{{ 'DASHBOARD.ONBOARDING.STEP2_TITLE' | translate }}</h4>
+            <p class="onboarding-step__desc">{{ 'DASHBOARD.ONBOARDING.STEP2_DESC' | translate }}</p>
+            <div class="onboarding-notice">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <div class="onboarding-notice__content">
+                <span>{{ 'DASHBOARD.ONBOARDING.STEP2_WEBREQUEST' | translate }}</span>
+                <code class="onboarding-notice__url">https://api.logynqo.com</code>
+              </div>
+            </div>
+            <div class="video-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              <span>{{ 'DASHBOARD.ONBOARDING.VIDEO_SOON' | translate }}</span>
+            </div>
+            <div class="onboarding-api-key">
+              <code class="onboarding-api-key__value">{{ apiKey || '—' }}</code>
+              <button class="modal__btn modal__btn--save" (click)="copyOnboardingApiKey()" [disabled]="!apiKey">
+                {{ copyOnboardingLabel | translate }}
+              </button>
+            </div>
+          </div>
+        }
+
+      </div>
+
+      <div class="modal__footer">
+        @if (onboardingStep > 1) {
+          <button class="modal__btn modal__btn--cancel" (click)="onboardingBack()">
+            {{ 'DASHBOARD.ONBOARDING.BACK' | translate }}
+          </button>
+        }
+        @if (onboardingStep < 2) {
+          <button class="modal__btn modal__btn--save" (click)="onboardingNext()">
+            {{ 'DASHBOARD.ONBOARDING.NEXT' | translate }}
+          </button>
+        } @else {
+          <button class="modal__btn modal__btn--save" (click)="closeOnboardingModal()">
+            {{ 'DASHBOARD.ONBOARDING.DONE' | translate }}
+          </button>
+        }
       </div>
 
     </div>

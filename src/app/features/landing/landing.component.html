@@ -1,0 +1,239 @@
+<div class="landing-page">
+  <app-language-switcher class="lang-switcher"></app-language-switcher>
+
+  <header class="topbar">
+    <a class="brand" routerLink="/">
+      <img src="assets/images/icon_brand.png" alt="Logynqo logo">
+      <span class="brand__primary">{{ 'MAIN.BRAND_PART1' | translate }}</span><span class="brand__suffix">{{ 'MAIN.BRAND_PART2' | translate }}</span>
+    </a>
+
+    <nav class="topnav">
+      <a href="#features">{{ 'LANDING.NAV.FEATURES' | translate }}</a>
+      <a href="#pricing">{{ 'LANDING.NAV.PRICING' | translate }}</a>
+      <a href="#faq">{{ 'LANDING.NAV.COMPARE' | translate }}</a>
+    </nav>
+
+    <div class="topbar__actions">
+      <a class="btn btn--ghost" routerLink="/auth/login">{{ 'LANDING.NAV.LOGIN' | translate }}</a>
+      <a class="btn btn--primary" routerLink="/auth/register">{{ 'LANDING.NAV.REGISTER' | translate }}</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section">
+      <div class="hero__content">
+        <p class="eyebrow">{{ 'LANDING.HERO.EYEBROW' | translate }}</p>
+        <h1>{{ 'LANDING.HERO.TITLE' | translate }}</h1>
+        <p class="hero__sub">{{ 'LANDING.HERO.SUBTITLE' | translate }}</p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" routerLink="/auth/register">{{ 'LANDING.HERO.PRIMARY_CTA' | translate }}</a>
+          <a class="btn btn--secondary" routerLink="/auth/login">{{ 'LANDING.HERO.SECONDARY_CTA' | translate }}</a>
+        </div>
+
+        <div class="hero__stats">
+          @for (stat of quickStats; track stat.key) {
+            <div class="stat-card">
+              <strong>{{ stat.value }}</strong>
+              <span>{{ stat.key | translate }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="visual-shell">
+          <img src="assets/images/mock_up_landing_page.png" alt="Trading dashboard preview">
+        </div>
+      </div>
+    </section>
+
+    <section class="proof section">
+      <div class="proof-grid">
+        <article class="proof-item">
+          <span>01</span>
+          <h2>{{ 'LANDING.PROOF.ITEM_1_TITLE' | translate }}</h2>
+          <p>{{ 'LANDING.PROOF.ITEM_1_BODY' | translate }}</p>
+        </article>
+        <article class="proof-item">
+          <span>02</span>
+          <h2>{{ 'LANDING.PROOF.ITEM_2_TITLE' | translate }}</h2>
+          <p>{{ 'LANDING.PROOF.ITEM_2_BODY' | translate }}</p>
+        </article>
+        <article class="proof-item">
+          <span>03</span>
+          <h2>{{ 'LANDING.PROOF.ITEM_3_TITLE' | translate }}</h2>
+          <p>{{ 'LANDING.PROOF.ITEM_3_BODY' | translate }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="journal section" id="features">
+      <div class="journal__content">
+        <p class="eyebrow">{{ 'LANDING.JOURNAL.EYEBROW' | translate }}</p>
+        <h2>{{ 'LANDING.JOURNAL.TITLE' | translate }}</h2>
+        <p>{{ 'LANDING.JOURNAL.SUBTITLE' | translate }}</p>
+
+        <ul class="check-list">
+          @for (point of journalPoints; track point) {
+            <li>{{ point | translate }}</li>
+          }
+        </ul>
+      </div>
+
+      <div class="journal__visual card">
+        <img src="assets/images/landing-journal-chart.png" alt="Trade chart illustration">
+      </div>
+    </section>
+
+    <section class="setup section">
+      <div class="section-heading section-heading--center">
+        <p class="eyebrow">{{ 'LANDING.SETUP.EYEBROW' | translate }}</p>
+        <h2>{{ 'LANDING.SETUP.TITLE' | translate }}</h2>
+        <p>{{ 'LANDING.SETUP.SUBTITLE' | translate }}</p>
+      </div>
+
+      <div class="setup-grid">
+        @for (step of setupSteps; track step.title) {
+          <article class="setup-card card">
+            <span class="setup-card__badge">{{ step.icon }}</span>
+            <h3>{{ step.title | translate }}</h3>
+            <p>{{ step.body | translate }}</p>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="metrics section">
+      <div class="metrics__headline">
+        <p class="eyebrow">{{ 'LANDING.METRICS.EYEBROW' | translate }}</p>
+        <h2>{{ 'LANDING.METRICS.TITLE' | translate }}</h2>
+        <p>{{ 'LANDING.METRICS.SUBTITLE' | translate }}</p>
+      </div>
+
+      <div class="metrics__grid">
+        <article class="metrics-card card metrics-card--bars">
+          <div class="card-topline">
+            <span>{{ 'LANDING.METRICS.CARD_1_TAG' | translate }}</span>
+            <strong>{{ 'LANDING.METRICS.CARD_1_VALUE' | translate }}</strong>
+          </div>
+          <div class="bars">
+            <span style="height: 26%"></span>
+            <span style="height: 35%"></span>
+            <span style="height: 42%"></span>
+            <span style="height: 54%"></span>
+            <span style="height: 67%"></span>
+            <span style="height: 82%"></span>
+          </div>
+        </article>
+
+        <article class="metrics-card card metrics-card--big-number">
+          <span class="card-topline">{{ 'LANDING.METRICS.CARD_2_TAG' | translate }}</span>
+          <strong>68%</strong>
+          <p>{{ 'LANDING.METRICS.CARD_2_BODY' | translate }}</p>
+        </article>
+
+        <article class="metrics-card card metrics-card--table">
+          <div class="mini-table">
+            <div class="mini-table__head">
+              <span>{{ 'LANDING.METRICS.TABLE.HEAD_1' | translate }}</span>
+              <span>{{ 'LANDING.METRICS.TABLE.HEAD_2' | translate }}</span>
+              <span>{{ 'LANDING.METRICS.TABLE.HEAD_3' | translate }}</span>
+            </div>
+            <div class="mini-table__row">
+              <span>EUR/USD</span>
+              <span class="is-positive">+4.2R</span>
+              <span>Win</span>
+            </div>
+            <div class="mini-table__row">
+              <span>NAS100</span>
+              <span class="is-positive">+2.1R</span>
+              <span>Win</span>
+            </div>
+            <div class="mini-table__row">
+              <span>XAU/USD</span>
+              <span class="is-negative">-1.0R</span>
+              <span>Loss</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="why section" id="faq">
+      <div class="section-heading section-heading--center">
+        <p class="eyebrow">{{ 'LANDING.WHY.EYEBROW' | translate }}</p>
+        <h2>{{ 'LANDING.WHY.TITLE' | translate }}</h2>
+        <p>{{ 'LANDING.WHY.SUBTITLE' | translate }}</p>
+      </div>
+
+      <div class="why-grid">
+        @for (reason of reasons; track reason.title) {
+          <article class="why-card">
+            <h3>{{ reason.title | translate }}</h3>
+            <p>{{ reason.body | translate }}</p>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="pricing section" id="pricing">
+      <div class="section-heading section-heading--center">
+        <p class="eyebrow">{{ 'LANDING.PRICING.EYEBROW' | translate }}</p>
+        <h2>{{ 'LANDING.PRICING.TITLE' | translate }}</h2>
+        <p>{{ 'LANDING.PRICING.SUBTITLE' | translate }}</p>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="price-card card">
+          <span class="price-card__label">{{ 'LANDING.PRICING.FREE_LABEL' | translate }}</span>
+          <h3>{{ 'LANDING.PRICING.FREE_PRICE' | translate }}</h3>
+          <p>{{ 'LANDING.PRICING.FREE_DESC' | translate }}</p>
+          <ul class="price-features">
+            @for (feature of freeFeatures; track feature) {
+              <li>{{ feature | translate }}</li>
+            }
+          </ul>
+          <a class="btn btn--secondary btn--block" routerLink="/auth/register">{{ 'LANDING.PRICING.FREE_CTA' | translate }}</a>
+        </article>
+
+        <article class="price-card card price-card--featured">
+          <span class="price-card__pill">{{ 'LANDING.PRICING.PRO_BADGE' | translate }}</span>
+          <span class="price-card__label">{{ 'LANDING.PRICING.PRO_LABEL' | translate }}</span>
+          <h3>{{ 'LANDING.PRICING.PRO_PRICE' | translate }}</h3>
+          <p>{{ 'LANDING.PRICING.PRO_DESC' | translate }}</p>
+          <ul class="price-features">
+            @for (feature of proFeatures; track feature) {
+              <li>{{ feature | translate }}</li>
+            }
+          </ul>
+          <a class="btn btn--primary btn--block" routerLink="/auth/register">{{ 'LANDING.PRICING.PRO_CTA' | translate }}</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta section">
+      <div class="cta-card">
+        <p class="eyebrow">{{ 'LANDING.CTA.EYEBROW' | translate }}</p>
+        <h2>{{ 'LANDING.CTA.TITLE' | translate }}</h2>
+        <p>{{ 'LANDING.CTA.SUBTITLE' | translate }}</p>
+        <div class="hero__actions hero__actions--center">
+          <a class="btn btn--primary" routerLink="/auth/register">{{ 'LANDING.CTA.PRIMARY' | translate }}</a>
+          <a class="btn btn--secondary" routerLink="/auth/login">{{ 'LANDING.CTA.SECONDARY' | translate }}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand brand--footer" routerLink="/">
+      <img src="assets/images/icon_brand.png" alt="Logynqo logo">
+      <span class="brand__primary">{{ 'MAIN.BRAND_PART1' | translate }}</span><span class="brand__suffix">{{ 'MAIN.BRAND_PART2' | translate }}</span>
+    </a>
+    <p>{{ 'LANDING.FOOTER.COPY' | translate }}</p>
+    <div class="footer__links">
+      <a routerLink="/auth/login">{{ 'LANDING.FOOTER.LOGIN' | translate }}</a>
+      <a routerLink="/auth/register">{{ 'LANDING.FOOTER.REGISTER' | translate }}</a>
+    </div>
+  </footer>
+</div>
