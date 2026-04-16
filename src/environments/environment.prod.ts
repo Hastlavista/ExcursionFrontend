@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.extrack.com'
+  apiUrl: 'https://api.logynqo.com'
 };
