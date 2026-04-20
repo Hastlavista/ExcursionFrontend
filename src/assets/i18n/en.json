@@ -14,12 +14,12 @@
     },
     "HERO": {
       "EYEBROW": "Trading Journal",
-      "TITLE": "Your trades log themselves. No more guessing what's working or what's not.",
+      "TITLE": "Your trades log themselves. No more guessing what's working or not.",
       "SUBTITLE": "Logynqo helps you track performance, review execution, and spot repeatable patterns without the spreadsheet mess.",
       "PRIMARY_CTA": "Connect MetaTrader Demo",
       "SECONDARY_CTA": "Go to Login",
-      "STAT_1": "trades synced",
-      "STAT_2": "win-rate visibility",
+      "STAT_1": "platform support",
+      "STAT_2": "excursion metrics",
       "STAT_3": "to get set up"
     },
     "PROOF": {
@@ -52,12 +52,12 @@
     },
     "METRICS": {
       "EYEBROW": "Refine your edge",
-      "TITLE": "Reply. Course.",
-      "SUBTITLE": "See momentum build when your routine captures enough detail to make your data useful.",
+      "TITLE": "Review. Refine.",
+      "SUBTITLE": "See what's actually working once your journal captures enough context to make your data meaningful.",
       "CARD_1_TAG": "Performance History",
       "CARD_1_VALUE": "+18.4%",
-      "CARD_2_TAG": "Average win-rate",
-      "CARD_2_BODY": "Better process awareness after only a few weeks of structured journaling.",
+      "CARD_2_TAG": "Your win-rate",
+      "CARD_2_BODY": "Calculated automatically from your closed trades. No spreadsheets, no manual math.",
       "TABLE": {
         "HEAD_1": "Symbol",
         "HEAD_2": "Result",

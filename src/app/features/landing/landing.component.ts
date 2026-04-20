@@ -13,8 +13,8 @@ import { LanguageSwitcherComponent } from '../../shared/language-switcher/langua
 })
 export class LandingComponent {
   protected readonly quickStats = [
-    { value: '1.2M+', key: 'LANDING.HERO.STAT_1' },
-    { value: '68%', key: 'LANDING.HERO.STAT_2' },
+    { value: 'MT4 & MT5', key: 'LANDING.HERO.STAT_1' },
+    { value: 'MAE + MFE', key: 'LANDING.HERO.STAT_2' },
     { value: '<5 min', key: 'LANDING.HERO.STAT_3' }
   ];
 

@@ -18,8 +18,8 @@
       "SUBTITLE": "Logynqo ti pomaže pratiti performanse, analizirati egzekuciju i prepoznati obrasce bez kaosa u tablicama.",
       "PRIMARY_CTA": "Poveži MetaTrader Demo",
       "SECONDARY_CTA": "Idi na prijavu",
-      "STAT_1": "sinkroniziranih tradeova",
-      "STAT_2": "vidljivosti win-ratea",
+      "STAT_1": "podrška platformi",
+      "STAT_2": "excursion metrike",
       "STAT_3": "za početno postavljanje"
     },
     "PROOF": {
@@ -56,8 +56,8 @@
       "SUBTITLE": "Vidi kako napredak izgleda kad tvoja rutina bilježi dovoljno detalja da podaci postanu korisni.",
       "CARD_1_TAG": "Povijest performansi",
       "CARD_1_VALUE": "+18.4%",
-      "CARD_2_TAG": "Prosječan win-rate",
-      "CARD_2_BODY": "Bolja svjesnost procesa već nakon nekoliko tjedana strukturiranog journalinga.",
+      "CARD_2_TAG": "Tvoj win-rate",
+      "CARD_2_BODY": "Izračunava se automatski iz tvojih zatvorenih tradeova. Bez tablica, bez ručnog računanja.",
       "TABLE": {
         "HEAD_1": "Simbol",
         "HEAD_2": "Rezultat",
