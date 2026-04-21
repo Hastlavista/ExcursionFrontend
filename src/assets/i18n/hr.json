@@ -82,7 +82,7 @@
       "FREE_LABEL": "Free",
       "FREE_PRICE": "€0",
       "FREE_DESC": "Najbolje za početak i izgradnju prve trading journal rutine.",
-      "FREE_FEATURE_1": "25 tradeova mjesečno",
+      "FREE_FEATURE_1": "50 tradeova mjesečno",
       "FREE_FEATURE_2": "Pregled dashboarda",
       "FREE_FEATURE_3": "Osnovni trade review",
       "FREE_CTA": "Započni",
@@ -314,7 +314,7 @@
       "STEP3_DESC": "Kopirajte vaš API ključ ispod i zalijepite ga u postavke EA unutar MT5. Vaši trejdovi će se početi automatski sinkronizirati."
     },
     "LIMIT_BANNER": {
-      "MESSAGE": "Dostigli ste mjesečni limit od 25 trejdova.",
+      "MESSAGE": "Dostigli ste mjesečni limit od 50 trejdova.",
       "UPGRADE": "Nadogradite na Pro za neograničene trejdove.",
       "BTN": "Nadogradi"
     }

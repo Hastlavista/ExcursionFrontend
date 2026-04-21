@@ -314,7 +314,7 @@
       "STEP3_DESC": "Copy your API key below and paste it into the EA settings in MT5. Your trades will start syncing automatically."
     },
     "LIMIT_BANNER": {
-      "MESSAGE": "You've reached your monthly limit of 25 trades.",
+      "MESSAGE": "You've reached your monthly limit of 50 trades.",
       "UPGRADE": "Upgrade to Pro for unlimited trades.",
       "BTN": "Upgrade Now"
     }
