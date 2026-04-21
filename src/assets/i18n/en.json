@@ -236,7 +236,7 @@
         "SL": "S/L",
         "TP": "T/P",
         "SIZE": "SIZE",
-        "PROFIT_PIPS": "PROFIT PIPS",
+        "PROFIT_POINTS": "PROFIT POINTS",
         "PNL": "P&L",
         "STATUS": "STATUS"
       }
@@ -363,11 +363,12 @@
       "EFFICIENCY": "EFFICIENCY",
       "MFE": "MFE",
       "MAE": "MAE",
-      "PROFIT_PIPS": "PROFIT PIPS",
+      "PROFIT_POINTS": "PROFIT POINTS",
       "PIPS": "Pips"
     },
     "SPECS": {
       "TITLE": "EXECUTION SPECS",
+      "ENTRY_PRICE": "Entry Price",
       "EXIT_PRICE": "Exit Price",
       "LOT_SIZE": "Lot Size",
       "STOP_LOSS": "Stop Loss",

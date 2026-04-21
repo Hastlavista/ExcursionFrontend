@@ -236,7 +236,7 @@
         "SL": "S/L",
         "TP": "T/P",
         "SIZE": "VELIČINA",
-        "PROFIT_PIPS": "PROFIT PIPOVI",
+        "PROFIT_POINTS": "PROFIT BODOVI",
         "PNL": "P&L",
         "STATUS": "STATUS"
       }
@@ -363,11 +363,12 @@
       "EFFICIENCY": "EFIKASNOST",
       "MFE": "MFE",
       "MAE": "MAE",
-      "PROFIT_PIPS": "PROFIT PIPOVI",
+      "PROFIT_POINTS": "PROFIT BODOVI",
       "PIPS": "Pipova"
     },
     "SPECS": {
       "TITLE": "PARAMETRI IZVRŠENJA",
+      "ENTRY_PRICE": "Cijena ulaza",
       "EXIT_PRICE": "Cijena izlaza",
       "LOT_SIZE": "Veličina lota",
       "STOP_LOSS": "Stop Loss",

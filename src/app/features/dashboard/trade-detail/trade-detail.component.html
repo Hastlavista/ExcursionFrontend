@@ -113,7 +113,7 @@
                 </p>
               </div>
               <div class="metric-card">
-                <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.PROFIT_PIPS' | translate }}</p>
+                <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.PROFIT_POINTS' | translate }}</p>
                 <p class="metric-card__value"
                    [class.value--positive]="(trade.profitPips ?? 0) > 0"
                    [class.value--negative]="(trade.profitPips ?? 0) < 0">
@@ -190,6 +190,10 @@
 
         <div class="spec-card">
           <h3 class="spec-card__title">{{ 'TRADE_DETAIL.SPECS.TITLE' | translate }}</h3>
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.ENTRY_PRICE' | translate }}</span>
+            <span class="spec-value">{{ trade.entryPrice ?? '—' }}</span>
+          </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.EXIT_PRICE' | translate }}</span>
             <input class="spec-input" type="number" step="any"
