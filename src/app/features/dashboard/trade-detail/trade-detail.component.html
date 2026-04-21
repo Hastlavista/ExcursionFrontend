@@ -243,6 +243,11 @@
             <span class="spec-label">{{ 'TRADE_DETAIL.TEMPORAL.DURATION' | translate }}</span>
             <span class="spec-value">{{ trade.durationMinutes != null ? trade.durationMinutes + ' ' + ('TRADE_DETAIL.TEMPORAL.MINUTES' | translate) : '—' }}</span>
           </div>
+          <div class="spec-row">
+            <span class="spec-label">{{ 'TRADE_DETAIL.TEMPORAL.EXTERNAL_ID' | translate }}</span>
+            <input class="spec-input" type="number"
+                   [(ngModel)]="editExternalId" placeholder="—" />
+          </div>
         </div>
 
         <div class="spec-card spec-card--timestamps">

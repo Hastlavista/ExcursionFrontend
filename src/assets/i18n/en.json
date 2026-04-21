@@ -286,6 +286,7 @@
       "EXIT_TIME": "EXIT TIME",
       "SCREENSHOT_BEFORE": "SCREENSHOT BEFORE",
       "SCREENSHOT_AFTER": "SCREENSHOT AFTER",
+      "EXTERNAL_ID": "MT4/MT5 TICKET #",
       "SAVE": "Save Trade",
       "SAVING": "Saving…",
       "CANCEL": "Cancel"
@@ -378,7 +379,8 @@
       "ENTRY_TIME": "Entry Time",
       "EXIT_TIME": "Exit Time",
       "DURATION": "Duration",
-      "MINUTES": "Minutes"
+      "MINUTES": "Minutes",
+      "EXTERNAL_ID": "MT4/MT5 Ticket #"
     },
     "TIMESTAMPS": {
       "LOGGED_AT": "Logged At",

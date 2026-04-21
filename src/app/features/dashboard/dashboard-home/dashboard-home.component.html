@@ -406,8 +406,8 @@
 
       <div class="modal__body">
 
-        <!-- Row 1: Symbol + Direction + Status -->
-        <div class="trade-form__row trade-form__row--3">
+        <!-- Row 1: Symbol + Direction + Status + External ID -->
+        <div class="trade-form__row trade-form__row--4">
           <div class="modal__field">
             <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.SYMBOL' | translate }} *</label>
             <input class="modal__input" type="text" [(ngModel)]="addTradeForm.symbol"
@@ -426,6 +426,10 @@
               <option value="Open">{{ 'DASHBOARD.ADD_TRADE.OPEN' | translate }}</option>
               <option value="Closed">{{ 'DASHBOARD.ADD_TRADE.CLOSED' | translate }}</option>
             </select>
+          </div>
+          <div class="modal__field">
+            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.EXTERNAL_ID' | translate }}</label>
+            <input class="modal__input" type="number" [(ngModel)]="addTradeForm.externalId" placeholder="—" />
           </div>
         </div>
 

@@ -286,6 +286,7 @@
       "EXIT_TIME": "VRIJEME IZLAZA",
       "SCREENSHOT_BEFORE": "SCREENSHOT PRIJE",
       "SCREENSHOT_AFTER": "SCREENSHOT NAKON",
+      "EXTERNAL_ID": "MT4/MT5 TICKET #",
       "SAVE": "Spremi trejd",
       "SAVING": "Spremanje…",
       "CANCEL": "Odustani"
@@ -378,7 +379,8 @@
       "ENTRY_TIME": "Vrijeme ulaza",
       "EXIT_TIME": "Vrijeme izlaza",
       "DURATION": "Trajanje",
-      "MINUTES": "Minuta"
+      "MINUTES": "Minuta",
+      "EXTERNAL_ID": "MT4/MT5 Ticket #"
     },
     "TIMESTAMPS": {
       "LOGGED_AT": "Zabilježeno",

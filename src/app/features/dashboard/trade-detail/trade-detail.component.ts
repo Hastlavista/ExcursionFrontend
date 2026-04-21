@@ -39,6 +39,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
   screenshotsSaved = false;
 
   // Trade detail editing
+  editExternalId: number | null = null;
   editEntryPrice: number | null = null;
   editExitPrice: number | null = null;
   editExitTime = '';
@@ -66,6 +67,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
         this.trade = trade;
         this.screenshotBefore = trade.chartData?.screenshotUrlBefore ?? '';
         this.screenshotAfter  = trade.chartData?.screenshotUrlAfter  ?? '';
+        this.editExternalId = trade.externalId ?? null;
         this.editEntryPrice = trade.entryPrice ?? null;
         this.editExitPrice  = trade.exitPrice  ?? null;
         this.editLotSize    = trade.lotSize    ?? null;
@@ -240,6 +242,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
 
     const updated: Trade = {
       ...this.trade,
+      externalId:  this.editExternalId,
       entryPrice:  this.editEntryPrice,
       exitPrice:   this.editExitPrice,
       lotSize:     this.editLotSize,
