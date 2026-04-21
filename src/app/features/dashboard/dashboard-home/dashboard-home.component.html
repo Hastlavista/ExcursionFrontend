@@ -157,9 +157,9 @@
                   <td>{{ trade.stopLoss ?? '—' }}</td>
                   <td>{{ trade.takeProfit ?? '—' }}</td>
                   <td>{{ trade.lotSize ?? '—' }}</td>
-                  <td [class.pnl--positive]="(trade.profitPips ?? 0) > 0"
-                      [class.pnl--negative]="(trade.profitPips ?? 0) < 0">
-                    {{ formatPips(trade.profitPips) }}
+                  <td [class.pnl--positive]="(trade.profitPoints ?? 0) > 0"
+                      [class.pnl--negative]="(trade.profitPoints ?? 0) < 0">
+                    {{ formatPips(trade.profitPoints) }}
                   </td>
                   <td [class.pnl--positive]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) > 0"
                       [class.pnl--negative]="trade.status === TradeStatus.Closed && (trade.profit ?? 0) < 0">

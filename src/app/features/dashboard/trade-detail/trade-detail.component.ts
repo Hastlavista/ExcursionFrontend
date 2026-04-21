@@ -39,9 +39,11 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
   screenshotsSaved = false;
 
   // Trade detail editing
+  editEntryPrice: number | null = null;
   editExitPrice: number | null = null;
   editExitTime = '';
   editingExitTime = false;
+  editLotSize: number | null = null;
   editStopLoss: number | null = null;
   editTakeProfit: number | null = null;
   savingDetails = false;
@@ -64,7 +66,9 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
         this.trade = trade;
         this.screenshotBefore = trade.chartData?.screenshotUrlBefore ?? '';
         this.screenshotAfter  = trade.chartData?.screenshotUrlAfter  ?? '';
+        this.editEntryPrice = trade.entryPrice ?? null;
         this.editExitPrice  = trade.exitPrice  ?? null;
+        this.editLotSize    = trade.lotSize    ?? null;
         this.editStopLoss   = trade.stopLoss   ?? null;
         this.editTakeProfit = trade.takeProfit ?? null;
         this.editExitTime   = trade.exitTime   ? this.toDatetimeLocal(trade.exitTime) : '';
@@ -236,7 +240,9 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
 
     const updated: Trade = {
       ...this.trade,
+      entryPrice:  this.editEntryPrice,
       exitPrice:   this.editExitPrice,
+      lotSize:     this.editLotSize,
       stopLoss:    this.editStopLoss,
       takeProfit:  this.editTakeProfit,
       exitTime:    this.editExitTime || null,
@@ -288,7 +294,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     return (value >= 0 ? '+' : '') + '$' + Math.abs(value).toFixed(2);
   }
 
-  formatPips(pips: number | null | undefined): string {
+  formatPoints(pips: number | null | undefined): string {
     if (pips == null) return '—';
     return (pips >= 0 ? '+' : '') + pips.toFixed(5);
   }

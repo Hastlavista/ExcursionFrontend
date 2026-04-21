@@ -41,7 +41,7 @@ export interface Trade {
   takeProfit?: number | null;
   lotSize?: number | null;
   profit?: number | null;
-  profitPips?: number | null;
+  profitPoints?: number | null;
   mae?: number | null;
   mfe?: number | null;
   efficiency?: number | null;

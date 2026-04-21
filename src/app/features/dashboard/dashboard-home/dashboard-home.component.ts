@@ -275,7 +275,7 @@ export class DashboardHomeComponent {
       takeProfit: null,
       lotSize: null,
       profit: null,
-      profitPips: null,
+      profitPoints: null,
       mae: null,
       mfe: null,
       efficiency: null,

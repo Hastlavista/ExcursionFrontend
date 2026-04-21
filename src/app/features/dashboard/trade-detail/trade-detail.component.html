@@ -103,21 +103,21 @@
               <div class="metric-card">
                 <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.MFE' | translate }}</p>
                 <p class="metric-card__value value--positive">
-                  {{ formatPips(trade.mfe) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+                  {{ formatPoints(trade.mfe) }}
                 </p>
               </div>
               <div class="metric-card">
                 <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.MAE' | translate }}</p>
                 <p class="metric-card__value value--negative">
-                  {{ formatPips(trade.mae) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+                  {{ formatPoints(trade.mae) }}
                 </p>
               </div>
               <div class="metric-card">
                 <p class="metric-card__label">{{ 'TRADE_DETAIL.METRICS.PROFIT_POINTS' | translate }}</p>
                 <p class="metric-card__value"
-                   [class.value--positive]="(trade.profitPips ?? 0) > 0"
-                   [class.value--negative]="(trade.profitPips ?? 0) < 0">
-                  {{ formatPips(trade.profitPips) }} {{ 'TRADE_DETAIL.METRICS.PIPS' | translate }}
+                   [class.value--positive]="(trade.profitPoints ?? 0) > 0"
+                   [class.value--negative]="(trade.profitPoints ?? 0) < 0">
+                  {{ formatPoints(trade.profitPoints) }}
                 </p>
               </div>
             </div>
@@ -192,7 +192,8 @@
           <h3 class="spec-card__title">{{ 'TRADE_DETAIL.SPECS.TITLE' | translate }}</h3>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.ENTRY_PRICE' | translate }}</span>
-            <span class="spec-value">{{ trade.entryPrice ?? '—' }}</span>
+            <input class="spec-input" type="number" step="any"
+                   [(ngModel)]="editEntryPrice" placeholder="—" />
           </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.EXIT_PRICE' | translate }}</span>
@@ -201,7 +202,8 @@
           </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.LOT_SIZE' | translate }}</span>
-            <span class="spec-value">{{ trade.lotSize ?? '—' }}</span>
+            <input class="spec-input" type="number" step="any"
+                   [(ngModel)]="editLotSize" placeholder="—" />
           </div>
           <div class="spec-row">
             <span class="spec-label">{{ 'TRADE_DETAIL.SPECS.STOP_LOSS' | translate }}</span>
