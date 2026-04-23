@@ -204,7 +204,9 @@
        (click)="$event.stopPropagation()">
     <p class="row-popover__trade">
       <span class="row-popover__symbol">{{ popoverTrade.symbol }}</span>
-      <span class="row-popover__id">#{{ popoverTrade.externalId }}</span>
+      @if (popoverTrade.externalId != null) {
+        <span class="row-popover__id">#{{ popoverTrade.externalId }}</span>
+      }
     </p>
     <button class="row-popover__item" (click)="openDetails()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -238,7 +240,9 @@
       <div class="modal__header">
         <div class="modal__title-group">
           <span class="modal__symbol">{{ modalTrade.symbol }}</span>
-          <span class="modal__id">#{{ modalTrade.externalId }}</span>
+          @if (modalTrade.externalId != null) {
+            <span class="modal__id">#{{ modalTrade.externalId }}</span>
+          }
         </div>
         <button class="modal__close" (click)="closeModal()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

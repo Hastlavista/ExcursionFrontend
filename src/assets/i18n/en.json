@@ -286,7 +286,7 @@
       "EXIT_TIME": "EXIT TIME",
       "SCREENSHOT_BEFORE": "SCREENSHOT BEFORE",
       "SCREENSHOT_AFTER": "SCREENSHOT AFTER",
-      "EXTERNAL_ID": "MT4/MT5 TICKET #",
+      "EXTERNAL_ID": "External ID / Ticket (optional)",
       "SAVE": "Save Trade",
       "SAVING": "Saving…",
       "CANCEL": "Cancel"

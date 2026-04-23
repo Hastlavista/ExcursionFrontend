@@ -286,7 +286,7 @@
       "EXIT_TIME": "VRIJEME IZLAZA",
       "SCREENSHOT_BEFORE": "SCREENSHOT PRIJE",
       "SCREENSHOT_AFTER": "SCREENSHOT NAKON",
-      "EXTERNAL_ID": "MT4/MT5 TICKET #",
+      "EXTERNAL_ID": "External ID / Ticket (opcionalno)",
       "SAVE": "Spremi trejd",
       "SAVING": "Spremanje…",
       "CANCEL": "Odustani"

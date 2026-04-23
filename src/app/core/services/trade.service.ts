@@ -11,19 +11,19 @@ export class TradeService {
   constructor(private http: HttpClient) {}
 
   getTrades(): Observable<Trade[]> {
-    return this.http.post<Trade[]>(`${this.api}/api/trades/gettrades`, {});
+    return this.http.get<Trade[]>(`${this.api}/api/journal/gettrades`);
   }
 
   getTradeById(id: string): Observable<Trade> {
-    return this.http.post<Trade>(`${this.api}/api/trades/gettrade`, { id });
+    return this.http.post<Trade>(`${this.api}/api/journal/gettrade`, { id });
   }
 
   updateTrade(trade: Trade): Observable<any> {
-    return this.http.post<any>(`${this.api}/api/trades/updatetrade`, trade);
+    return this.http.post<any>(`${this.api}/api/journal/updatetrade`, trade);
   }
 
   updateScreenshot(id: string, screenshotBefore: string | null, screenshotAfter: string | null): Observable<any> {
-    return this.http.post<any>(`${this.api}/api/trades/updatescreenshots`, {
+    return this.http.post<any>(`${this.api}/api/journal/updatescreenshots`, {
       id,
       screenshotBefore,
       screenshotAfter,
@@ -31,10 +31,10 @@ export class TradeService {
   }
 
   openTrade(payload: Trade): Observable<any> {
-    return this.http.post<any>(`${this.api}/api/trades/opentrade`, payload);
+    return this.http.post<any>(`${this.api}/api/journal/createtrade`, payload);
   }
 
   deleteTrade(id: string): Observable<any> {
-    return this.http.post<any>(`${this.api}/api/trades/deletetrade`, { id });
+    return this.http.delete<any>(`${this.api}/api/journal/deletetrade`, { body: { id } });
   }
 }
