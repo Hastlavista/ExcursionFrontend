@@ -1,384 +1,478 @@
 @use '../../../../styles/variables' as *;
 
-.settings-page {
-  padding: $spacing-xl;
-  max-width: 640px;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-xl;
+$settings-bg: #071120;
+$settings-panel: #0b1525;
+$settings-card: #111c2e;
+$settings-card-soft: #0e192a;
+$settings-line: rgba(125, 148, 181, 0.1);
+$settings-line-strong: rgba(125, 148, 181, 0.18);
+$settings-text: #dce7f8;
+$settings-muted: #71809a;
+$settings-soft: #9aa8bd;
+$settings-green: #49e774;
+$settings-red: #ff8e8e;
+$settings-warn: #f4c96a;
 
-  @media (max-width: 768px) {
+.settings-page {
+  width: 100%;
+  max-width: 1380px;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 18px;
+  padding: 28px 30px 38px;
+  overflow-x: clip;
+  color: $settings-text;
+
+  @media (max-width: 1180px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: minmax(0, 1fr);
     padding: $spacing-md;
   }
 }
 
-// ── Section ───────────────────────────────────────────────────────────────────
-
 .settings-section {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  gap: 9px;
+
+  &:nth-of-type(3),
+  &:nth-of-type(4) {
+    grid-column: 2;
+  }
+
+  &:nth-of-type(5),
+  &:nth-of-type(6) {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 900px) {
+    &:nth-of-type(n) {
+      grid-column: auto;
+    }
+  }
 
   &__title {
-    font-size: $font-size-sm;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: $text-secondary;
+    margin: 0;
+    padding-left: 10px;
+    border-left: 2px solid $settings-green;
+    color: #c8d2e1;
+    font-size: $font-size-xs;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
 
-    &--danger { color: $danger; }
+    &--danger {
+      border-left-color: $settings-red;
+      color: $settings-red;
+    }
   }
 
   &__desc {
-    font-size: $font-size-sm;
-    color: $text-muted;
     margin: 0;
+    color: $settings-muted;
+    font-size: $font-size-xs;
+    line-height: 1.5;
   }
 }
 
-// ── Card ──────────────────────────────────────────────────────────────────────
-
 .settings-card {
-  background: $bg-card;
-  border: 1px solid $border-color;
-  border-radius: $radius-lg;
+  min-width: 0;
   overflow: hidden;
+  background: $settings-card;
+  border: 1px solid $settings-line;
+  border-radius: 11px;
 
   &--form {
-    padding: $spacing-lg;
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-lg;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+
+    .form-error,
+    .form-footer {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 1180px) {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   &--danger {
-    border-color: rgba($danger, 0.3);
+    border-color: rgba($settings-red, 0.28);
+    background: rgba($settings-red, 0.045);
   }
 }
 
-// ── Row ───────────────────────────────────────────────────────────────────────
-
 .settings-row {
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $spacing-md;
-  padding: $spacing-md $spacing-lg;
-  border-bottom: 1px solid $border-color;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(125, 148, 181, 0.08);
 
-  &--last { border-bottom: none; }
+  &--last {
+    border-bottom: 0;
+  }
+
+  &--progress {
+    padding-top: 0;
+  }
+
+  @media (max-width: 560px) {
+    align-items: stretch;
+    flex-direction: column;
+  }
 
   &__label {
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    min-width: 0;
+    gap: 4px;
   }
 
   &__name {
+    color: $settings-text;
     font-size: $font-size-sm;
-    font-weight: 500;
-    color: $text-primary;
+    font-weight: 850;
+    overflow-wrap: anywhere;
   }
 
   &__hint {
+    color: $settings-muted;
     font-size: $font-size-xs;
-    color: $text-muted;
+    line-height: 1.45;
   }
 
   &__value {
+    min-width: 0;
+    color: $settings-soft;
     font-size: $font-size-sm;
-    color: $text-secondary;
+    font-weight: 750;
     text-align: right;
+    overflow-wrap: anywhere;
+
+    @media (max-width: 560px) {
+      text-align: left;
+    }
   }
 
   &__actions {
+    min-width: 0;
     display: flex;
-    gap: $spacing-sm;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
     flex-shrink: 0;
+
+    @media (max-width: 560px) {
+      justify-content: stretch;
+
+      .btn {
+        flex: 1 1 140px;
+      }
+    }
   }
 }
-
-// ── Plan badge ────────────────────────────────────────────────────────────────
 
 .plan-badge {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: $radius-full;
-  font-size: $font-size-xs;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  background: rgba($text-muted, 0.15);
-  color: $text-muted;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1px solid rgba($settings-green, 0.24);
+  border-radius: 999px;
+  background: rgba($settings-green, 0.08);
+  color: $settings-green;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 
   &--pro {
-    background: rgba(#f4b942, 0.15);
-    color: #f4b942;
-    border: 1px solid rgba(#f4b942, 0.3);
+    color: $settings-warn;
+    background: rgba($settings-warn, 0.08);
+    border-color: rgba($settings-warn, 0.28);
   }
-}
-
-// ── Trade progress bar ────────────────────────────────────────────────────────
-
-.settings-row--progress {
-  padding-top: 0;
-  padding-bottom: $spacing-md;
 }
 
 .trade-progress {
   width: 100%;
-  height: 6px;
-  background: rgba($text-muted, 0.15);
-  border-radius: $radius-full;
+  height: 7px;
   overflow: hidden;
+  background: $settings-panel;
+  border-radius: 999px;
 
   &__bar {
     height: 100%;
-    background: $accent-primary;
-    border-radius: $radius-full;
-    transition: width 0.4s ease;
     min-width: 4px;
+    background: $settings-green;
+    border-radius: inherit;
+    transition: width 0.4s ease;
 
-    &--warn { background: #f4b942; }
-    &--full { background: $danger; }
-  }
-}
+    &--warn {
+      background: $settings-warn;
+    }
 
-// ── Upgrade modal ─────────────────────────────────────────────────────────────
-
-.upgrade-modal {
-  &__header {
-    display: flex;
-    align-items: baseline;
-    gap: $spacing-md;
-    margin-bottom: $spacing-md;
-  }
-
-  &__price {
-    font-size: $font-size-sm;
-    font-weight: 700;
-    color: #f4b942;
-  }
-
-  &__features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 $spacing-lg;
-    display: flex;
-    flex-direction: column;
-    gap: $spacing-sm;
-
-    li {
-      display: flex;
-      align-items: center;
-      gap: $spacing-sm;
-      font-size: $font-size-sm;
-      color: $text-secondary;
-
-      svg { color: $success; flex-shrink: 0; }
+    &--full {
+      background: $settings-red;
     }
   }
-
-  &__coming-soon {
-    font-size: $font-size-sm;
-    color: $text-muted;
-    text-align: center;
-    padding: $spacing-sm;
-    background: rgba($accent-primary, 0.06);
-    border-radius: $radius-md;
-    margin-bottom: $spacing-md;
-  }
 }
 
-// ── API Key display ───────────────────────────────────────────────────────────
-
 .api-key-display {
-  font-family: monospace;
-  font-size: $font-size-sm;
-  color: $text-secondary;
-  letter-spacing: 0.04em;
   flex: 1;
   min-width: 0;
   overflow: hidden;
+  color: $settings-soft;
+  font-family: monospace;
+  font-size: $font-size-sm;
+  font-weight: 750;
+  letter-spacing: 0.04em;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-// ── Buttons ───────────────────────────────────────────────────────────────────
-
 .btn {
+  min-height: 38px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px $spacing-md;
-  border-radius: $radius-md;
-  font-size: $font-size-sm;
-  font-weight: 600;
+  padding: 9px 14px;
+  border: 1px solid transparent;
+  border-radius: 7px;
   font-family: $font-family;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  border: none;
-  transition: opacity $transition-fast, background $transition-fast;
+  font-size: $font-size-xs;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
+  transition: background-color $transition-fast, border-color $transition-fast, color $transition-fast, opacity $transition-fast;
 
-  &:disabled { opacity: 0.5; cursor: not-allowed; }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 
   &--primary {
-    background: $accent-primary;
-    color: #fff;
-    &:not(:disabled):hover { opacity: 0.85; }
+    color: #06110b;
+    background: $settings-green;
+    border-color: rgba($settings-green, 0.55);
+
+    &:not(:disabled):hover {
+      background: #5df083;
+    }
   }
 
   &--ghost {
-    background: transparent;
-    border: 1px solid $border-color;
-    color: $text-secondary;
-    &:not(:disabled):hover { border-color: $text-secondary; color: $text-primary; }
+    color: $settings-text;
+    background: $settings-panel;
+    border-color: $settings-line;
+
+    &:not(:disabled):hover {
+      border-color: $settings-line-strong;
+      color: #f1f6ff;
+    }
   }
 
   &--danger {
-    background: rgba($danger, 0.12);
-    border: 1px solid rgba($danger, 0.3);
-    color: $danger;
-    &:not(:disabled):hover { background: rgba($danger, 0.2); }
+    color: $settings-red;
+    background: rgba($settings-red, 0.08);
+    border-color: rgba($settings-red, 0.28);
+
+    &:not(:disabled):hover {
+      background: rgba($settings-red, 0.14);
+    }
+  }
+
+  @media (max-width: 420px) {
+    width: 100%;
   }
 }
 
-// ── Form fields ───────────────────────────────────────────────────────────────
-
 .form-field {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: $spacing-xs;
+  gap: 7px;
 
   &__label {
-    font-size: $font-size-xs;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: $text-secondary;
+    color: $settings-soft;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
   }
 
   &__input-wrap {
     position: relative;
+    min-width: 0;
   }
 
   &__input {
     width: 100%;
-    padding: 10px $spacing-md;
-    padding-right: 44px;
-    background: $bg-input;
-    border: 1px solid $border-color;
-    border-radius: $radius-md;
-    color: $text-primary;
-    font-size: $font-size-sm;
-    font-family: $font-family;
+    min-height: 42px;
+    padding: 10px 42px 10px 12px;
     box-sizing: border-box;
-    transition: border-color $transition-fast;
+    background: $settings-panel;
+    border: 1px solid $settings-line;
+    border-radius: 8px;
+    color: $settings-text;
+    font-family: $font-family;
+    font-size: $font-size-sm;
+    transition: border-color $transition-fast, background-color $transition-fast;
 
-    &:focus { outline: none; border-color: $accent-primary; }
-    &::placeholder { color: $text-muted; }
-    &--error { border-color: $danger; }
+    &:focus {
+      outline: none;
+      border-color: rgba($settings-green, 0.45);
+      background: #0a1423;
+    }
+
+    &::placeholder {
+      color: $settings-muted;
+    }
+
+    &--error {
+      border-color: rgba($settings-red, 0.65);
+    }
   }
 
   &__eye {
     position: absolute;
-    right: 12px;
     top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    color: $text-muted;
+    right: 12px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: $settings-muted;
+    cursor: pointer;
+    transform: translateY(-50%);
     transition: color $transition-fast;
-    &:hover { color: $text-secondary; }
+
+    &:hover {
+      color: $settings-text;
+    }
   }
 
   &__error {
+    color: $settings-red;
     font-size: $font-size-xs;
-    color: $danger;
   }
 }
 
 .form-error {
-  font-size: $font-size-sm;
-  color: $danger;
-  background: rgba($danger, 0.08);
-  border: 1px solid rgba($danger, 0.2);
-  border-radius: $radius-md;
-  padding: 10px $spacing-md;
   margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgba($settings-red, 0.22);
+  border-radius: 8px;
+  background: rgba($settings-red, 0.08);
+  color: $settings-red;
+  font-size: $font-size-sm;
 }
 
 .form-footer {
   display: flex;
   justify-content: flex-end;
-  padding-top: $spacing-xs;
-  border-top: 1px solid $border-color;
+  padding-top: 12px;
+  border-top: 1px solid rgba(125, 148, 181, 0.08);
 
-  .btn { min-width: 140px; }
+  .btn {
+    min-width: 150px;
+  }
 }
-
-// ── Password strength ─────────────────────────────────────────────────────────
 
 .strength-bar {
   display: flex;
   align-items: center;
-  gap: $spacing-sm;
-  margin-top: 2px;
+  gap: 10px;
+  min-width: 0;
 
   &__track {
     flex: 1;
-    height: 3px;
-    background: $border-color;
-    border-radius: $radius-full;
+    height: 4px;
     overflow: hidden;
+    background: $settings-panel;
+    border-radius: 999px;
   }
 
   &__fill {
     height: 100%;
-    border-radius: $radius-full;
-    transition: width $transition-base, background $transition-base;
+    border-radius: inherit;
+    transition: width $transition-base, background-color $transition-base;
 
-    &--weak   { width: 33%; background: $danger; }
-    &--medium { width: 66%; background: $warning; }
-    &--strong { width: 100%; background: $success; }
+    &--weak {
+      width: 33%;
+      background: $settings-red;
+    }
+
+    &--medium {
+      width: 66%;
+      background: $settings-warn;
+    }
+
+    &--strong {
+      width: 100%;
+      background: $settings-green;
+    }
   }
 
   &__label {
+    flex-shrink: 0;
     font-size: $font-size-xs;
-    font-weight: 600;
+    font-weight: 850;
     white-space: nowrap;
 
-    &--weak   { color: $danger; }
-    &--medium { color: $warning; }
-    &--strong { color: $success; }
+    &--weak {
+      color: $settings-red;
+    }
+
+    &--medium {
+      color: $settings-warn;
+    }
+
+    &--strong {
+      color: $settings-green;
+    }
   }
 }
 
-// ── Tutorial grid ─────────────────────────────────────────────────────────────
-
 .tutorial-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: $spacing-md;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 
-  @media (max-width: 540px) {
-    grid-template-columns: 1fr;
+  @media (max-width: 700px) {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 .tutorial-card {
-  background: $bg-card;
-  border: 1px solid $border-color;
-  border-radius: $radius-lg;
+  min-width: 0;
   overflow: hidden;
+  background: $settings-card;
+  border: 1px solid $settings-line;
+  border-radius: 11px;
 
   &__video {
-    aspect-ratio: 16 / 9;
-    background: $bg-secondary;
-    border-bottom: 1px solid $border-color;
+    aspect-ratio: 18 / 7;
+    background:
+      linear-gradient(rgba(73, 231, 116, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(73, 231, 116, 0.035) 1px, transparent 1px),
+      $settings-panel;
+    background-size: 24px 24px;
+    border-bottom: 1px solid rgba(125, 148, 181, 0.08);
   }
 
   &__placeholder {
@@ -388,98 +482,173 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: $spacing-sm;
-    color: $text-muted;
+    gap: 8px;
+    color: $settings-muted;
 
-    svg { opacity: 0.45; }
+    svg {
+      color: $settings-green;
+      opacity: 0.65;
+    }
 
     span {
       font-size: $font-size-xs;
-      font-weight: 500;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
   }
 
   &__body {
-    padding: $spacing-md;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    padding: 13px 15px;
   }
 
   &__title {
+    margin: 0 0 5px;
+    color: $settings-text;
     font-size: $font-size-sm;
-    font-weight: 600;
-    color: $text-primary;
-    margin: 0;
+    font-weight: 850;
   }
 
   &__desc {
-    font-size: $font-size-xs;
-    color: $text-muted;
     margin: 0;
-    line-height: 1.5;
+    color: $settings-muted;
+    font-size: $font-size-xs;
+    line-height: 1.45;
   }
 }
-
-// ── Confirm Modals ────────────────────────────────────────────────────────────
 
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(2px);
+  z-index: 400;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 400;
   padding: $spacing-md;
+  overflow-x: clip;
+  background: rgba(4, 10, 20, 0.72);
+  backdrop-filter: blur(6px);
 }
 
 .confirm-modal {
-  background: $bg-card;
-  border: 1px solid $border-color;
-  border-radius: $radius-lg;
-  padding: $spacing-xl;
-  max-width: 420px;
-  width: 100%;
+  width: min(420px, calc(100vw - 28px));
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $spacing-md;
+  gap: 14px;
+  padding: 28px;
+  border: 1px solid $settings-line-strong;
+  border-radius: 12px;
+  background: $settings-card;
+  color: $settings-text;
   text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.62);
+
+  @media (max-width: 420px) {
+    padding: 22px 18px;
+  }
 
   &__icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
 
-    &--warn   { background: rgba($warning, 0.12); color: $warning; border: 1px solid rgba($warning, 0.3); }
-    &--danger { background: rgba($danger, 0.12);  color: $danger;  border: 1px solid rgba($danger, 0.3);  }
+    &--warn {
+      color: $settings-warn;
+      background: rgba($settings-warn, 0.08);
+      border: 1px solid rgba($settings-warn, 0.28);
+    }
+
+    &--danger {
+      color: $settings-red;
+      background: rgba($settings-red, 0.08);
+      border: 1px solid rgba($settings-red, 0.28);
+    }
   }
 
   &__title {
-    font-size: $font-size-lg;
-    font-weight: 700;
-    color: $text-primary;
     margin: 0;
+    color: $settings-text;
+    font-size: $font-size-lg;
+    font-weight: 900;
+    letter-spacing: -0.02em;
   }
 
   &__body {
-    font-size: $font-size-sm;
-    color: $text-secondary;
     margin: 0;
+    color: $settings-soft;
+    font-size: $font-size-sm;
     line-height: 1.6;
   }
 
   &__actions {
-    display: flex;
-    gap: $spacing-sm;
     width: 100%;
-    margin-top: $spacing-xs;
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
 
-    .btn { flex: 1; justify-content: center; }
+    .btn {
+      flex: 1;
+    }
+
+    @media (max-width: 420px) {
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+.upgrade-modal {
+  &__header {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__price {
+    color: $settings-green;
+    font-size: $font-size-sm;
+    font-weight: 900;
+  }
+
+  &__features {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: left;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: $settings-soft;
+      font-size: $font-size-sm;
+
+      svg {
+        flex-shrink: 0;
+        color: $settings-green;
+      }
+    }
+  }
+
+  &__coming-soon {
+    width: 100%;
+    margin: 0;
+    padding: 10px 12px;
+    border: 1px solid rgba($settings-green, 0.18);
+    border-radius: 8px;
+    background: rgba($settings-green, 0.07);
+    color: $settings-green;
+    font-size: $font-size-sm;
   }
 }

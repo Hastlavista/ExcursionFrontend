@@ -260,7 +260,7 @@
                  [placeholder]="'DASHBOARD.SCREENSHOT_MODAL.URL_PLACEHOLDER' | translate" />
           @if (screenshotBefore) {
             <div class="modal__preview">
-              <img [src]="screenshotBefore" alt="Before" (error)="$any($event.target).style.display='none'" />
+              <img [src]="screenshotBefore" [alt]="'DASHBOARD.SCREENSHOT_MODAL.BEFORE_ALT' | translate" (error)="$any($event.target).style.display='none'" />
             </div>
           }
         </div>
@@ -273,7 +273,7 @@
                  [placeholder]="'DASHBOARD.SCREENSHOT_MODAL.URL_PLACEHOLDER' | translate" />
           @if (screenshotAfter) {
             <div class="modal__preview">
-              <img [src]="screenshotAfter" alt="After" (error)="$any($event.target).style.display='none'" />
+              <img [src]="screenshotAfter" [alt]="'DASHBOARD.SCREENSHOT_MODAL.AFTER_ALT' | translate" (error)="$any($event.target).style.display='none'" />
             </div>
           }
         </div>
@@ -395,109 +395,180 @@
 <!-- ── Add Trade Modal ────────────────────────────────────────────────────────── -->
 @if (addTradeOpen) {
   <div class="modal-backdrop" (click)="closeAddTradeModal()">
-    <div class="modal modal--wide" (click)="$event.stopPropagation()">
+    <div class="modal modal--journal" (click)="$event.stopPropagation()">
 
-      <div class="modal__header">
-        <div class="modal__title-group">
-          <span class="modal__symbol">{{ 'DASHBOARD.ADD_TRADE.TITLE' | translate }}</span>
+      <div class="jm-header">
+        <div>
+          <h2 class="jm-header__title">{{ 'DASHBOARD.ADD_TRADE.MODAL_TITLE' | translate }}</h2>
         </div>
-        <button class="modal__close" (click)="closeAddTradeModal()">
+        <button class="jm-close" (click)="closeAddTradeModal()" [attr.aria-label]="'COMMON.CLOSE' | translate">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
       </div>
 
-      <div class="modal__body">
-
-        <!-- Row 1: Symbol + Direction + Status + External ID -->
-        <div class="trade-form__row trade-form__row--4">
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.SYMBOL' | translate }} *</label>
-            <input class="modal__input" type="text" [(ngModel)]="addTradeForm.symbol"
-                   placeholder="EURUSD" />
+      <div class="jm-body">
+        <div class="jm-meta">
+          <div class="jm-field">
+            <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.SYMBOL' | translate }} *</label>
+            <input class="jm-input" type="text" [(ngModel)]="addTradeForm.symbol" placeholder="EURUSD" />
           </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.DIRECTION' | translate }} *</label>
-            <select class="modal__input modal__select" [(ngModel)]="addTradeForm.direction">
-              <option value="Buy">{{ 'DASHBOARD.ADD_TRADE.BUY' | translate }}</option>
-              <option value="Sell">{{ 'DASHBOARD.ADD_TRADE.SELL' | translate }}</option>
-            </select>
+          <div class="jm-field">
+            <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.EXTERNAL_ID' | translate }}</label>
+            <input class="jm-input" type="number" [(ngModel)]="addTradeForm.externalId" placeholder="#882940" />
           </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.STATUS' | translate }} *</label>
-            <select class="modal__input modal__select" [(ngModel)]="addTradeForm.status">
-              <option value="Open">{{ 'DASHBOARD.ADD_TRADE.OPEN' | translate }}</option>
-              <option value="Closed">{{ 'DASHBOARD.ADD_TRADE.CLOSED' | translate }}</option>
-            </select>
+          <div class="jm-field">
+            <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.LOT_SIZE' | translate }}</label>
+            <input class="jm-input" type="number" step="any" [(ngModel)]="addTradeForm.lotSize" placeholder="1.00" />
           </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.EXTERNAL_ID' | translate }}</label>
-            <input class="modal__input" type="number" [(ngModel)]="addTradeForm.externalId" placeholder="—" />
+          <div class="jm-field">
+            <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.DIRECTION' | translate }} *</label>
+            <div class="jm-toggle"
+                 [class.jm-toggle--right]="addTradeForm.direction === Direction.Sell"
+                 (click)="addTradeForm.direction = addTradeForm.direction === Direction.Buy ? Direction.Sell : Direction.Buy"
+                 role="group"
+                 [attr.aria-label]="'DASHBOARD.ADD_TRADE.DIRECTION_ARIA' | translate">
+              <button type="button"
+                      class="jm-toggle__btn"
+                      [class.jm-toggle__btn--active]="addTradeForm.direction === Direction.Buy"
+                      tabindex="-1">
+                {{ 'DASHBOARD.ADD_TRADE.BUY' | translate }}
+              </button>
+              <button type="button"
+                      class="jm-toggle__btn"
+                      [class.jm-toggle__btn--active]="addTradeForm.direction === Direction.Sell"
+                      tabindex="-1">
+                {{ 'DASHBOARD.ADD_TRADE.SELL' | translate }}
+              </button>
+            </div>
           </div>
-        </div>
-
-        <!-- Row 2: Price levels -->
-        <div class="trade-form__row trade-form__row--4">
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.ENTRY_PRICE' | translate }}</label>
-            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.entryPrice" placeholder="0.00000" />
-          </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.EXIT_PRICE' | translate }}</label>
-            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.exitPrice" placeholder="0.00000" />
-          </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.STOP_LOSS' | translate }}</label>
-            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.stopLoss" placeholder="0.00000" />
-          </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.TAKE_PROFIT' | translate }}</label>
-            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.takeProfit" placeholder="0.00000" />
-          </div>
-        </div>
-
-        <!-- Row 3: Lot size + Times -->
-        <div class="trade-form__row trade-form__row--3">
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.LOT_SIZE' | translate }}</label>
-            <input class="modal__input" type="number" step="any" [(ngModel)]="addTradeForm.lotSize" placeholder="0.01" />
-          </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.ENTRY_TIME' | translate }} *</label>
-            <input class="modal__input" type="datetime-local" [(ngModel)]="addTradeForm.entryTime" />
-          </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.EXIT_TIME' | translate }}</label>
-            <input class="modal__input" type="datetime-local" [(ngModel)]="addTradeForm.exitTime" />
+          <div class="jm-field">
+            <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.STATUS' | translate }} *</label>
+            <div class="jm-toggle"
+                 [class.jm-toggle--right]="addTradeForm.status === TradeStatus.Closed"
+                 (click)="addTradeForm.status = addTradeForm.status === TradeStatus.Open ? TradeStatus.Closed : TradeStatus.Open"
+                 role="group"
+                 [attr.aria-label]="'DASHBOARD.ADD_TRADE.STATUS_ARIA' | translate">
+              <button type="button"
+                      class="jm-toggle__btn"
+                      [class.jm-toggle__btn--active]="addTradeForm.status === TradeStatus.Open"
+                      tabindex="-1">
+                {{ 'DASHBOARD.ADD_TRADE.OPEN' | translate }}
+              </button>
+              <button type="button"
+                      class="jm-toggle__btn"
+                      [class.jm-toggle__btn--active]="addTradeForm.status === TradeStatus.Closed"
+                      tabindex="-1">
+                {{ 'DASHBOARD.ADD_TRADE.CLOSED' | translate }}
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Row 4: Screenshots -->
-        <div class="trade-form__row trade-form__row--2">
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.SCREENSHOT_BEFORE' | translate }}</label>
-            <input class="modal__input" type="url" [(ngModel)]="addTradeForm.chartData!.screenshotUrlBefore"
-                   [placeholder]="'DASHBOARD.SCREENSHOT_MODAL.URL_PLACEHOLDER' | translate" />
+        <div class="jm-execution">
+          <div class="jm-section">
+            <div class="jm-section__header">
+              <span class="jm-dot jm-dot--entry"></span>
+              <span class="jm-section__title">{{ 'DASHBOARD.ADD_TRADE.ENTRY_CONFIGURATION' | translate }}</span>
+            </div>
+            <div class="jm-grid jm-grid--2">
+              <div class="jm-field">
+                <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.ENTRY_PRICE' | translate }}</label>
+                <input class="jm-input" type="number" step="any" [(ngModel)]="addTradeForm.entryPrice" placeholder="1.08450" />
+              </div>
+              <div class="jm-field">
+                <label class="jm-label jm-label--danger">{{ 'DASHBOARD.ADD_TRADE.STOP_LOSS_HARD' | translate }}</label>
+                <input class="jm-input" type="number" step="any" [(ngModel)]="addTradeForm.stopLoss" placeholder="1.08200" />
+              </div>
+            </div>
+            <div class="jm-grid jm-grid--1">
+              <div class="jm-field">
+                <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.ENTRY_TIME' | translate }} *</label>
+                <input class="jm-input" type="datetime-local" [(ngModel)]="addTradeForm.entryTime" />
+              </div>
+            </div>
           </div>
-          <div class="modal__field">
-            <label class="modal__label">{{ 'DASHBOARD.ADD_TRADE.SCREENSHOT_AFTER' | translate }}</label>
-            <input class="modal__input" type="url" [(ngModel)]="addTradeForm.chartData!.screenshotUrlAfter"
-                   [placeholder]="'DASHBOARD.SCREENSHOT_MODAL.URL_PLACEHOLDER' | translate" />
+
+          <div class="jm-section">
+            <div class="jm-section__header">
+              <span class="jm-dot jm-dot--exit"></span>
+              <span class="jm-section__title">{{ 'DASHBOARD.ADD_TRADE.EXIT_CONFIGURATION' | translate }}</span>
+            </div>
+            <div class="jm-grid jm-grid--2">
+              <div class="jm-field">
+                <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.EXIT_PRICE' | translate }}</label>
+                <input class="jm-input" type="number" step="any" [(ngModel)]="addTradeForm.exitPrice" placeholder="1.09210" />
+              </div>
+              <div class="jm-field">
+                <label class="jm-label jm-label--success">{{ 'DASHBOARD.ADD_TRADE.TAKE_PROFIT_TARGET' | translate }}</label>
+                <input class="jm-input" type="number" step="any" [(ngModel)]="addTradeForm.takeProfit" placeholder="1.10500" />
+              </div>
+            </div>
+            <div class="jm-grid jm-grid--1">
+              <div class="jm-field">
+                <label class="jm-label">{{ 'DASHBOARD.ADD_TRADE.EXIT_TIME' | translate }}</label>
+                <input class="jm-input" type="datetime-local" [(ngModel)]="addTradeForm.exitTime" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jm-section">
+          <div class="jm-section__header">
+            <span class="jm-section__title">{{ 'DASHBOARD.ADD_TRADE.VISUAL_DOCUMENTATION' | translate }}</span>
+          </div>
+          <div class="jm-grid jm-grid--2">
+            <div class="jm-visual">
+              <input class="jm-input jm-input--url" type="url" [(ngModel)]="addTradeForm.chartData!.screenshotUrlBefore"
+                     [placeholder]="'DASHBOARD.ADD_TRADE.BEFORE_URL_PLACEHOLDER' | translate" />
+              <div class="jm-visual__thumb">
+                @if (addTradeForm.chartData?.screenshotUrlBefore) {
+                  <img class="jm-visual__image"
+                       [src]="addTradeForm.chartData!.screenshotUrlBefore!"
+                       [alt]="'DASHBOARD.ADD_TRADE.PRE_TRADE_SETUP' | translate"
+                       (error)="$any($event.target).style.display='none'" />
+                } @else {
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                  <span>{{ 'DASHBOARD.ADD_TRADE.PRE_TRADE_SETUP' | translate }}</span>
+                }
+              </div>
+            </div>
+            <div class="jm-visual">
+              <input class="jm-input jm-input--url" type="url" [(ngModel)]="addTradeForm.chartData!.screenshotUrlAfter"
+                     [placeholder]="'DASHBOARD.ADD_TRADE.AFTER_URL_PLACEHOLDER' | translate" />
+              <div class="jm-visual__thumb">
+                @if (addTradeForm.chartData?.screenshotUrlAfter) {
+                  <img class="jm-visual__image"
+                       [src]="addTradeForm.chartData!.screenshotUrlAfter!"
+                       [alt]="'DASHBOARD.ADD_TRADE.POST_TRADE_RESULT' | translate"
+                       (error)="$any($event.target).style.display='none'" />
+                } @else {
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                  <span>{{ 'DASHBOARD.ADD_TRADE.POST_TRADE_RESULT' | translate }}</span>
+                }
+              </div>
+            </div>
           </div>
         </div>
 
       </div>
 
-      <div class="modal__footer">
-        <button class="modal__btn modal__btn--cancel" (click)="closeAddTradeModal()">
-          {{ 'DASHBOARD.ADD_TRADE.CANCEL' | translate }}
-        </button>
-        <button class="modal__btn modal__btn--save"
-                (click)="submitTrade()"
-                [disabled]="addTradeSaving || !addTradeForm.symbol || !addTradeForm.entryTime">
-          {{ addTradeSaving ? ('DASHBOARD.ADD_TRADE.SAVING' | translate) : ('DASHBOARD.ADD_TRADE.SAVE' | translate) }}
-        </button>
+      <div class="jm-footer">
+        <div class="jm-footer__actions">
+          <button class="jm-btn jm-btn--discard" (click)="closeAddTradeModal()">
+            {{ 'DASHBOARD.ADD_TRADE.CANCEL' | translate }}
+          </button>
+          <button class="jm-btn jm-btn--commit"
+                  (click)="submitTrade()"
+                  [disabled]="addTradeSaving || !addTradeForm.symbol || !addTradeForm.entryTime">
+            {{ addTradeSaving ? ('DASHBOARD.ADD_TRADE.SAVING' | translate) : ('DASHBOARD.ADD_TRADE.SAVE' | translate) }}
+          </button>
+        </div>
       </div>
 
     </div>

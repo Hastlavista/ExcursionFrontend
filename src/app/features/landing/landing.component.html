@@ -3,7 +3,7 @@
 
   <header class="topbar">
     <a class="brand" routerLink="/">
-      <img src="assets/images/icon_brand.png" alt="Logynqo logo">
+      <img src="assets/images/icon_brand.png" [alt]="'MAIN.BRAND_TITLE' | translate">
       <span class="brand__primary">{{ 'MAIN.BRAND_PART1' | translate }}</span><span class="brand__suffix">{{ 'MAIN.BRAND_PART2' | translate }}</span>
     </a>
 
@@ -43,7 +43,7 @@
 
       <div class="hero__visual">
         <div class="visual-shell">
-          <img src="assets/images/mock_up_landing_page.png" alt="Trading dashboard preview">
+          <img src="assets/images/mock_up_landing_page.png" [alt]="'LANDING.HERO.TITLE' | translate">
         </div>
       </div>
     </section>
@@ -82,7 +82,7 @@
       </div>
 
       <div class="journal__visual card">
-        <img src="assets/images/landing-journal-chart.png" alt="Trade chart illustration">
+        <img src="assets/images/landing-journal-chart.png" [alt]="'LANDING.JOURNAL.TITLE' | translate">
       </div>
     </section>
 
@@ -227,7 +227,7 @@
 
   <footer class="footer">
     <a class="brand brand--footer" routerLink="/">
-      <img src="assets/images/icon_brand.png" alt="Logynqo logo">
+      <img src="assets/images/icon_brand.png" [alt]="'MAIN.BRAND_TITLE' | translate">
       <span class="brand__primary">{{ 'MAIN.BRAND_PART1' | translate }}</span><span class="brand__suffix">{{ 'MAIN.BRAND_PART2' | translate }}</span>
     </a>
     <p>{{ 'LANDING.FOOTER.COPY' | translate }}</p>

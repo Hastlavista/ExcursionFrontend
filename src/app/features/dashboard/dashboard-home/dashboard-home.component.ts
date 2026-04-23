@@ -2,11 +2,11 @@ import { Component, HostListener, signal, computed, ChangeDetectorRef } from '@a
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DashboardStateService } from '../../../core/services/dashboard-state.service';
 import { TradeService } from '../../../core/services/trade.service';
 import { AccountService } from '../../../core/services/account.service';
-import { Trade, TradeStatus } from '../../../core/models/trade.model';
+import { Direction, Trade, TradeStatus } from '../../../core/models/trade.model';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -19,6 +19,7 @@ export class DashboardHomeComponent {
   currentPage = 0;
   readonly PAGE_SIZE = 10;
   readonly TradeStatus = TradeStatus;
+  readonly Direction = Direction;
 
   // Filters — signals so computed() can track them
   readonly filterSymbol    = signal('');
@@ -81,6 +82,7 @@ export class DashboardHomeComponent {
     private tradeService: TradeService,
     private accountService: AccountService,
     private router: Router,
+    private translate: TranslateService,
     private cdr: ChangeDetectorRef
   ) {
     this.apiKey = this.accountService.getApiKey();
@@ -172,7 +174,7 @@ export class DashboardHomeComponent {
     this.popoverTrade = null;
 
     const label = trade.externalId != null ? `${trade.symbol} #${trade.externalId}` : trade.symbol;
-    if (!confirm(`Delete trade ${label}?`)) return;
+    if (!confirm(this.translate.instant('DASHBOARD.QUICK_MENU.DELETE_CONFIRM', { label }))) return;
 
     this.deleting = true;
     this.tradeService.deleteTrade(trade.id).subscribe({
@@ -268,7 +270,7 @@ export class DashboardHomeComponent {
       id: null as any,
       externalId: null,
       symbol: null as any,
-      direction: null as any,
+      direction: Direction.Buy,
       entryPrice: null,
       exitPrice: null,
       stopLoss: null,
@@ -283,7 +285,7 @@ export class DashboardHomeComponent {
       exitTime: null,
       durationMinutes: null,
       chartData: { screenshotUrlBefore: null, screenshotUrlAfter: null },
-      status: null as any,
+      status: TradeStatus.Open,
       updatedAt: null as any,
       createdAt: null as any
     };

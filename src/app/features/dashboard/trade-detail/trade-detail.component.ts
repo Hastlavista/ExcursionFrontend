@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { createChart, ColorType, LineStyle, CandlestickSeries } from 'lightweight-charts';
 import { TradeService } from '../../../core/services/trade.service';
 import { ToastService } from '../../../core/services/toast.service';
@@ -29,7 +29,6 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
   trade: Trade | null = null;
   loading = true;
   error: string | null = null;
-  activeMainTab = signal<'ohlc' | 'screenshots'>('ohlc');
   readonly TradeStatus = TradeStatus;
 
   // Screenshot editing
@@ -91,14 +90,6 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     this.chart?.remove();
   }
 
-  switchMainTab(tab: 'ohlc' | 'screenshots'): void {
-    if (this.activeMainTab() === tab) return;
-    this.chart?.remove();
-    this.chart = undefined;
-    this.activeMainTab.set(tab);
-    // ViewChild setter will call initChart() when #chartContainer appears
-  }
-
   get hasOhlcData(): boolean {
     return (this.trade?.chartData?.ohlcDataBefore?.candles?.length ?? 0) > 0 ||
            (this.trade?.chartData?.ohlcDataAfter?.candles?.length ?? 0) > 0;
@@ -129,28 +120,28 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     this.chart = createChart(container, {
       autoSize: true,
       layout: {
-        background: { type: ColorType.Solid, color: '#1a1a1a' },
-        textColor: '#9a9a9a',
+        background: { type: ColorType.Solid, color: '#0b1525' },
+        textColor: '#71809a',
       },
       grid: {
-        vertLines: { color: '#2a2a2a' },
-        horzLines: { color: '#2a2a2a' },
+        vertLines: { color: 'rgba(125, 148, 181, 0.08)' },
+        horzLines: { color: 'rgba(125, 148, 181, 0.08)' },
       },
       crosshair: {
-        vertLine: { labelBackgroundColor: '#4f6ef7' },
-        horzLine: { labelBackgroundColor: '#4f6ef7' },
+        vertLine: { labelBackgroundColor: '#49e774' },
+        horzLine: { labelBackgroundColor: '#49e774' },
       },
-      rightPriceScale: { borderColor: '#333333' },
-      timeScale: { borderColor: '#333333', timeVisible: true, secondsVisible: false },
-      height: 380,
+      rightPriceScale: { borderColor: 'rgba(125, 148, 181, 0.14)' },
+      timeScale: { borderColor: 'rgba(125, 148, 181, 0.14)', timeVisible: true, secondsVisible: false },
+      height: 430,
     });
 
     const series = this.chart.addSeries(CandlestickSeries, {
-      upColor: '#26a69a',
-      downColor: '#ef5350',
+      upColor: '#49e774',
+      downColor: '#ff8e8e',
       borderVisible: false,
-      wickUpColor: '#26a69a',
-      wickDownColor: '#ef5350',
+      wickUpColor: '#49e774',
+      wickDownColor: '#ff8e8e',
     });
 
     series.setData(candles.map(c => ({
@@ -164,7 +155,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     if (this.trade.entryPrice != null) {
       series.createPriceLine({
         price: this.trade.entryPrice,
-        color: '#4f6ef7',
+        color: '#49e774',
         lineWidth: 1,
         lineStyle: LineStyle.Solid,
         axisLabelVisible: true,
@@ -174,7 +165,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     if (this.trade.exitPrice != null) {
       series.createPriceLine({
         price: this.trade.exitPrice,
-        color: '#26a69a',
+        color: '#6fa6ff',
         lineWidth: 1,
         lineStyle: LineStyle.Solid,
         axisLabelVisible: true,
@@ -184,7 +175,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     if (this.trade.stopLoss != null) {
       series.createPriceLine({
         price: this.trade.stopLoss,
-        color: '#ef5350',
+        color: '#ff8e8e',
         lineWidth: 1,
         lineStyle: LineStyle.Dashed,
         axisLabelVisible: true,
@@ -194,7 +185,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     if (this.trade.takeProfit != null) {
       series.createPriceLine({
         price: this.trade.takeProfit,
-        color: '#26a69a',
+        color: '#6fa6ff',
         lineWidth: 1,
         lineStyle: LineStyle.Dashed,
         axisLabelVisible: true,
@@ -253,17 +244,25 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
 
     this.savingDetails = true;
     this.detailsSaved = false;
-    this.tradeService.updateTrade(updated).subscribe({
+    this.tradeService.updateTrade(updated).pipe(
+      finalize(() => {
+        this.savingDetails = false;
+        this.cdr.detectChanges();
+      })
+    ).subscribe({
       next: () => {
         this.trade = updated;
-        this.savingDetails = false;
         this.detailsSaved = true;
         this.toastService.show('TRADE_DETAIL.EDIT.SAVE_SUCCESS', 'success');
-        setTimeout(() => { this.detailsSaved = false; }, 3000);
+        this.cdr.detectChanges();
+        setTimeout(() => {
+          this.detailsSaved = false;
+          this.cdr.detectChanges();
+        }, 3000);
       },
       error: () => {
-        this.savingDetails = false;
         this.toastService.show('TRADE_DETAIL.EDIT.SAVE_ERROR', 'error');
+        this.cdr.detectChanges();
       }
     });
   }

@@ -1,0 +1,200 @@
+<div class="analytics-page">
+
+  @if (state.loading()) {
+    <div class="analytics-state">
+      <div class="spinner"></div>
+      <span>{{ 'DASHBOARD.LOADING' | translate }}</span>
+    </div>
+  } @else if (state.error()) {
+    <div class="analytics-state analytics-state--error">
+      {{ state.error() | translate }}
+    </div>
+  } @else {
+    <header class="analytics-header">
+      <div>
+        <p class="analytics-header__eyebrow">{{ 'ANALYTICS.EYEBROW' | translate }}</p>
+        <h1>{{ 'ANALYTICS.TITLE' | translate }}</h1>
+        <span>{{ 'ANALYTICS.SUBTITLE' | translate }}</span>
+      </div>
+      <div class="analytics-header__count">
+        <strong>{{ closedTrades().length }}</strong>
+        <span>{{ 'ANALYTICS.CLOSED_TRADES' | translate }}</span>
+      </div>
+    </header>
+
+    <section class="pnl-grid">
+      <article class="pnl-card">
+        <span>{{ 'ANALYTICS.PNL.TOTAL' | translate }}</span>
+        <strong [class.value--positive]="totalPnl() > 0" [class.value--negative]="totalPnl() < 0">
+          {{ formatCurrency(totalPnl()) }}
+        </strong>
+      </article>
+      <article class="pnl-card">
+        <span>{{ 'ANALYTICS.PNL.TODAY' | translate }}</span>
+        <strong [class.value--positive]="todayPnl() > 0" [class.value--negative]="todayPnl() < 0">
+          {{ formatCurrency(todayPnl()) }}
+        </strong>
+      </article>
+      <article class="pnl-card">
+        <span>{{ 'ANALYTICS.PNL.WEEK' | translate }}</span>
+        <strong [class.value--positive]="weekPnl() > 0" [class.value--negative]="weekPnl() < 0">
+          {{ formatCurrency(weekPnl()) }}
+        </strong>
+      </article>
+      <article class="pnl-card">
+        <span>{{ 'ANALYTICS.PNL.MONTH' | translate }}</span>
+        <strong [class.value--positive]="monthPnl() > 0" [class.value--negative]="monthPnl() < 0">
+          {{ formatCurrency(monthPnl()) }}
+        </strong>
+      </article>
+    </section>
+
+    <section class="analytics-grid">
+      <article class="analytics-card analytics-card--chart analytics-card--equity">
+        <div class="card-title">
+          <div>
+            <span>{{ 'ANALYTICS.EQUITY.TITLE' | translate }}</span>
+            <small>{{ 'ANALYTICS.EQUITY.SUBTITLE' | translate }}</small>
+          </div>
+        </div>
+        <div class="chart-box">
+          @if (closedTrades().length) {
+            <canvas #equityChart></canvas>
+          } @else {
+            <div class="empty-chart">{{ 'ANALYTICS.EMPTY' | translate }}</div>
+          }
+        </div>
+      </article>
+
+      <article class="analytics-card analytics-card--win">
+        <div class="card-title">
+          <span>{{ 'ANALYTICS.WIN_RATE.TITLE' | translate }}</span>
+          <strong>{{ formatPercent(winRate()) }}</strong>
+        </div>
+        <div class="win-meter">
+          <span [style.width.%]="winRate()"></span>
+        </div>
+        <p class="win-summary">
+          {{ winningTrades().length }} / {{ closedTrades().length }}
+          {{ 'ANALYTICS.WIN_RATE.WINNING_TOTAL' | translate }}
+        </p>
+
+        <div class="metric-list">
+          <div>
+            <span>{{ 'ANALYTICS.WIN_RATE.PROFIT_FACTOR' | translate }}</span>
+            <strong>{{ formatProfitFactor(profitFactor()) }}</strong>
+          </div>
+          <div>
+            <span>{{ 'ANALYTICS.WIN_RATE.AVG_WIN' | translate }}</span>
+            <strong class="value--positive">{{ formatCurrency(averageWin()) }}</strong>
+          </div>
+          <div>
+            <span>{{ 'ANALYTICS.WIN_RATE.AVG_LOSS' | translate }}</span>
+            <strong class="value--negative">{{ formatCurrency(averageLoss()) }}</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="analytics-card analytics-card--symbols">
+        <div class="card-title">
+          <div>
+            <span>{{ 'ANALYTICS.SYMBOLS.TITLE' | translate }}</span>
+            <small>{{ 'ANALYTICS.SYMBOLS.SUBTITLE' | translate }}</small>
+          </div>
+        </div>
+
+        <div class="symbol-bars">
+          @for (row of symbolPnl(); track row.symbol) {
+            <div class="symbol-row">
+              <span class="symbol-row__label">{{ row.symbol }}</span>
+              <div class="symbol-row__track">
+                <span class="symbol-row__axis"></span>
+                <span class="symbol-row__bar"
+                      [class.symbol-row__bar--loss]="row.profit < 0"
+                      [style.width.%]="row.width"
+                      [style.margin-left.%]="row.profit < 0 ? 50 - row.width : 50">
+                </span>
+              </div>
+              <strong [class.value--positive]="row.profit > 0" [class.value--negative]="row.profit < 0">
+                {{ formatCurrency(row.profit) }}
+              </strong>
+            </div>
+          } @empty {
+            <div class="empty-chart">{{ 'ANALYTICS.EMPTY' | translate }}</div>
+          }
+        </div>
+      </article>
+
+      <article class="analytics-card analytics-card--outcomes">
+        <div class="card-title">
+          <div>
+            <span>{{ 'ANALYTICS.OUTCOMES.TITLE' | translate }}</span>
+            <small>{{ 'ANALYTICS.OUTCOMES.SUBTITLE' | translate }}</small>
+          </div>
+        </div>
+
+        <div class="outcome-mark">
+          <strong [class.value--positive]="outcomeDistribution().accuracy >= 50"
+                  [class.value--negative]="outcomeDistribution().accuracy < 50">
+            {{ formatPercent(outcomeDistribution().accuracy) }}
+          </strong>
+          <span>{{ 'ANALYTICS.OUTCOMES.ACCURACY' | translate }}</span>
+        </div>
+
+        <div class="outcome-list">
+          <div><span>{{ 'ANALYTICS.OUTCOMES.WINS' | translate }}</span><strong class="value--positive">{{ outcomeDistribution().wins }}</strong></div>
+          <div><span>{{ 'ANALYTICS.OUTCOMES.LOSSES' | translate }}</span><strong class="value--negative">{{ outcomeDistribution().losses }}</strong></div>
+          <div><span>{{ 'ANALYTICS.OUTCOMES.BREAKEVEN' | translate }}</span><strong>{{ outcomeDistribution().breakeven }}</strong></div>
+        </div>
+      </article>
+
+      <article class="analytics-card analytics-card--heatmap">
+        <div class="card-title">
+          <div>
+            <span>{{ 'ANALYTICS.HEATMAP.TITLE' | translate }}</span>
+            <small>{{ 'ANALYTICS.HEATMAP.SUBTITLE' | translate }}</small>
+          </div>
+        </div>
+
+        <div class="heatmap">
+          <span class="heatmap__corner"></span>
+          @for (day of heatmapDays; track trackByCode($index, day)) {
+            <span class="heatmap__day">{{ day.labelKey | translate }}</span>
+          }
+
+          @for (session of marketSessions; track trackByCode($index, session)) {
+            <span class="heatmap__session">{{ session.labelKey | translate }}</span>
+            @for (day of heatmapDays; track trackByCode($index, day)) {
+              @let cell = heatmapCell(session.code, day.code);
+              <span class="heatmap__cell"
+                    [style.background]="heatmapBackground(cell)"
+                    [title]="heatmapTitle(session, day, cell)">
+                {{ cell.total ? formatCurrency(cell.averageProfit) : '-' }}
+              </span>
+            }
+          }
+        </div>
+      </article>
+
+      <article class="analytics-card analytics-card--weekday">
+        <div class="card-title">
+          <div>
+            <span>{{ 'ANALYTICS.WEEKDAY.TITLE' | translate }}</span>
+            <small>{{ 'ANALYTICS.WEEKDAY.SUBTITLE' | translate }}</small>
+          </div>
+        </div>
+        <div class="weekday-tiles">
+          @for (day of weekdayStats(); track trackByLabel($index, day)) {
+            <div class="weekday-tile"
+                 [class.weekday-tile--positive]="day.winRate >= 50 && day.total"
+                 [class.weekday-tile--negative]="day.winRate < 50 && day.total">
+              <span>{{ day.labelKey | translate }}</span>
+              <strong>{{ day.total ? formatPercent(day.winRate) : '-' }}</strong>
+            </div>
+          }
+        </div>
+      </article>
+    </section>
+  }
+
+</div>

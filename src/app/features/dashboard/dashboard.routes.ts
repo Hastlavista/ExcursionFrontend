@@ -17,6 +17,11 @@ export const DASHBOARD_ROUTES: Routes = [
           import('./trade-detail/trade-detail.component').then(m => m.TradeDetailComponent)
       },
       {
+        path: 'analytics',
+        loadComponent: () =>
+          import('./analytics/analytics.component').then(m => m.AnalyticsComponent)
+      },
+      {
         path: 'settings',
         loadComponent: () =>
           import('./settings/settings.component').then(m => m.SettingsComponent)

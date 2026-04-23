@@ -191,7 +191,8 @@
   },
   "COMMON": {
     "LOADING": "Učitavanje...",
-    "ERROR": "Nešto je pošlo po krivu"
+    "ERROR": "Nešto je pošlo po krivu",
+    "CLOSE": "Zatvori"
   },
   "DASHBOARD": {
     "NAV": {
@@ -200,7 +201,8 @@
       "ANALYTICS": "Analitika",
       "SETTINGS": "Postavke",
       "SOON": "Uskoro",
-      "LOGOUT": "Odjava"
+      "LOGOUT": "Odjava",
+      "TOGGLE_SIDEBAR": "Otvori ili zatvori navigaciju"
     },
     "TOPBAR": {
       "WELCOME": "Dobrodošli nazad,",
@@ -209,7 +211,8 @@
     },
     "PLAN_BADGE": {
       "FREE": "FREE",
-      "PRO": "PRO"
+      "PRO": "PRO",
+      "VIEW_PLAN": "Pogledaj plan"
     },
     "LOADING": "Učitavanje trejdova…",
     "ERROR": "Učitavanje trejdova nije uspjelo. Osvježite stranicu ili pokušajte ponovo.",
@@ -257,11 +260,14 @@
     "QUICK_MENU": {
       "DETAILS": "Detalji",
       "SCREENSHOTS": "Brzi screenshot update",
-      "DELETE": "Izbriši trade"
+      "DELETE": "Izbriši trade",
+      "DELETE_CONFIRM": "Izbrisati trade {{ label }}?"
     },
     "SCREENSHOT_MODAL": {
       "BEFORE_LABEL": "SCREENSHOT PRIJE ULAZA",
       "AFTER_LABEL": "SCREENSHOT NAKON ULAZA",
+      "BEFORE_ALT": "Screenshot prije ulaza",
+      "AFTER_ALT": "Screenshot nakon ulaza",
       "URL_PLACEHOLDER": "Zalijepite URL slike…",
       "SAVE": "Spremi screenshote",
       "SAVING": "Spremanje…",
@@ -269,24 +275,36 @@
     },
     "ADD_TRADE": {
       "TITLE": "Dodaj trejd",
+      "MODAL_TITLE": "Novi trade entry",
       "BTN": "+ Dodaj trejd",
       "SYMBOL": "SIMBOL",
       "DIRECTION": "SMJER",
       "BUY": "Kupovina",
       "SELL": "Prodaja",
+      "DIRECTION_ARIA": "Smjer tradea",
       "STATUS": "STATUS",
       "OPEN": "Otvoren",
       "CLOSED": "Zatvoren",
+      "STATUS_ARIA": "Status tradea",
+      "ENTRY_CONFIGURATION": "ENTRY KONFIGURACIJA",
+      "EXIT_CONFIGURATION": "EXIT KONFIGURACIJA",
+      "VISUAL_DOCUMENTATION": "VIZUALNA DOKUMENTACIJA",
       "ENTRY_PRICE": "CIJENA ULAZA",
       "EXIT_PRICE": "CIJENA IZLAZA",
       "STOP_LOSS": "STOP LOSS",
+      "STOP_LOSS_HARD": "STOP LOSS (HARD)",
       "TAKE_PROFIT": "TAKE PROFIT",
+      "TAKE_PROFIT_TARGET": "TAKE PROFIT (TARGET)",
       "LOT_SIZE": "VELIČINA LOTA",
       "ENTRY_TIME": "VRIJEME ULAZA",
       "EXIT_TIME": "VRIJEME IZLAZA",
       "SCREENSHOT_BEFORE": "SCREENSHOT PRIJE",
       "SCREENSHOT_AFTER": "SCREENSHOT NAKON",
-      "EXTERNAL_ID": "External ID / Ticket (opcionalno)",
+      "BEFORE_URL_PLACEHOLDER": "URL prije setupa",
+      "AFTER_URL_PLACEHOLDER": "URL nakon egzekucije",
+      "PRE_TRADE_SETUP": "PRE-TRADE SETUP",
+      "POST_TRADE_RESULT": "POST-TRADE RESULT",
+      "EXTERNAL_ID": "Ticket (opcionalno)",
       "SAVE": "Spremi trejd",
       "SAVING": "Spremanje…",
       "CANCEL": "Odustani"
@@ -319,6 +337,68 @@
       "BTN": "Nadogradi"
     }
   },
+  "ANALYTICS": {
+    "EYEBROW": "Performance desk",
+    "TITLE": "Analitika",
+    "SUBTITLE": "Izracuni na frontendu iz zatvorenih trejdova.",
+    "CLOSED_TRADES": "Zatvorenih trejdova",
+    "EMPTY": "Jos nema zatvorenih trejdova.",
+    "UNKNOWN_SYMBOL": "Nepoznato",
+    "PNL": {
+      "TOTAL": "Ukupni PnL",
+      "TODAY": "Danas",
+      "WEEK": "Ovaj tjedan",
+      "MONTH": "Ovaj mjesec"
+    },
+    "WIN_RATE": {
+      "TITLE": "Win Rate",
+      "WINNING_TOTAL": "dobitnih trejdova",
+      "PROFIT_FACTOR": "Profit Factor",
+      "AVG_WIN": "Prosjecni win",
+      "AVG_LOSS": "Prosjecni loss"
+    },
+    "EQUITY": {
+      "TITLE": "Equity graf",
+      "SUBTITLE": "Kumulativni PnL po exit vremenu",
+      "START": "Start"
+    },
+    "WEEKDAY": {
+      "TITLE": "Win Rate po danu",
+      "SUBTITLE": "Ponedjeljak do nedjelja"
+    },
+    "SYMBOLS": {
+      "TITLE": "Profit/Loss po simbolu",
+      "SUBTITLE": "Neto rezultat grupiran po instrumentu"
+    },
+    "OUTCOMES": {
+      "TITLE": "Distribucija ishoda",
+      "SUBTITLE": "Win, loss i breakeven trejdovi",
+      "ACCURACY": "Preciznost",
+      "WINS": "Wins",
+      "LOSSES": "Losses",
+      "BREAKEVEN": "Breakeven"
+    },
+    "HEATMAP": {
+      "TITLE": "Intraday heatmap",
+      "SUBTITLE": "Prosjecni PnL po market sessionu i danu",
+      "CELL_TITLE": "{{ session }} {{ day }}: {{ profit }} prosjek, {{ total }} trejdova"
+    },
+    "DAYS": {
+      "MON": "PON",
+      "TUE": "UTO",
+      "WED": "SRI",
+      "THU": "CET",
+      "FRI": "PET",
+      "SAT": "SUB",
+      "SUN": "NED"
+    },
+    "SESSIONS": {
+      "ASIA": "ASIA",
+      "LONDON": "LONDON",
+      "NY_LON": "NY/LON",
+      "NEW_YORK": "NEW YORK"
+    }
+  },
   "TRADE_DETAIL": {
     "LOADING": "Učitavanje trejda…",
     "ERROR": "Učitavanje trejda nije uspjelo.",
@@ -335,6 +415,8 @@
     "SCREENSHOTS": {
       "BEFORE": "PRIJE ULAZA",
       "AFTER": "NAKON ULAZA",
+      "BEFORE_ALT": "Screenshot prije ulaza",
+      "AFTER_ALT": "Screenshot nakon ulaza",
       "NO_DATA": "Screenshot nije dostupan.",
       "URL_PLACEHOLDER": "Zalijepite URL slike…",
       "SAVE": "Spremi screenshote",
@@ -360,13 +442,19 @@
       "SL": "SL",
       "TP": "TP"
     },
-    "METRICS": {
-      "EFFICIENCY": "EFIKASNOST",
-      "MFE": "MFE",
-      "MAE": "MAE",
-      "PROFIT_POINTS": "PROFIT BODOVI"
-    },
-    "SPECS": {
+      "METRICS": {
+        "EFFICIENCY": "EFIKASNOST",
+        "MFE": "MFE",
+        "MAE": "MAE",
+        "PROFIT_POINTS": "PROFIT BODOVI"
+      },
+      "HELP": {
+        "EFFICIENCY": "Pokazuje koliko je trade efikasno uhvatio dostupni pomak. Veci postotak znaci da je trade zadrzao vise prilike umjesto da ju vrati trzistu.",
+        "MAE": "Maximum Adverse Excursion: najveci pomak protiv tvoje pozicije dok je trade bio otvoren.",
+        "MFE": "Maximum Favorable Excursion: najveci pomak u korist tvoje pozicije dok je trade bio otvoren.",
+        "PROFIT_POINTS": "Konacni rezultat izrazen u price pointovima ili pipovima, prema ulazu i izlazu."
+      },
+      "SPECS": {
       "TITLE": "PARAMETRI IZVRŠENJA",
       "ENTRY_PRICE": "Cijena ulaza",
       "EXIT_PRICE": "Cijena izlaza",
@@ -380,7 +468,7 @@
       "EXIT_TIME": "Vrijeme izlaza",
       "DURATION": "Trajanje",
       "MINUTES": "Minuta",
-      "EXTERNAL_ID": "MT4/MT5 Ticket #"
+      "EXTERNAL_ID": "Ticket #"
     },
     "TIMESTAMPS": {
       "LOGGED_AT": "Zabilježeno",

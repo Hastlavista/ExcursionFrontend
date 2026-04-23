@@ -191,7 +191,8 @@
   },
   "COMMON": {
     "LOADING": "Loading...",
-    "ERROR": "Something went wrong"
+    "ERROR": "Something went wrong",
+    "CLOSE": "Close"
   },
   "DASHBOARD": {
     "NAV": {
@@ -200,7 +201,8 @@
       "ANALYTICS": "Analytics",
       "SETTINGS": "Settings",
       "SOON": "Soon",
-      "LOGOUT": "Logout"
+      "LOGOUT": "Logout",
+      "TOGGLE_SIDEBAR": "Toggle sidebar"
     },
     "TOPBAR": {
       "WELCOME": "Welcome back,",
@@ -209,7 +211,8 @@
     },
     "PLAN_BADGE": {
       "FREE": "FREE",
-      "PRO": "PRO"
+      "PRO": "PRO",
+      "VIEW_PLAN": "View plan"
     },
     "LOADING": "Loading trades…",
     "ERROR": "Failed to load trades. Please refresh or try again later.",
@@ -257,11 +260,14 @@
     "QUICK_MENU": {
       "DETAILS": "Details",
       "SCREENSHOTS": "Quick screenshots update",
-      "DELETE": "Delete trade"
+      "DELETE": "Delete trade",
+      "DELETE_CONFIRM": "Delete trade {{ label }}?"
     },
     "SCREENSHOT_MODAL": {
       "BEFORE_LABEL": "SCREENSHOT BEFORE ENTRY",
       "AFTER_LABEL": "SCREENSHOT AFTER ENTRY",
+      "BEFORE_ALT": "Screenshot before entry",
+      "AFTER_ALT": "Screenshot after entry",
       "URL_PLACEHOLDER": "Paste image URL…",
       "SAVE": "Save Screenshots",
       "SAVING": "Saving…",
@@ -269,24 +275,36 @@
     },
     "ADD_TRADE": {
       "TITLE": "Add Trade",
+      "MODAL_TITLE": "New Trade Entry",
       "BTN": "Add Trade",
       "SYMBOL": "SYMBOL",
       "DIRECTION": "DIRECTION",
       "BUY": "Buy",
       "SELL": "Sell",
+      "DIRECTION_ARIA": "Trade direction",
       "STATUS": "STATUS",
       "OPEN": "Open",
       "CLOSED": "Closed",
+      "STATUS_ARIA": "Trade status",
+      "ENTRY_CONFIGURATION": "ENTRY CONFIGURATION",
+      "EXIT_CONFIGURATION": "EXIT CONFIGURATION",
+      "VISUAL_DOCUMENTATION": "VISUAL DOCUMENTATION",
       "ENTRY_PRICE": "ENTRY PRICE",
       "EXIT_PRICE": "EXIT PRICE",
       "STOP_LOSS": "STOP LOSS",
+      "STOP_LOSS_HARD": "STOP LOSS (HARD)",
       "TAKE_PROFIT": "TAKE PROFIT",
+      "TAKE_PROFIT_TARGET": "TAKE PROFIT (TARGET)",
       "LOT_SIZE": "LOT SIZE",
       "ENTRY_TIME": "ENTRY TIME",
       "EXIT_TIME": "EXIT TIME",
       "SCREENSHOT_BEFORE": "SCREENSHOT BEFORE",
       "SCREENSHOT_AFTER": "SCREENSHOT AFTER",
-      "EXTERNAL_ID": "External ID / Ticket (optional)",
+      "BEFORE_URL_PLACEHOLDER": "Before Setup URL",
+      "AFTER_URL_PLACEHOLDER": "After Execution URL",
+      "PRE_TRADE_SETUP": "PRE-TRADE SETUP",
+      "POST_TRADE_RESULT": "POST-TRADE RESULT",
+      "EXTERNAL_ID": "Ticket (Optional)",
       "SAVE": "Save Trade",
       "SAVING": "Saving…",
       "CANCEL": "Cancel"
@@ -319,6 +337,68 @@
       "BTN": "Upgrade Now"
     }
   },
+  "ANALYTICS": {
+    "EYEBROW": "Performance desk",
+    "TITLE": "Analytics",
+    "SUBTITLE": "Frontend calculations from your closed trades.",
+    "CLOSED_TRADES": "Closed Trades",
+    "EMPTY": "No closed trades yet.",
+    "UNKNOWN_SYMBOL": "Unknown",
+    "PNL": {
+      "TOTAL": "Total PnL",
+      "TODAY": "Today",
+      "WEEK": "This Week",
+      "MONTH": "This Month"
+    },
+    "WIN_RATE": {
+      "TITLE": "Win Rate",
+      "WINNING_TOTAL": "winning trades",
+      "PROFIT_FACTOR": "Profit Factor",
+      "AVG_WIN": "Average Win",
+      "AVG_LOSS": "Average Loss"
+    },
+    "EQUITY": {
+      "TITLE": "Equity Chart",
+      "SUBTITLE": "Cumulative PnL by exit time",
+      "START": "Start"
+    },
+    "WEEKDAY": {
+      "TITLE": "Win Rate by Day",
+      "SUBTITLE": "Monday to Sunday"
+    },
+    "SYMBOLS": {
+      "TITLE": "Profit/Loss by Symbol",
+      "SUBTITLE": "Net result grouped by instrument"
+    },
+    "OUTCOMES": {
+      "TITLE": "Outcome Distribution",
+      "SUBTITLE": "Wins, losses and breakeven trades",
+      "ACCURACY": "Accuracy",
+      "WINS": "Wins",
+      "LOSSES": "Losses",
+      "BREAKEVEN": "Breakeven"
+    },
+    "HEATMAP": {
+      "TITLE": "Intraday Heatmap",
+      "SUBTITLE": "Average PnL by market session and weekday",
+      "CELL_TITLE": "{{ session }} {{ day }}: {{ profit }} avg, {{ total }} trades"
+    },
+    "DAYS": {
+      "MON": "MON",
+      "TUE": "TUE",
+      "WED": "WED",
+      "THU": "THU",
+      "FRI": "FRI",
+      "SAT": "SAT",
+      "SUN": "SUN"
+    },
+    "SESSIONS": {
+      "ASIA": "ASIA",
+      "LONDON": "LONDON",
+      "NY_LON": "NY/LON",
+      "NEW_YORK": "NEW YORK"
+    }
+  },
   "TRADE_DETAIL": {
     "LOADING": "Loading trade…",
     "ERROR": "Failed to load trade.",
@@ -335,6 +415,8 @@
     "SCREENSHOTS": {
       "BEFORE": "BEFORE ENTRY",
       "AFTER": "AFTER ENTRY",
+      "BEFORE_ALT": "Screenshot before entry",
+      "AFTER_ALT": "Screenshot after entry",
       "NO_DATA": "No screenshot available.",
       "URL_PLACEHOLDER": "Paste image URL…",
       "SAVE": "Save Screenshots",
@@ -360,13 +442,19 @@
       "SL": "SL",
       "TP": "TP"
     },
-    "METRICS": {
-      "EFFICIENCY": "EFFICIENCY",
-      "MFE": "MFE",
-      "MAE": "MAE",
-      "PROFIT_POINTS": "PROFIT POINTS"
-    },
-    "SPECS": {
+      "METRICS": {
+        "EFFICIENCY": "EFFICIENCY",
+        "MFE": "MFE",
+        "MAE": "MAE",
+        "PROFIT_POINTS": "PROFIT POINTS"
+      },
+      "HELP": {
+        "EFFICIENCY": "Shows how efficiently the trade captured available movement. Higher means the trade kept more of the opportunity instead of giving it back.",
+        "MAE": "Maximum Adverse Excursion: the furthest the trade moved against you while it was open.",
+        "MFE": "Maximum Favorable Excursion: the furthest the trade moved in your favor while it was open.",
+        "PROFIT_POINTS": "Final result measured in price points or pips, based on entry and exit."
+      },
+      "SPECS": {
       "TITLE": "EXECUTION SPECS",
       "ENTRY_PRICE": "Entry Price",
       "EXIT_PRICE": "Exit Price",
@@ -380,7 +468,7 @@
       "EXIT_TIME": "Exit Time",
       "DURATION": "Duration",
       "MINUTES": "Minutes",
-      "EXTERNAL_ID": "MT4/MT5 Ticket #"
+      "EXTERNAL_ID": "Ticket #"
     },
     "TIMESTAMPS": {
       "LOGGED_AT": "Logged At",

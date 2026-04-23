@@ -6,7 +6,7 @@
   <!-- ── Sidebar ─────────────────────────────────────────── -->
   <aside class="sidebar">
     <a class="sidebar__logo" routerLink="/dashboard" (click)="sidebarOpen = false">
-      <img src="assets/images/icon_brand.png" class="sidebar__logo-icon" alt="logo">
+      <img src="assets/images/icon_brand.png" class="sidebar__logo-icon" [alt]="'MAIN.BRAND_TITLE' | translate">
       <span class="sidebar__logo-text">
         <span class="logo--brand">{{ 'MAIN.BRAND_PART1' | translate }}</span><span class="logo--suffix">{{ 'MAIN.BRAND_PART2' | translate }}</span>
       </span>
@@ -25,13 +25,15 @@
         {{ 'DASHBOARD.NAV.DASHBOARD' | translate }}
       </a>
 
-      <a class="nav-item nav-item--disabled">
+      <a class="nav-item"
+         routerLink="/dashboard/analytics"
+         routerLinkActive="nav-item--active"
+         (click)="sidebarOpen = false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
           <line x1="6" y1="20" x2="6" y2="14"/>
         </svg>
         {{ 'DASHBOARD.NAV.ANALYTICS' | translate }}
-        <span class="nav-item__soon">{{ 'DASHBOARD.NAV.SOON' | translate }}</span>
       </a>
 
       <a class="nav-item"
@@ -53,7 +55,7 @@
     <!-- Topbar -->
     <header class="topbar">
       <div class="topbar__left">
-        <button class="hamburger" (click)="sidebarOpen = !sidebarOpen" aria-label="Toggle sidebar">
+        <button class="hamburger" (click)="sidebarOpen = !sidebarOpen" [attr.aria-label]="'DASHBOARD.NAV.TOGGLE_SIDEBAR' | translate">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
           </svg>
@@ -80,7 +82,7 @@
         <button class="plan-badge-btn"
                 [class.plan-badge-btn--pro]="isPro"
                 (click)="goToPlan()"
-                title="View plan">
+                [title]="'DASHBOARD.PLAN_BADGE.VIEW_PLAN' | translate">
           {{ isPro ? ('DASHBOARD.PLAN_BADGE.PRO' | translate) : ('DASHBOARD.PLAN_BADGE.FREE' | translate) }}
         </button>
         <div class="profile-menu">
