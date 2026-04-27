@@ -588,6 +588,14 @@ $landing-red: #8f2323;
   font-size: 0.85rem;
 }
 
+@media (max-width: 1180px) {
+  .footer {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero,
   .journal,

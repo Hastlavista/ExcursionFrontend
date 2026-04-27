@@ -9,6 +9,9 @@ import { TradeService } from '../../../core/services/trade.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { Trade, TradeStatus, Candle } from '../../../core/models/trade.model';
 
+const DETAIL_GREEN = '#5f8f56';
+const DETAIL_RED = '#8f2323';
+
 @Component({
   selector: 'app-trade-detail',
   standalone: true,
@@ -128,8 +131,8 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
         horzLines: { color: 'rgba(125, 148, 181, 0.08)' },
       },
       crosshair: {
-        vertLine: { labelBackgroundColor: '#49e774' },
-        horzLine: { labelBackgroundColor: '#49e774' },
+        vertLine: { labelBackgroundColor: DETAIL_GREEN },
+        horzLine: { labelBackgroundColor: DETAIL_GREEN },
       },
       rightPriceScale: { borderColor: 'rgba(125, 148, 181, 0.14)' },
       timeScale: { borderColor: 'rgba(125, 148, 181, 0.14)', timeVisible: true, secondsVisible: false },
@@ -137,11 +140,11 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     });
 
     const series = this.chart.addSeries(CandlestickSeries, {
-      upColor: '#49e774',
-      downColor: '#ff8e8e',
+      upColor: DETAIL_GREEN,
+      downColor: DETAIL_RED,
       borderVisible: false,
-      wickUpColor: '#49e774',
-      wickDownColor: '#ff8e8e',
+      wickUpColor: DETAIL_GREEN,
+      wickDownColor: DETAIL_RED,
     });
 
     series.setData(candles.map(c => ({
@@ -155,7 +158,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     if (this.trade.entryPrice != null) {
       series.createPriceLine({
         price: this.trade.entryPrice,
-        color: '#49e774',
+        color: DETAIL_GREEN,
         lineWidth: 1,
         lineStyle: LineStyle.Solid,
         axisLabelVisible: true,
@@ -175,7 +178,7 @@ export class TradeDetailComponent implements OnInit, OnDestroy {
     if (this.trade.stopLoss != null) {
       series.createPriceLine({
         price: this.trade.stopLoss,
-        color: '#ff8e8e',
+        color: DETAIL_RED,
         lineWidth: 1,
         lineStyle: LineStyle.Dashed,
         axisLabelVisible: true,
