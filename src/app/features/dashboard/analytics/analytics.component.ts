@@ -15,6 +15,10 @@ import { Trade, TradeStatus } from '../../../core/models/trade.model';
 
 Chart.register(...registerables);
 
+const ANALYTICS_GREEN = '#5f8f56';
+const ANALYTICS_GREEN_RGB = '95, 143, 86';
+const ANALYTICS_RED_RGB = '143, 35, 35';
+
 interface WeekdayStat {
   code: string;
   labelKey: string;
@@ -285,7 +289,7 @@ export class AnalyticsComponent implements AfterViewInit, OnDestroy {
 
   heatmapBackground(cell: HeatmapCell): string {
     if (!cell.total) return 'rgba(125, 148, 181, 0.08)';
-    const color = cell.averageProfit >= 0 ? '73, 231, 116' : '255, 142, 142';
+    const color = cell.averageProfit >= 0 ? ANALYTICS_GREEN_RGB : ANALYTICS_RED_RGB;
     return `rgba(${color}, ${Math.min(0.9, cell.intensity * 0.72 + 0.14)})`;
   }
 
@@ -311,8 +315,8 @@ export class AnalyticsComponent implements AfterViewInit, OnDestroy {
         labels: series.labels,
         datasets: [{
           data: series.values,
-          borderColor: '#49e774',
-          backgroundColor: 'rgba(73, 231, 116, 0.1)',
+          borderColor: ANALYTICS_GREEN,
+          backgroundColor: `rgba(${ANALYTICS_GREEN_RGB}, 0.1)`,
           borderWidth: 2,
           pointRadius: 0,
           pointHoverRadius: 4,

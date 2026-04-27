@@ -8,8 +8,8 @@ $landing-line: rgba(125, 148, 181, 0.16);
 $landing-text: #dce7f8;
 $landing-muted: #71809a;
 $landing-soft: #9aa8bd;
-$landing-green: #49e774;
-$landing-red: #ff8e8e;
+$landing-green: #5f8f56;
+$landing-red: #8f2323;
 
 :host {
   display: block;
@@ -136,7 +136,7 @@ $landing-red: #ff8e8e;
 }
 
 .btn--primary:hover {
-  background: #5df087;
+  background: #6b9b61;
   box-shadow: 0 18px 44px rgba($landing-green, 0.2);
 }
 
@@ -460,7 +460,7 @@ $landing-red: #ff8e8e;
 
 .bars span {
   flex: 1;
-  background: linear-gradient(180deg, #61f08a 0%, #1f9f52 100%);
+  background: linear-gradient(180deg, #7da874 0%, #4f7e47 100%);
   border-radius: 12px 12px 0 0;
   box-shadow: 0 10px 20px rgba($landing-green, 0.16);
 }

@@ -23,18 +23,18 @@
 
   &--error {
     background-color: #2c1a1a;
-    border: 1px solid rgba(239, 83, 80, 0.4);
-    color: #ff8a80;
+    border: 1px solid rgba(143, 35, 35, 0.4);
+    color: #d98b8b;
 
-    .toast__icon { color: #ef5350; }
+    .toast__icon { color: #8f2323; }
   }
 
   &--success {
     background-color: #1a2c2b;
-    border: 1px solid rgba(38, 166, 154, 0.4);
-    color: #80cbc4;
+    border: 1px solid rgba(95, 143, 86, 0.4);
+    color: #b7cfae;
 
-    .toast__icon { color: #26a69a; }
+    .toast__icon { color: #5f8f56; }
   }
 
   &--warning {

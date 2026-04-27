@@ -8,8 +8,8 @@ $auth-line: rgba(125, 148, 181, 0.16);
 $auth-text: #dce7f8;
 $auth-muted: #71809a;
 $auth-soft: #9aa8bd;
-$auth-green: #49e774;
-$auth-red: #ff8e8e;
+$auth-green: #5f8f56;
+$auth-red: #8f2323;
 $auth-yellow: #ffc857;
 
 .register-page {
@@ -436,7 +436,7 @@ $auth-yellow: #ffc857;
   font-weight: 800;
 
   &:hover {
-    color: #74f39a;
+    color: #7aa56f;
   }
 }
 
@@ -462,7 +462,7 @@ $auth-yellow: #ffc857;
   transition: transform $transition-fast, box-shadow $transition-fast, background $transition-fast;
 
   &:hover:not(:disabled) {
-    background: #5df087;
+    background: #6b9b61;
     box-shadow: 0 18px 42px rgba($auth-green, 0.22);
     transform: translateY(-1px);
   }
@@ -500,7 +500,7 @@ $auth-yellow: #ffc857;
     font-weight: 800;
 
     &:hover {
-      color: #74f39a;
+      color: #7aa56f;
     }
   }
 }

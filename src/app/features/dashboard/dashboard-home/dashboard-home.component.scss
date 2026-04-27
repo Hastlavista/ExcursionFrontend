@@ -9,8 +9,8 @@ $dash-line-strong: rgba(125, 148, 181, 0.14);
 $dash-text: #dce7f8;
 $dash-muted: #71809a;
 $dash-soft: #9aa8bd;
-$dash-green: #49e774;
-$dash-red: #ff8e8e;
+$dash-green: #5f8f56;
+$dash-red: #8f2323;
 
 .content {
   min-width: 0;
@@ -952,7 +952,7 @@ $dash-red: #ff8e8e;
   text-transform: uppercase;
   color: #9aa8bd;
 
-  &--danger { color: #ff8e8e; }
+  &--danger { color: $dash-red; }
   &--success { color: $dash-green; }
 }
 
@@ -1137,7 +1137,7 @@ $dash-red: #ff8e8e;
     color: #06101f;
 
     &:hover:not(:disabled) {
-      background: #3bd765;
+      background: #6b9b61;
     }
   }
 }
